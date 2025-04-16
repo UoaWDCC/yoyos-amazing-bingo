@@ -1,0 +1,9 @@
+build
+coverage
+
+node_modules
+.next
+out
+*.md
+*.yml
+*.yaml
