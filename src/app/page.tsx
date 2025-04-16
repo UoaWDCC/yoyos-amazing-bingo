@@ -1,3 +1,11 @@
+"use client";
+
+import useSWR from "swr";
+
+import { test } from "@/actions/test";
+
 export default function Home() {
-  return <h1>Hello World!</h1>;
+  const { data, isLoading } = useSWR("test", test);
+
+  return isLoading ? <p>This is loading</p> : <h1>{data}</h1>;
 }
