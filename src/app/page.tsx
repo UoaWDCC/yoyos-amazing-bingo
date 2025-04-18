@@ -1,11 +1,9 @@
 "use client";
 
-import useSWR from "swr";
-
-import { test } from "@/actions/test";
+import useTestQuery from "@/queries/testQuery";
 
 export default function Home() {
-  const { data, isLoading } = useSWR("test", test);
+  const { data, isLoading } = useTestQuery();
 
   return isLoading ? <p>This is loading</p> : <h1>{data}</h1>;
 }
