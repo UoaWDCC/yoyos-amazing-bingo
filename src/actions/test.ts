@@ -1,6 +1,6 @@
 "use server";
 
-export async function test() {
-  console.log("test");
-  return "This was returned from a server function";
+export async function getTime() {
+  console.log(`getTime() called at: ${new Date().toLocaleTimeString()}`);
+  return `getTime() called at: ${new Date().toLocaleTimeString()}`;
 }

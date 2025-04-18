@@ -1,11 +1,17 @@
 "use client";
 
-import useSWR from "swr";
-
-import { test } from "@/actions/test";
+import useTestQuery from "@/queries/testQuery";
 
 export default function Home() {
-  const { data, isLoading } = useSWR("test", test);
+  const { data, isLoading } = useTestQuery();
 
-  return isLoading ? <p>This is loading</p> : <h1>{data}</h1>;
+  return (
+    <>
+      <p>
+        By default, this data is cached for 2s and refetched when you refocus
+        the page. Try change tabs and back!
+      </p>
+      {isLoading ? <p>This is loading</p> : <h1>{data}</h1>}
+    </>
+  );
 }
