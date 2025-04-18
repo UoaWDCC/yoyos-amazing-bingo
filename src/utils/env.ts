@@ -5,6 +5,7 @@
 
 import dotenv from "dotenv";
 import { z } from "zod";
+import { parseZod } from "./zod";
 
 // .env schema
 const envSchema = z.object({
@@ -14,24 +15,5 @@ export type Env = z.infer<typeof envSchema>;
 
 // Read .env, validate and export it
 dotenv.config();
-const env = parseEnv(process.env);
+const env = parseZod(envSchema, process.env, "Error parsing environment variables (check your .env file):");
 export default env;
-
-// Validation function
-function parseEnv(env: unknown): Env {
-  try {
-    return envSchema.parse(env);
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      console.error(
-        "Error parsing environment variables (check your .env file):",
-      );
-      error.errors.forEach((err) => {
-        console.error(err.message);
-      });
-    } else {
-      console.error(error);
-    }
-    process.exit(1);
-  }
-}
