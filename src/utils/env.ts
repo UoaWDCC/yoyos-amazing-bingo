@@ -15,5 +15,5 @@ export type Env = z.infer<typeof envSchema>;
 
 // Read .env, validate and export it
 dotenv.config();
-const env = parseZod(envSchema, process.env, "Error parsing environment variables (check your .env file):");
+const env = parseZod(envSchema, process.env, "utils/env.ts");
 export default env;
