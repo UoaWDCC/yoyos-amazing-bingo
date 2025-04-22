@@ -1,9 +1,9 @@
 "use client";
 
-import useTime from "@/queries/useTimeEXAMPLE";
+import useGetTime from "@/queries/useTimeEXAMPLE";
 
 export default function Home() {
-  const { data, isLoading } = useTime();
+  const { data, isLoading } = useGetTime();
 
   return (
     <>

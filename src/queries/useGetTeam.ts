@@ -5,7 +5,7 @@ import { useSWRWithZod } from "@/utils/swr";
 /** @see getTeam */
 export default function useGetTeam(code: string, teamId: string) {
   return useSWRWithZod(
-    `team/${code}/${teamId}`,
+    `getTeam/${code}/${teamId}`,
     () => getTeam(code, teamId),
     TeamSchema,
     "queries/useGetTeam.ts",
