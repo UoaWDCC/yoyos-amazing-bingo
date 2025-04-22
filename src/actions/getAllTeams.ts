@@ -8,9 +8,9 @@ import { Team } from "@/models/Team";
  * @param code The team auth code. Teams have access to their own team/board only. Admins can access all teams/boards.
  * @param teamId The ID of the team to fetch the board for.
  */
-export async function getTeam(code: string, teamId: string): Promise<Team> {
+export async function getAllTeams(code: string): Promise<Team[]> {
   // TODO: STUB
-  console.log(code, teamId);
+  console.log(code);
 
   const dummyBoard = [
     [false, false, false, false],
@@ -20,11 +20,18 @@ export async function getTeam(code: string, teamId: string): Promise<Team> {
   ];
 
   const dummyTeam = {
-    id: teamId,
+    id: "dummyId",
     name: "Dummy Team",
     code: "dummyCode",
-    board: dummyBoard,
+    board: dummyBoard.concat(),
   };
 
-  return dummyTeam;
+  const secondDummyTeam = {
+    id: "dummyId2",
+    name: "Second Dummy Team",
+    code: "dummyCode2",
+    board: dummyBoard.concat(),
+  };
+
+  return [dummyTeam, secondDummyTeam];
 }
