@@ -10,7 +10,7 @@ export default function Home() {
     <NormalLayout title="Home">
       <p>
         By default, this data is cached for 2s and refetched when you refocus
-        the page. Try change tabs and back!{data}
+        the page. Try change tabs and back!
       </p>
       <div> {isLoading ? <p>This is loading</p> : <h1>{data}</h1>}</div>
     </NormalLayout>

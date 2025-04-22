@@ -10,7 +10,7 @@ interface LayoutProps {
 export const NormalLayout = (props: LayoutProps) => {
   return (
     <div className="responsive-body">
-      <div className="flex h-dvh flex-col justify-between gap-4 border-x-2 p-6">
+      <div className="flex h-dvh flex-col justify-between gap-4 border-x-2 p-6 overflow-hidden">
         <Header title={props.title} />
         {props.children}
       </div>
