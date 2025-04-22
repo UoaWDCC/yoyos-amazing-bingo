@@ -4,10 +4,10 @@ import { useSWRWithZod } from "@/utils/swr";
 
 /** @see getTeam */
 export default function useGetTeam(code: string, teamId: string) {
-  return useSWRWithZod(
-    `getTeam/${code}/${teamId}`,
-    () => getTeam(code, teamId),
-    TeamSchema,
-    "queries/useGetTeam.ts",
-  );
+  return useSWRWithZod({
+    cacheKey: `getTeam/${code}/${teamId}`,
+    fetcher: () => getTeam(code, teamId),
+    zodSchema: TeamSchema,
+    thisFile: "queries/useGetTeam.ts",
+  });
 }

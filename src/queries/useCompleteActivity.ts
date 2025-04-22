@@ -5,10 +5,10 @@ import { useSWRWithZod } from "@/utils/swr";
 
 /** @see completeActivity */
 export default function useCompleteActivity(code: string, activityId: string) {
-  return useSWRWithZod(
-    `completeActivity/${code}/${activityId}`,
-    () => completeActivity(code, activityId),
-    z.void(),
-    "queries/useCompleteActivity.ts",
-  );
+  return useSWRWithZod({
+    cacheKey: `completeActivity/${code}/${activityId}`,
+    fetcher: () => completeActivity(code, activityId),
+    zodSchema: z.void(),
+    thisFile: "queries/useCompleteActivity.ts",
+  });
 }
