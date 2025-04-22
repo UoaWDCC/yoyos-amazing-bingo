@@ -9,6 +9,15 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
+  /* button */
+  --color-btn-solid: var(--foreground);
+  --color-btn-solid-fg: var(--background);
+  --color-btn-outline: var(--foreground);
+  --color-btn-outline-fg: var(--foreground);
+
+  /* pill */
+  --color-pill: var(--secondary);
+
   /* Drawer */
   --color-ring: var(--ring);
   --color-border: var(--border);
@@ -22,7 +31,8 @@
 :root {
   --radius: 0.625rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --secondary: #e5e5e5;
+  --foreground: oklch(0.2 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
   --border: oklch(0.922 0 0);
@@ -47,4 +57,17 @@
     /* Constrain children of main to middle column */
     @apply col-start-2 col-end-3;
   }
+}
+
+.poke1 {
+  background-image: url("./images/L1_POKE.png");
+}
+.poke2 {
+  background-image: url("./images/L2_POKE.png");
+}
+.poke3 {
+  background-image: url("./images/L3_POKE.png");
+}
+.poke4 {
+  background-image: url("./images/L4_POKE.png");
 }
