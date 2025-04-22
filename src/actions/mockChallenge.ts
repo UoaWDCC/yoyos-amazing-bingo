@@ -3,8 +3,6 @@
 import { ChallangeDTO } from "@/models/Challenge";
 
 export async function getChallange(id: number): Promise<ChallangeDTO> {
-  console.log(id);
-
   const data: ChallangeDTO = {
     id: id,
     title: `Challenge ${id}`,
