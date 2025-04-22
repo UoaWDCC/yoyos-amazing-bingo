@@ -2,9 +2,9 @@
 
 import "server-only";
 
-import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
+import { getSession } from "@/lib/session";
 import { getTeamByCode } from "@/services/auth";
 
 type SignInState = {
@@ -44,8 +44,9 @@ export async function signIn(
     };
   }
 
-  const cookieStore = await cookies();
-  cookieStore.set("teamId", team.id);
+  const session = await getSession();
+  session.teamId = team.id;
+  await session.save();
 
   return redirect("/");
 }
@@ -55,15 +56,15 @@ export async function signIn(
  * @returns Auth object
  */
 export async function auth(): Promise<Auth> {
-  const cookieStore = await cookies();
-  const teamId = cookieStore.get("teamId");
+  const session = await getSession();
+  const teamId = session.teamId;
 
   if (!teamId) {
     return { error: "Unauthorized" };
   }
 
   return {
-    teamId: teamId.value,
+    teamId,
   };
 }
 
@@ -84,8 +85,8 @@ export async function protect() {
  * @returns Redirect to the code page
  */
 export async function signOut() {
-  const cookieStore = await cookies();
-  cookieStore.delete("teamId");
+  const session = await getSession();
+  session.destroy();
 
   return redirect("/code");
 }
