@@ -4,7 +4,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const pill = cva(
-  "py-1 flex gap-6 text-center w-min whitespace-nowrap px-4 rounded-full select-none",
+  "py-1 flex gap-base text-center w-min whitespace-nowrap px-4 rounded-full select-none",
   {
     variants: {
       variant: {

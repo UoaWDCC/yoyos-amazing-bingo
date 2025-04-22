@@ -15,7 +15,7 @@ const pokeball = cva(
       },
       size: {
         full: "size-full",
-        fixed: "size-8",
+        fixed: "size-24",
       },
     },
     defaultVariants: {
@@ -25,20 +25,28 @@ const pokeball = cva(
   },
 );
 
+export const pokeDifficulty = ["normal", "great", "ultra", "master"] as const;
+
 type PokeballVariants = VariantProps<typeof pokeball>;
-type Variant = PokeballVariants["variant"];
+type Variant = (typeof pokeDifficulty)[number];
+type Size = PokeballVariants["size"];
 
 interface pokeballProps extends HTMLAttributes<HTMLDivElement> {
   className?: string;
   variant?: Variant;
+  size?: Size;
 }
 
-const Pokeball = ({ variant, ...props }: pokeballProps) => {
+const Pokeball = ({ variant, size, ...props }: pokeballProps) => {
   return (
-    <div {...props} className={cn(pokeball({ variant }), props.className)}>
+    <div
+      {...props}
+      className={cn(pokeball({ variant, size }), props.className)}
+    >
       {props.children}
     </div>
   );
 };
 
 export { Pokeball };
+export type { PokeballVariants, Variant as PokeVariant, Size as PokeSize };
