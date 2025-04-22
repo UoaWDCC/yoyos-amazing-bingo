@@ -3,10 +3,10 @@
 import { Team } from "@/models/Team";
 
 /**
- * Fetches the team info (including board) for a given team ID.
+ * Fetches all teams (including boards).
  *
- * @param code The team auth code. Teams have access to their own team/board only. Admins can access all teams/boards.
- * @param teamId The ID of the team to fetch the board for.
+ * @param code Auth code. Needs to be admin for now.
+ * @returns All teams (including boards).
  */
 export async function getAllTeams(code: string): Promise<Team[]> {
   // TODO: STUB
