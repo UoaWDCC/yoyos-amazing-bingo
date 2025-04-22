@@ -3,7 +3,8 @@ import { redirect } from "next/navigation";
 
 import { auth } from "@/actions/auth";
 import { Header } from "@/components/Header";
-import LoginForm from "@/components/LoginForm";
+import { LoginForm } from "@/components/login-form";
+import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 
 export default async function CodePage() {
   const { teamId } = await auth();
@@ -13,8 +14,9 @@ export default async function CodePage() {
   }
 
   return (
-    <>
+    <NormalLayout>
       <Header title="Login" />
+
       <div className="relative h-[180px] w-full">
         <Image
           src="/assets/logo.svg"
@@ -27,6 +29,6 @@ export default async function CodePage() {
       <LoginForm />
 
       <div />
-    </>
+    </NormalLayout>
   );
 }

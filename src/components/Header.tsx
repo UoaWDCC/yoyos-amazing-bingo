@@ -5,8 +5,8 @@ interface HeaderProps {
 export function Header({ title }: HeaderProps) {
   return (
     <header className="flex flex-col justify-between">
-      <p className="text-xl">Yoyo&apos;s Bingo</p>
-      <p className="text-base">{title}</p>
+      <h2 className="text-xl">Yoyo&apos;s Bingo</h2>
+      <h1 className="text-base">{title}</h1>
     </header>
   );
 }
