@@ -8,6 +8,7 @@
   --color-foreground: var(--foreground);
   --color-primary: #1a1a1a;
   --color-primary-foreground: #ffffff;
+  --color-destructive: #ef4444;
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 

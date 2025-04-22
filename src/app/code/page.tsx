@@ -1,10 +1,17 @@
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
-import { Button } from "@/components/Button";
+import { auth } from "@/actions/auth";
 import { Header } from "@/components/Header";
-import { Input } from "@/components/Input";
+import LoginForm from "@/components/LoginForm";
 
-export default function CodePage() {
+export default async function CodePage() {
+  const { teamId } = await auth();
+
+  if (teamId) {
+    return redirect("/");
+  }
+
   return (
     <>
       <Header title="Login" />
@@ -16,14 +23,9 @@ export default function CodePage() {
           className="object-contain"
         />
       </div>
-      <form className="flex flex-col justify-between gap-6">
-        <p className="">Enter team code</p>
 
-        <Input placeholder="ABCD-EFGH" className="w-full" />
-        <Button className="w-full" type="submit">
-          Enter
-        </Button>
-      </form>
+      <LoginForm />
+
       <div />
     </>
   );
