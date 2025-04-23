@@ -1,6 +1,5 @@
 "use client";
 
-import useCompleteActivity from "@/queries/useCompleteActivity";
 import useGetAllTeams from "@/queries/useGetAllTeams";
 import useGetTeam from "@/queries/useGetTeam";
 import useGetTime from "@/queries/useTimeEXAMPLE";
