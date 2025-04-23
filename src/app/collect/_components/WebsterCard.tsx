@@ -4,15 +4,17 @@ import { useRef } from "react";
 import { Float, useTexture } from "@react-three/drei";
 import { Group } from "three";
 
+import { cards } from "@/assets/pokecards";
+
 const WebsterCard = () => {
   const cardRef = useRef<Group>(null);
   const texture = useTexture({
-    alpha: "/alpha.png",
-    map: "/snorelax.png",
+    alpha: cards.mask.src,
+    map: cards.images[0].src,
   });
   const backside = useTexture({
-    alpha: "/alpha.png",
-    map: "/backside.png",
+    alpha: cards.mask.src,
+    map: cards.back.src,
   });
 
   const size = [1, 1.4] as const;
