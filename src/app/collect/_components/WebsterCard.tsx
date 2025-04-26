@@ -1,13 +1,10 @@
 "use client";
 
-import { useRef } from "react";
 import { Float, useTexture } from "@react-three/drei";
-import { Group } from "three";
 
 import { cards } from "@/assets/pokecards";
 
 const WebsterCard = () => {
-  const cardRef = useRef<Group>(null);
   const texture = useTexture({
     alpha: cards.mask.src,
     map: cards.images[0].src,
@@ -22,8 +19,7 @@ const WebsterCard = () => {
   return (
     <Float speed={2}>
       <ambientLight intensity={(2 * Math.PI) / 3} />
-
-      <group ref={cardRef}>
+      <group>
         <mesh>
           <planeGeometry args={size} />
           <meshStandardMaterial

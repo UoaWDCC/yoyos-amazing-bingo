@@ -10,7 +10,7 @@ import {
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
-} from "@/components/ui/drawer/drawer";
+} from "@/components/ui/drawer";
 import { Pill } from "@/components/ui/pill";
 import { Pokeball } from "@/components/ui/pokeball/Pokeball";
 import useChallengeQuery from "@/queries/mockChallengeQuery";

@@ -41,6 +41,8 @@ const CardDisplay = () => {
           autoRotateSpeed={Math.PI}
           dampingFactor={0.02}
           enableZoom={false}
+          minPolarAngle={Math.PI / 2 - Math.PI / 8}
+          maxPolarAngle={Math.PI / 2 + Math.PI / 8}
         />
         <PerspectiveCamera makeDefault position={[0, 0, 1.9]} />
         <WebsterCard />

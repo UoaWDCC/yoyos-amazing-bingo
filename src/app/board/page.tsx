@@ -1,6 +1,6 @@
-import "@/components/ui/drawer/drawer";
+import "@/components/ui/drawer";
 
-import { Drawer, DrawerTrigger } from "@/components/ui/drawer/drawer";
+import { Drawer, DrawerTrigger } from "@/components/ui/drawer";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 import { Pill } from "@/components/ui/pill";
 import { Pokeball } from "@/components/ui/pokeball/Pokeball";
@@ -8,6 +8,7 @@ import { Pokeball } from "@/components/ui/pokeball/Pokeball";
 import { ChallengeDrawer } from "./_components/DescriptionDrawer";
 
 export default function Home() {
+  const variant = ["master", "great", "ultra", "normal"] as const;
   return (
     <NormalLayout title="Board">
       <div className="flex flex-col gap-8">
@@ -18,7 +19,10 @@ export default function Home() {
           {[...Array(16)].map((_, i) => (
             <Drawer key={i}>
               <DrawerTrigger>
-                <Pokeball variant="master" className="cursor-pointer" />
+                <Pokeball
+                  variant={variant[Math.floor(Math.random() * 4)]}
+                  className="cursor-pointer"
+                />
               </DrawerTrigger>
               <ChallengeDrawer id={i + 1} />
             </Drawer>
