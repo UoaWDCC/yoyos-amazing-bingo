@@ -49,7 +49,7 @@ export function initWebSocketServer(httpServer: Server) {
       return;
     }
 
-    ws.on("message", async (message: string) => {
+    ws.on("message", async (message: Buffer) => {
       if (!ws.teamId) {
         console.error("No team ID in WebSocket connection");
         ws.close(1000, "Unauthorized");
@@ -57,17 +57,15 @@ export function initWebSocketServer(httpServer: Server) {
       }
 
       try {
-        // TODO: implement message handling and validation
+        // TODO: implement message handling and
 
         // Broadcast message to all connections for the team
         const teamConnections = connections.get(ws.teamId);
-        if (teamConnections) {
-          for (const connection of teamConnections) {
-            if (connection.readyState === WebSocket.OPEN) {
-              connection.send(message.toString());
-            }
+        teamConnections?.forEach((connection) => {
+          if (connection.readyState === WebSocket.OPEN) {
+            connection.send(message.toString());
           }
-        }
+        });
       } catch (error) {
         console.error("WebSocket message handling error:", error);
         ws.send(JSON.stringify({ error: "Internal server error" }));

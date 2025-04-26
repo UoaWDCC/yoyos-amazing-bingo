@@ -31,7 +31,7 @@ export function useBoardWebSocket(onBoardUpdate: (board: Board) => void) {
         wsRef.current = ws;
       };
 
-      ws.onmessage = (event) => {
+      ws.onmessage = async (event: MessageEvent<string>) => {
         try {
           const data = JSON.parse(event.data) as BoardWebSocketMessage;
           if (data.type === "BOARD_UPDATE") {
