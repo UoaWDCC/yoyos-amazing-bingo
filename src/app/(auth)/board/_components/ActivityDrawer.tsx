@@ -12,31 +12,31 @@ import {
   DrawerHeader,
 } from "@/components/ui/drawer";
 import { Pill } from "@/components/ui/pill";
-import { Pokeball } from "@/components/ui/pokeball/Pokeball";
-import useChallengeQuery from "@/queries/mockChallengeQuery";
+import { Pokeball, pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
+import { Square } from "@/models/Square";
 
-export interface ChallengeDrawerProps {
-  id: number;
+export interface ActivityDrawerProps {
+  square: Square;
 }
 
-const ChallengeDrawer = (props: ChallengeDrawerProps) => {
-  const { data: challenge } = useChallengeQuery(props.id);
-
-  if (!challenge) return null;
-
+const ActivityDrawer = ({ square }: ActivityDrawerProps) => {
   return (
     <DrawerContent>
       <DrawerHeader>
         {/* required for screen reader */}
-        <DialogTitle hidden>{challenge.title || ""}</DialogTitle>
+        <DialogTitle hidden>{square.activity.name || ""}</DialogTitle>
         <div className="flex w-full justify-center gap-2">
-          <Pill>{challenge.id}</Pill>
-          <Pill>{challenge.title}</Pill>
+          <Pill>{square.activity.id}</Pill>
+          <Pill>{square.activity.name}</Pill>
         </div>
-        <DrawerDescription>{challenge.description}</DrawerDescription>
+        <DrawerDescription>{square.activity.description}</DrawerDescription>
       </DrawerHeader>
       <div className="flex w-full justify-center">
-        <Pokeball variant="master" size="fixed" className="shadow-2xl" />
+        <Pokeball
+          variant={pokeDifficulty[square.points - 1]}
+          size="fixed"
+          className="shadow-2xl"
+        />
       </div>
       <DrawerFooter>
         <Button variant="outline">PIN</Button>
@@ -48,6 +48,6 @@ const ChallengeDrawer = (props: ChallengeDrawerProps) => {
   );
 };
 
-const MemoChallengeDrawer = memo(ChallengeDrawer);
+const MemoActivityDrawer = memo(ActivityDrawer);
 
-export { MemoChallengeDrawer as ChallengeDrawer };
+export { MemoActivityDrawer as ActivityDrawer };

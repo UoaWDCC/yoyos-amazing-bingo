@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { BoardSchema } from "./Board";
+import { BoardSchema } from "./Square";
 
 export const TeamSchema = z.object({
   id: z.string().min(1).max(255),
