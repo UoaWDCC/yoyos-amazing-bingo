@@ -8,9 +8,9 @@ import useGetTime from "@/queries/useTimeEXAMPLE";
 export default function Home() {
   // High-quality integration testing
   const { data: time, isLoading: timeIsLoading } = useGetTime();
-  const { data: team, isLoading: teamIsLoading } = useGetTeam("code", "teamId");
+  const { data: team, isLoading: teamIsLoading } = useGetTeam("teamId");
   const { data: allTeams, isLoading: allTeamsIsLoading } =
-    useGetAllTeams("code");
+    useGetAllTeams();
 
   return (
     <NormalLayout title="Home">
@@ -18,14 +18,11 @@ export default function Home() {
         By default, this data is cached for 2s and refetched when you refocus
         the page. Try change tabs and back!
       </p>
-      <div>
-        {" "}
-        {timeIsLoading ? (
-          <p className="bg-red-200">Time is loading</p>
-        ) : (
-          <h1 className="bg-red-200">{time}</h1>
-        )}
-      </div>
+      {timeIsLoading ? (
+        <p className="bg-red-200">Time is loading</p>
+      ) : (
+        <h1 className="bg-red-200">{time}</h1>
+      )}
       {teamIsLoading ? (
         <p className="bg-emerald-200">Loading team...</p>
       ) : (

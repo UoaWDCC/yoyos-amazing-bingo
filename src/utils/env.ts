@@ -5,6 +5,7 @@
 
 import dotenv from "dotenv";
 import { z } from "zod";
+
 import { parseZod } from "./zod";
 
 // .env schema
