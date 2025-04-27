@@ -8,6 +8,7 @@ import { updateTeamSquare } from "@/services/activity";
  * Complete the activity for a given team auth code and activity ID.
  *
  * @param activityId Activity ID to complete.
+ * @param answer The 6-character answer code to validate.
  */
 export async function completeActivity(activityId: string): Promise<void> {
   // TODO: STUB

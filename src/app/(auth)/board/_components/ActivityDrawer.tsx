@@ -1,16 +1,20 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useState } from "react";
 import { DialogTitle } from "@radix-ui/react-dialog";
 
+import { completeActivity } from "@/actions/completeActivity";
 import { Button } from "@/components/ui/button";
 import {
+  Drawer,
   DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
   DrawerHeader,
+  DrawerTrigger,
 } from "@/components/ui/drawer";
+import { Input } from "@/components/ui/input";
 import { Pill } from "@/components/ui/pill";
 import { Pokeball, pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
 import { Square } from "@/models/Square";
@@ -20,31 +24,72 @@ export interface ActivityDrawerProps {
 }
 
 const ActivityDrawer = ({ square }: ActivityDrawerProps) => {
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [error, setError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const answer = e.target.value;
+    if (answer.length === 6) {
+      setIsSubmitting(true);
+      try {
+        await completeActivity(square.activity.id, answer);
+        setError("");
+        setIsDrawerOpen(false);
+      } catch {
+        setError("Invalid answer");
+      } finally {
+        setIsSubmitting(false);
+      }
+    }
+  };
+
   return (
-    <DrawerContent>
-      <DrawerHeader>
-        {/* required for screen reader */}
-        <DialogTitle hidden>{square.activity.name || ""}</DialogTitle>
-        <div className="flex w-full justify-center gap-2">
-          <Pill>{square.activity.id}</Pill>
-          <Pill>{square.activity.name}</Pill>
-        </div>
-        <DrawerDescription>{square.activity.description}</DrawerDescription>
-      </DrawerHeader>
-      <div className="flex w-full justify-center">
+    <Drawer
+      key={`${square.activity.x}-${square.activity.y}`}
+      onOpenChange={() => {
+        if (!isDrawerOpen) setError("");
+        setIsDrawerOpen((prev) => !prev);
+      }}
+      open={isDrawerOpen}
+    >
+      <DrawerTrigger>
         <Pokeball
           variant={pokeDifficulty[square.points - 1]}
-          size="fixed"
-          className="shadow-2xl"
+          className="cursor-pointer"
         />
-      </div>
-      <DrawerFooter>
-        <Button variant="outline">PIN</Button>
-        <DrawerClose asChild>
-          <Button>CLOSE</Button>
-        </DrawerClose>
-      </DrawerFooter>
-    </DrawerContent>
+      </DrawerTrigger>
+      <DrawerContent>
+        <DrawerHeader>
+          {/* required for screen reader */}
+          <DialogTitle hidden>{square.activity.name || ""}</DialogTitle>
+          <div className="flex w-full justify-center gap-2">
+            <Pill>{square.activity.name}</Pill>
+          </div>
+          <DrawerDescription>{square.activity.description}</DrawerDescription>
+        </DrawerHeader>
+        <div className="flex w-full justify-center">
+          <Pokeball
+            variant={pokeDifficulty[square.points - 1]}
+            size="fixed"
+            className="shadow-2xl"
+          />
+        </div>
+        <DrawerFooter>
+          <Input
+            type="text"
+            placeholder="Enter your answer"
+            maxLength={6}
+            onChange={handleInputChange}
+            error={error}
+            disabled={isSubmitting}
+          />
+          <DrawerClose asChild>
+            <Button>CLOSE</Button>
+          </DrawerClose>
+        </DrawerFooter>
+      </DrawerContent>
+    </Drawer>
   );
 };
 
