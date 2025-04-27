@@ -1,6 +1,7 @@
 "use server";
 
 import { Team } from "@/models/Team";
+import "server-only";
 
 /**
  * Fetches the team info (including board) for a given team ID.

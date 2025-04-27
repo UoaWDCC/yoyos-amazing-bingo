@@ -1,6 +1,7 @@
 "use server";
 
 import { Team } from "@/models/Team";
+import "server-only";
 
 /**
  * Fetches all teams (including boards).

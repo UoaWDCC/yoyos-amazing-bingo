@@ -1,5 +1,6 @@
 "use server";
 import { getTeamBoard } from "@/services/teamBoard";
+import "server-only";
 
 export async function getTeamPoints(teamId: string) {
     const board = await getTeamBoard(teamId)

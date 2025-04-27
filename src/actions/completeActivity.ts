@@ -1,4 +1,5 @@
 "use server";
+import "server-only";
 
 /**
  * Complete the activity for a given team auth code and activity ID.
