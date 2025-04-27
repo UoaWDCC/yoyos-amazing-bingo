@@ -6,7 +6,7 @@ import { useSWRWithZod } from "@/utils/swr";
 export default function useGetTeam(code: string, teamId: string) {
   return useSWRWithZod({
     cacheKey: `getTeam/${code}/${teamId}`,
-    fetcher: () => getTeam(code, teamId),
+    fetcher: () => getTeam(teamId),
     zodSchema: TeamSchema,
     thisFile: "queries/useGetTeam.ts",
   });

@@ -1,24 +1,19 @@
 "use server";
 
 import { Team } from "@/models/Team";
+import { getSquares } from "@/services/getSquares";
+import { getTeamSerivce } from "@/services/getTeam";
 
 /**
  * Fetches the team info (including board) for a given team ID.
  *
- * @param code The team auth code. Teams have access to their own team/board only. Admins can access all teams/boards.
+ *
  * @param teamId The ID of the team to fetch the board for.
  * @returns The team info (including board) for the given team ID.
  */
-export async function getTeam(code: string, teamId: string): Promise<Team> {
-  // TODO: STUB
-  console.log(code, teamId);
-
-  const dummyTeam = {
-    id: teamId,
-    name: "Dummy Team",
-    code: "dummyCode",
-    board: dummyBoard,
-  };
-
-  return dummyTeam;
+export async function getTeam(teamId: string): Promise<Team> {
+  const team = await getTeamSerivce(teamId);
+  const teamSquare = await getSquares(teamId);
+  const res = { ...team, board: teamSquare };
+  return res;
 }
