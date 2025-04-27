@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 
 import LeaderboardListItem from "./_components/LeaderboardListItem";
