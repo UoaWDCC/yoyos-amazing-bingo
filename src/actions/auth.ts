@@ -36,7 +36,7 @@ export async function signIn(
     };
   }
 
-  const team = await getTeamByCode(code as string);
+  const team = await getTeamByCode(code.toString().toLowerCase());
 
   if (!team) {
     return {
