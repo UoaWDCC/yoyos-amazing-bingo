@@ -1,7 +1,7 @@
 "use server";
 
-import {auth} from "@/actions/auth";
-import {updateTeamSquare} from "@/services/activity";
+import { auth } from "@/actions/auth";
+import { updateTeamSquare } from "@/services/activity";
 
 /**
  * Complete the activity for a given team auth code and activity ID.
