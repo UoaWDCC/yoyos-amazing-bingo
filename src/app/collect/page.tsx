@@ -1,12 +1,9 @@
 "use client";
-
-import React, { useEffect, useState } from "react";
-
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
-
 import CardProvider from "./_components/Provider";
 import StateCardDisplay from "./_components/StateCardDisplay";
 import StateCollectingDisplay from "./_components/StateCollectingDisplay";
+import { useEffect, useState } from "react";
 
 const ClientPage = () => {
   const [data, setData] = useState<{
@@ -35,6 +32,7 @@ const ClientPage = () => {
     setanimating(true);
   };
 
+  // Plz remove all these useEffects if possible!!
   useEffect(() => {
     if (!isAnimating) return;
 
@@ -92,10 +90,10 @@ const ClientPage = () => {
     <CardProvider value={data}>
       <NormalLayout title="collect">
         {cardState ? (
-          <StateCardDisplay />
-        ) : (
-          <StateCollectingDisplay handleAnimating={handleAnimating} />
-        )}
+            <StateCardDisplay />
+          ) : (
+            <StateCollectingDisplay handleAnimating={handleAnimating} />
+          )}
       </NormalLayout>
     </CardProvider>
   );
