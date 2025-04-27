@@ -1,11 +1,22 @@
 "use server";
 
+
+
+
 import "server-only";
+
+
 
 import { redirect } from "next/navigation";
 
+
+
 import { getSession } from "@/lib/session";
 import { getTeamByCode } from "@/services/team";
+
+
+
+
 
 type SignInState = {
   error?: string;
@@ -60,7 +71,7 @@ export async function auth(): Promise<Auth> {
   const teamId = session.teamId;
 
   if (!teamId) {
-    throw new Error("Unauthorized");
+    return { teamId: "Unauthorized", error: "Unauthorized" };
   }
 
   return {
@@ -73,9 +84,10 @@ export async function auth(): Promise<Auth> {
  * @returns Redirect to the code page if the user is not authenticated
  */
 export async function protect() {
-  const { error } = await auth();
-
-  if (error) {
+  try {
+    await auth();
+  } catch (error: unknown) {
+    console.error("Unauthorized", error);
     return redirect("/code");
   }
 }

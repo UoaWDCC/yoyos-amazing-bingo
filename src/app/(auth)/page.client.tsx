@@ -7,8 +7,8 @@ import useGetTime from "@/queries/useTimeEXAMPLE";
 export default function Home() {
   // High-quality integration testing
   const { data: time, isLoading: timeIsLoading } = useGetTime();
-  const { data: team, isLoading: teamIsLoading } = useGetTeam("teamId");
   const { data: allTeams, isLoading: allTeamsIsLoading } = useGetAllTeams();
+  const { data: team, isLoading: teamIsLoading } = useGetTeam("ausa");
 
   return (
     <>
