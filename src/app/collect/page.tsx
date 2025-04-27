@@ -3,7 +3,7 @@
 import React from "react";
 
 import { Button } from "@/components/ui/button";
-import { Heading } from "@/components/ui/Heading";
+import { Heading } from "@/components/ui/heading";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 import { Pill } from "@/components/ui/pill";
 

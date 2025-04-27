@@ -2,7 +2,7 @@
 
 import { ChallengeDTO } from "@/models/Challenge";
 
-export async function getChallange(id: number): Promise<ChallengeDTO> {
+export async function getChallenge(id: number): Promise<ChallengeDTO> {
   const data: ChallengeDTO = {
     id: id,
     title: `Challenge ${id}`,
