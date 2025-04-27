@@ -1,7 +1,3 @@
-"use client";
-
-import React from "react";
-
 import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";

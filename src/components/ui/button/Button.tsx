@@ -3,7 +3,7 @@ import { cva, VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
-const button = cva("py-3 text-center w-full px-4 cursor-pointer", {
+const button = cva("py-3 text-center w-full px-4 cursor-pointer disabled:opacity-50", {
   variants: {
     variant: {
       solid: "bg-btn-solid text-btn-solid-fg",
