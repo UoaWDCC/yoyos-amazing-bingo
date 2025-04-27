@@ -38,6 +38,9 @@
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
+
+  --ease-in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+  --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
 }
 
 :root[data-state-dim="true"] {
@@ -92,6 +95,10 @@ html[data-state-dim="true"] .darkout {
   scale: 0;
 }
 
+html[data-state-dim="true"] .darkout-center {
+  padding-bottom: 96px;
+}
+
 html[data-state-pokehide="true"] .animate-pulse {
   animation: none;
   opacity: 0;
@@ -107,4 +114,20 @@ html[data-state-blind-2="true"] .blind-2 {
 
 .blind-rad {
   background: radial-gradient(#ffffff, #00000000, #00000000);
+}
+
+.slide-up {
+  opacity: 0;
+  animation: slideUp 0.5s both;
+  animation-delay: calc(var(--delay) * 1s);
+}
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }

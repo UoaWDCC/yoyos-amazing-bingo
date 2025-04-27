@@ -28,7 +28,8 @@ const CardDisplay = () => {
 
   return (
     <div
-      className="aspect-square size-full"
+      style={{ "--delay": 1.5 } as React.CSSProperties}
+      className="slide-up aspect-square size-full"
       onMouseDown={handleInteraction}
       onTouchStart={handleInteraction}
       onMouseOut={handleEndInteraction}
@@ -44,7 +45,7 @@ const CardDisplay = () => {
           minPolarAngle={Math.PI / 2 - Math.PI / 8}
           maxPolarAngle={Math.PI / 2 + Math.PI / 8}
         />
-        <PerspectiveCamera makeDefault position={[0, 0, 1.9]} />
+        <PerspectiveCamera makeDefault position={[0, 0, 2.1]} />
         <WebsterCard />
       </Canvas>
     </div>

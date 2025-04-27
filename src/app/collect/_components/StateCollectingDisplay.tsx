@@ -16,7 +16,7 @@ const StateCollectingDisplay = ({
         <BlindBall />
         <Pill className="darkout">Webster&apos;s stuff</Pill>
         <p className="darkout">You have solved the challenge</p>
-        <div className="relative">
+        <div className="relative darkout-center">
           <Darkball className="absolute inset-0" />
           <Pokeball variant="normal" className="size-32 animate-pulse" />
         </div>
