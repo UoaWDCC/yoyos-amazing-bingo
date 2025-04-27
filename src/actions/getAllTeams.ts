@@ -7,7 +7,7 @@ import { Team } from "@/models/Team";
  *
  * @returns All teams (including boards).
  */
-export async function getAllTeams(): Promise<Team[]> {
+export async function getAllTeams(id: string): Promise<Team[]> {
   // TODO: STUB
 
   const dummyBoard = [
