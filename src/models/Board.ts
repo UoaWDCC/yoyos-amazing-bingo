@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 /** A single square in the board */
-export const SquareSchema = z.boolean({ message: "Invalid square" });
+export const SquareSchema = z.boolean({ message: "Invalid square" }); // This schema will need to be added to
 
 /** 4x4 board */
 export const BoardSchema = z
