@@ -43,7 +43,9 @@ export function useRevalidationSocket(
 
       ws.onmessage = async (event: MessageEvent<string>) => {
         const codes = event.data.split(",");
-        mutate(codes);
+        codes.forEach((code) => {
+          mutate(code);
+        });
         onInvalidation?.(codes);
       };
 

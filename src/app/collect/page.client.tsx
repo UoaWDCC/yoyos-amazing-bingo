@@ -2,8 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 
-import { NormalLayout } from "@/components/ui/layout/NormalLayout";
-
 import CardProvider from "./_components/Provider";
 import StateCardDisplay from "./_components/StateCardDisplay";
 import StateCollectingDisplay from "./_components/StateCollectingDisplay";

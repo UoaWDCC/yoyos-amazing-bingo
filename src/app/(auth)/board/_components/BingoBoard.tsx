@@ -1,5 +1,7 @@
 "use client";
 
+import { useMemo } from "react";
+
 import { useRevalidationSocket } from "@/hooks/useRevalidationSocket";
 import useGetBoard from "@/queries/useGetBoard";
 
@@ -18,13 +20,22 @@ export function BingoBoard({ teamId }: BingoBoardProps) {
     },
   });
 
-  if (isLoading || !squares) {
+  const sortedSquares = useMemo(() => {
+    return squares?.sort((a, b) => {
+      if (a.activity.y === b.activity.y) {
+        return a.activity.x - b.activity.x;
+      }
+      return a.activity.y - b.activity.y;
+    });
+  }, [squares]);
+
+  if (isLoading || !sortedSquares) {
     return <BingoBoardSkeleton />;
   }
 
   return (
     <div className="grid grid-cols-4 gap-2 px-8">
-      {squares.map((square) => (
+      {sortedSquares.map((square) => (
         <ActivityDrawer
           key={`${square.activity.x}-${square.activity.y}`}
           square={square}
