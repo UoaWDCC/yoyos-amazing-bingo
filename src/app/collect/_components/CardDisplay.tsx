@@ -28,7 +28,7 @@ const CardDisplay = () => {
 
   return (
     <div
-      style={{ "--delay": 1.5 } as React.CSSProperties}
+      style={{ "--delay": 1.25 } as React.CSSProperties}
       className="slide-up aspect-square size-full"
       onMouseDown={handleInteraction}
       onTouchStart={handleInteraction}

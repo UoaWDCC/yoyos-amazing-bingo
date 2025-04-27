@@ -20,14 +20,14 @@ const StateCardDisplay = () => {
           </Heading.h2>
           <Pill
             className="slide-up"
-            style={{ "--delay": 1.5 } as React.CSSProperties}
+            style={{ "--delay": 1.25 } as React.CSSProperties}
           >
             SNORELAX
           </Pill>
           <CardDisplay />
           <Link
             className="slide-up"
-            style={{ "--delay": 2.5 } as React.CSSProperties}
+            style={{ "--delay": 2.0 } as React.CSSProperties}
             href="/board"
           >
             <Button className="w-min rounded-full px-8">Back to board</Button>
