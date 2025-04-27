@@ -1,3 +1,4 @@
+import { relations } from "drizzle-orm";
 import {
   boolean,
   integer,
@@ -21,7 +22,9 @@ export const squaresTable = pgTable(
       .references(() => teamsTable.id),
     x: integer().notNull(),
     y: integer().notNull(),
+    points: integer().notNull().default(1),
     completed: boolean().notNull().default(false),
+    activityId: varchar("activity_id", { length: 36 }),
   },
   (table) => [primaryKey({ columns: [table.teamId, table.x, table.y] })],
 );
@@ -30,7 +33,17 @@ export const activitiesTable = pgTable("activities", {
   id: varchar({ length: 36 }).primaryKey(),
   name: varchar({ length: 255 }).notNull(),
   slug: varchar({ length: 255 }).notNull(),
-  points: integer().notNull().default(0),
   x: integer().notNull(),
   y: integer().notNull(),
 });
+
+export const squareRelations = relations(activitiesTable, ({ many }) => ({
+  squaresTable: many(squaresTable),
+}));
+
+export const activitiesRelations = relations(squaresTable, ({ one }) => ({
+  activity: one(activitiesTable, {
+    fields: [squaresTable.activityId],
+    references: [activitiesTable.id],
+  }),
+}));
