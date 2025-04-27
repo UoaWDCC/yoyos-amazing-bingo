@@ -5,7 +5,7 @@ import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 import LeaderboardListItem from "./_components/LeaderboardListItem";
 
 export default async function Leaderboard() {
-  const teams = await getAllTeams("sdfghjk");
+  const teams = await getAllTeams();
 
   /*
   TODO logic to sort teams by points before passing into LeaderboardListItem

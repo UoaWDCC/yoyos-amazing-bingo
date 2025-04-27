@@ -1,10 +1,9 @@
-import { getTeamName } from "@/actions/getTeamName";
-
 import { Heading } from "../heading";
 
 const Header = async ({ title }: { title: string }) => {
   //TODO: fetch this using SWR instead
-  const teamName = await getTeamName();
+  // const teamName = await getTeamName();
+  const teamName = "My team";
 
   return (
     <div className="flex justify-between">

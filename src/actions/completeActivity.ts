@@ -1,4 +1,5 @@
 "use server";
+import "server-only";
 
 import { auth } from "@/actions/auth";
 import { updateTeamSquare } from "@/services/activity";

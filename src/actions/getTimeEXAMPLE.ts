@@ -1,4 +1,5 @@
 "use server";
+import "server-only";
 
 /** Just an example server action to return the current server time */
 export async function getTime() {

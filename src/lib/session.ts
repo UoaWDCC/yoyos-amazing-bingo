@@ -7,7 +7,7 @@ export interface SessionData {
   teamId?: string;
 }
 
-const SESSION_OPTIONS = {
+export const SESSION_OPTIONS = {
   cookieName: "bingo_session",
   password: env.COOKIE_SECRET,
   cookieOptions: {
@@ -18,10 +18,10 @@ const SESSION_OPTIONS = {
   },
 };
 
-export async function getSession() {
+export const getSession = async () => {
   const session = await getIronSession<SessionData>(
     await cookies(),
     SESSION_OPTIONS,
   );
   return session;
-}
+};

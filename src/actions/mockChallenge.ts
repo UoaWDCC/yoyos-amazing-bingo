@@ -1,6 +1,6 @@
 "use server";
-
 import { ChallengeDTO } from "@/models/Challenge";
+import "server-only";
 
 export async function getChallenge(id: number): Promise<ChallengeDTO> {
   const data: ChallengeDTO = {

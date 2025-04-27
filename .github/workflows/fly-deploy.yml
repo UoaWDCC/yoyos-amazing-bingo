@@ -5,17 +5,21 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 jobs:
   deploy:
     name: Deploy app
     runs-on: ubuntu-latest
-    concurrency: deploy-group    # optional: ensure only one action runs at a time
+    concurrency:
+      group: deploy-group
+      cancel-in-progress: true  # optional: auto-cancel old deploys if new commit comes
     steps:
       - uses: actions/checkout@v4
       - uses: superfly/flyctl-actions/setup-flyctl@master
+      - run: |
+          flyctl deploy --remote-only \
+          --build-secret DB_URL=${{ secrets.DB_URL }} \
+          --build-secret COOKIE_SECRET=${{ secrets.COOKIE_SECRET }} \
+          --build-secret APP_URL=${{ secrets.APP_URL }} \
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-      - run: >- 
-          flyctl deploy --remote-only 
-          --build-secret=${{ secrets.DB_URL }} 
-          --build-secret=${{ secrets.COOKIE_SECRET }}

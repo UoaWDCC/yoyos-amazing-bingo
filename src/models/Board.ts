@@ -1,7 +1,13 @@
 import { z } from "zod";
 
+import { ActivitySchema } from "./Activity";
+
 /** A single square in the board */
-export const SquareSchema = z.boolean({ message: "Invalid square" }); // This schema will need to be added to
+export const SquareSchema = z.object({
+  completed: z.boolean({ message: "Square has invalid completed" }),
+  activity: ActivitySchema,
+  points: z.number({ message: "Square has invalid points" }),
+});
 
 /** 4x4 board */
 export const BoardSchema = z
