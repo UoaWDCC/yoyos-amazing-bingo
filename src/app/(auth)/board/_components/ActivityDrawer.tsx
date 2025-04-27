@@ -16,7 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Pill } from "@/components/ui/pill";
 import { Pokeball, pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
-import { Square } from "@/models/Square";
+import { Square } from "@/models/Board";
 import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
 
 export interface ActivityDrawerProps {
