@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes } from "react";
 import { cva, VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 
 const button = cva(
   "py-3 text-center w-full px-4 cursor-pointer whitespace-nowrap disabled:opacity-50",

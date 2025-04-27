@@ -1,22 +1,11 @@
 "use server";
 
-
-
-
 import "server-only";
-
-
 
 import { redirect } from "next/navigation";
 
-
-
-import { getSession } from "@/lib/session";
+import { getSession } from "@/lib/auth";
 import { getTeamByCode } from "@/services/team";
-
-
-
-
 
 type SignInState = {
   error?: string;

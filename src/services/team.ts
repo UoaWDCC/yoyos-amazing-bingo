@@ -1,9 +1,15 @@
 import { eq } from "drizzle-orm";
 
+
+
 import { db } from "@/db/connection";
 import { activitiesTable, squaresTable, teamsTable } from "@/db/schema";
+import { parseZod } from "@/lib/zod";
 import { BoardSchema } from "@/models/Board";
-import { parseZod } from "@/utils/zod";
+
+
+
+
 
 export const getTeamByCode = async (code: string) => {
   return await db.query.teamsTable.findFirst({

@@ -16,9 +16,13 @@ import {
 import { Input } from "@/components/ui/input";
 import { Pill } from "@/components/ui/pill";
 import { Pokeball, pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 import { Square } from "@/models/Board";
 import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
+
+
+
+
 
 export type ActivityDrawerProps = {
   square: Square;

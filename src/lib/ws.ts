@@ -2,7 +2,7 @@ import { IncomingMessage, Server, ServerResponse } from "http";
 import { getIronSession } from "iron-session";
 import { WebSocket, WebSocketServer } from "ws";
 
-import { SESSION_OPTIONS, SessionData } from "@/lib/session";
+import { SESSION_OPTIONS, SessionData } from "@/lib/auth";
 
 export function initWebSocketServer(httpServer: Server) {
   const wss = new WebSocketServer({
