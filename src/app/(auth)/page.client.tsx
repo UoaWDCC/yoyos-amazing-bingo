@@ -1,6 +1,5 @@
 "use client";
 
-import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 import useGetAllTeams from "@/queries/useGetAllTeams";
 import useGetTeam from "@/queries/useGetTeam";
 import useGetTime from "@/queries/useTimeEXAMPLE";
@@ -8,16 +7,11 @@ import useGetTime from "@/queries/useTimeEXAMPLE";
 export default function Home() {
   // High-quality integration testing
   const { data: time, isLoading: timeIsLoading } = useGetTime();
-  const { data: team, isLoading: teamIsLoading } = useGetTeam("code", "teamId");
-  const { data: allTeams, isLoading: allTeamsIsLoading } =
-    useGetAllTeams("code");
+  const { data: team, isLoading: teamIsLoading } = useGetTeam("teamId");
+  const { data: allTeams, isLoading: allTeamsIsLoading } = useGetAllTeams();
 
   return (
-    <NormalLayout title="Home">
-      <p>
-        By default, this data is cached for 2s and refetched when you refocus
-        the page. Try change tabs and back!
-      </p>
+    <>
       <div>
         {" "}
         {timeIsLoading ? (
@@ -38,6 +32,6 @@ export default function Home() {
           {allTeams?.map((team) => <div key={team.id}>{team.name}</div>)}
         </div>
       )}
-    </NormalLayout>
+    </>
   );
 }

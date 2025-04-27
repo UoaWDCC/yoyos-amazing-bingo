@@ -1,0 +1,11 @@
+@keyframes arrow-left {
+    0%{
+        transform: translateX(0px);
+    }
+    50%{
+        transform: translateX(-7px);
+    }
+    100%{
+        transform: translateX(0px);
+    }
+}
