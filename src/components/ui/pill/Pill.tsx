@@ -23,7 +23,7 @@ type Variant = PillVariants["variant"];
 type PillProps = {
   className?: string;
   variant?: Variant;
-} & HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLDivElement>;
 
 const Pill = ({ variant, ...props }: PillProps) => {
   return (

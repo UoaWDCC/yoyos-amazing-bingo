@@ -10,7 +10,7 @@ import useGetTeam from "@/queries/useGetTeam";
 type BoardClientPageProps = {
   teamId: string;
   initialTeamData: Team;
-}
+};
 
 export default function BoardClientPage({
   teamId,

@@ -1,5 +1,5 @@
 {
-    "watch": ["server.ts"],
-    "exec": "tsx --tsconfig tsconfig.server.json server.ts",
-    "ext": "js ts"
-  }
+  "watch": ["server.ts"],
+  "exec": "tsx --tsconfig tsconfig.server.json server.ts",
+  "ext": "js ts"
+}

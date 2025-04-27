@@ -24,7 +24,7 @@ type Variant = ButtonVariants["variant"];
 type ButtonProps = {
   className?: string;
   variant?: Variant;
-} & ButtonHTMLAttributes<HTMLButtonElement>
+} & ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({ variant, ...props }: ButtonProps) => {
   return (

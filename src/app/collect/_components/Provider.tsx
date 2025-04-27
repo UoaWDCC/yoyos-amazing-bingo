@@ -8,7 +8,7 @@ type CardProviderProps = {
     imageIndex: number;
   };
   children: React.ReactNode;
-}
+};
 
 const CardProvider = ({ value, children }: CardProviderProps) => {
   return (

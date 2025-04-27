@@ -5,7 +5,7 @@ import Header from "./Header";
 type LayoutProps = {
   children: ReactNode;
   title: string;
-}
+};
 
 export const NormalLayout = (props: LayoutProps) => {
   return (

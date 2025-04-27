@@ -5,7 +5,7 @@ import { completeActivity } from "@/actions/completeActivity";
 export type CompleteActivityArgs = {
   activityId: string;
   answer: string;
-}
+};
 
 async function completeActivityFetcher(
   _key: string,

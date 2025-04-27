@@ -20,7 +20,7 @@ type HeadingProps = {
   className?: string;
   size?: Size;
   as?: "h1" | "h2" | "h3";
-} & HTMLAttributes<HTMLHeadingElement>
+} & HTMLAttributes<HTMLHeadingElement>;
 
 const HeadingUI = ({ size, as = "h1", ...props }: HeadingProps) => {
   const Component = as;
@@ -36,7 +36,7 @@ type HeadingComponent = {
   h1: FC<HeadingProps>;
   h2: FC<HeadingProps>;
   h3: FC<HeadingProps>;
-} & FC<Omit<HeadingProps, "as">>
+} & FC<Omit<HeadingProps, "as">>;
 
 const HeadingWithNamespace = HeadingUI as HeadingComponent;
 

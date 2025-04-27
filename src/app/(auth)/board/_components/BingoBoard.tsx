@@ -10,7 +10,7 @@ import { BingoBoardSkeleton } from "./BingoBoardSkeleton";
 
 type BingoBoardProps = {
   teamId: string;
-}
+};
 
 export function BingoBoard({ teamId }: BingoBoardProps) {
   const { data: squares, isLoading } = useGetBoard(teamId);

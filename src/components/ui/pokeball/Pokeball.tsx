@@ -42,7 +42,7 @@ type pokeballProps = {
   className?: string;
   variant?: Variant;
   size?: Size;
-} & HTMLAttributes<HTMLDivElement>
+} & HTMLAttributes<HTMLDivElement>;
 
 const Pokeball = ({ variant, size, ...props }: pokeballProps) => {
   return (

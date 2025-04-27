@@ -5,7 +5,7 @@ import env from "@/utils/env";
 
 export type SessionData = {
   teamId?: string;
-}
+};
 
 export const SESSION_OPTIONS = {
   cookieName: "bingo_session",

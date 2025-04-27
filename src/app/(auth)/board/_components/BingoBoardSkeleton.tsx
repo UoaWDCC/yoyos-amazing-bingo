@@ -9,7 +9,7 @@ export function BingoBoardSkeleton() {
           key={index}
           className="bg-secondary/50 flex aspect-square w-full animate-pulse flex-col items-center justify-center rounded-lg"
         >
-          <Pokeball variant="completed"/>
+          <Pokeball variant="completed" />
         </div>
       ))}
     </div>

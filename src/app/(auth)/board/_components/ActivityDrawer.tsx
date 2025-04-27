@@ -22,7 +22,7 @@ import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
 
 export type ActivityDrawerProps = {
   square: Square;
-}
+};
 
 const ActivityDrawer = ({ square }: ActivityDrawerProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

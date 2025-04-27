@@ -6,17 +6,15 @@ import { useSWRConfig } from "swr";
  * This hook should be used on any routes or client components that would involve dynamic revalidation logic.
  * @returns
  */
-export function useRevalidationSocket(
-  {
-    onInvalidation
-  }: {
-    /**
-     * This function will be called when the board is updated.
-     * Note: the revalidation logic is baked into the hook, this is just a callback for any additional logic you want to do.
-     */
-    onInvalidation?: (codes: string[]) => void;
-  } = {},
-) {
+export function useRevalidationSocket({
+  onInvalidation,
+}: {
+  /**
+   * This function will be called when the board is updated.
+   * Note: the revalidation logic is baked into the hook, this is just a callback for any additional logic you want to do.
+   */
+  onInvalidation?: (codes: string[]) => void;
+} = {}) {
   const wsRef = useRef<WebSocket | null>(null);
   const isConnecting = useRef(false);
   const { mutate } = useSWRConfig();
