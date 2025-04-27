@@ -1,9 +1,9 @@
 "use server";
 
-import { ChallangeDTO } from "@/models/Challenge";
+import { ChallengeDTO } from "@/models/Challenge";
 
-export async function getChallange(id: number): Promise<ChallangeDTO> {
-  const data: ChallangeDTO = {
+export async function getChallange(id: number): Promise<ChallengeDTO> {
+  const data: ChallengeDTO = {
     id: id,
     title: `Challenge ${id}`,
     description: `Challenge ${id} description`,

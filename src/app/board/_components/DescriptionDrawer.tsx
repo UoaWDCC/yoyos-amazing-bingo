@@ -28,7 +28,7 @@ const ChallengeDrawer = (props: ChallengeDrawerProps) => {
     <DrawerContent>
       <DrawerHeader>
         {/* required for screen reader */}
-        <DialogTitle hidden>{challenge.title}</DialogTitle>
+        <DialogTitle hidden>{challenge.title || ""}</DialogTitle>
         <div className="flex w-full justify-center gap-2">
           <Pill>{challenge.id}</Pill>
           <Pill>{challenge.title}</Pill>

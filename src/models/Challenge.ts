@@ -9,7 +9,7 @@ const ChallangeSchema = z.object({
   difficulty: z.enum(pokeDifficulty),
 });
 
-type ChallangeDTO = z.infer<typeof ChallangeSchema>;
+type ChallengeDTO = z.infer<typeof ChallangeSchema>;
 
 export { ChallangeSchema };
-export type { ChallangeDTO };
+export type { ChallengeDTO };
