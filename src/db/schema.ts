@@ -4,6 +4,7 @@ import {
   integer,
   pgTable,
   primaryKey,
+  text,
   varchar,
 } from "drizzle-orm/pg-core";
 
@@ -22,7 +23,6 @@ export const squaresTable = pgTable(
       .references(() => teamsTable.id),
     x: integer().notNull(),
     y: integer().notNull(),
-    points: integer().notNull().default(1),
     completed: boolean().notNull().default(false),
     activityId: varchar("activity_id", { length: 36 }),
   },
@@ -33,8 +33,10 @@ export const activitiesTable = pgTable("activities", {
   id: varchar({ length: 36 }).primaryKey(),
   name: varchar({ length: 255 }).notNull(),
   slug: varchar({ length: 255 }).notNull(),
-  x: integer().notNull(),
-  y: integer().notNull(),
+  points: integer().notNull().default(1),
+  description: text().notNull(),
+  defaultX: integer().notNull(),
+  defaultY: integer().notNull(),
 });
 
 export const squareRelations = relations(activitiesTable, ({ many }) => ({
