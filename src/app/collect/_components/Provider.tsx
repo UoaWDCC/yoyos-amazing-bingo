@@ -2,7 +2,7 @@ import React, { createContext, useContext } from "react";
 
 const ProviderContext = createContext({ title: "", imageIndex: 0 });
 
-interface CardProviderProps {
+type CardProviderProps = {
   value: {
     title: string;
     imageIndex: number;

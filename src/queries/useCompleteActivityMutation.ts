@@ -2,7 +2,7 @@ import useSWRMutation from "swr/mutation";
 
 import { completeActivity } from "@/actions/completeActivity";
 
-export interface CompleteActivityArgs {
+export type CompleteActivityArgs = {
   activityId: string;
   answer: string;
 }

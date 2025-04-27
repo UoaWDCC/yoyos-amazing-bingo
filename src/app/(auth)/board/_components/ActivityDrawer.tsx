@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
 import { Square } from "@/models/Board";
 import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
 
-export interface ActivityDrawerProps {
+export type ActivityDrawerProps = {
   square: Square;
 }
 

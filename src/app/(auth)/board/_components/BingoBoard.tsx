@@ -8,7 +8,7 @@ import useGetBoard from "@/queries/useGetBoard";
 import { ActivityDrawer } from "./ActivityDrawer";
 import { BingoBoardSkeleton } from "./BingoBoardSkeleton";
 
-interface BingoBoardProps {
+type BingoBoardProps = {
   teamId: string;
 }
 

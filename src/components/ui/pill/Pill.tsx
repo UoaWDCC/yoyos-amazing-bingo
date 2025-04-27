@@ -20,10 +20,10 @@ const pill = cva(
 type PillVariants = VariantProps<typeof pill>;
 type Variant = PillVariants["variant"];
 
-interface PillProps extends HTMLAttributes<HTMLDivElement> {
+type PillProps = {
   className?: string;
   variant?: Variant;
-}
+} & HTMLAttributes<HTMLDivElement>
 
 const Pill = ({ variant, ...props }: PillProps) => {
   return (

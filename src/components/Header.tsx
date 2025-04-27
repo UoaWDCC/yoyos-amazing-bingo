@@ -1,4 +1,4 @@
-interface HeaderProps {
+type HeaderProps = {
   title: string;
 }
 

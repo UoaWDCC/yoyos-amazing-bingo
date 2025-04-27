@@ -38,11 +38,11 @@ type PokeballVariants = VariantProps<typeof pokeball>;
 type Variant = (typeof pokeDifficulty)[number];
 type Size = PokeballVariants["size"];
 
-interface pokeballProps extends HTMLAttributes<HTMLDivElement> {
+type pokeballProps = {
   className?: string;
   variant?: Variant;
   size?: Size;
-}
+} & HTMLAttributes<HTMLDivElement>
 
 const Pokeball = ({ variant, size, ...props }: pokeballProps) => {
   return (

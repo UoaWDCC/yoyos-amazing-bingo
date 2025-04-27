@@ -21,10 +21,10 @@ const button = cva(
 type ButtonVariants = VariantProps<typeof button>;
 type Variant = ButtonVariants["variant"];
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+type ButtonProps = {
   className?: string;
   variant?: Variant;
-}
+} & ButtonHTMLAttributes<HTMLButtonElement>
 
 const Button = ({ variant, ...props }: ButtonProps) => {
   return (

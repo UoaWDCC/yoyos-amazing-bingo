@@ -3,7 +3,7 @@ import { getIronSession } from "iron-session";
 
 import env from "@/utils/env";
 
-export interface SessionData {
+export type SessionData = {
   teamId?: string;
 }
 

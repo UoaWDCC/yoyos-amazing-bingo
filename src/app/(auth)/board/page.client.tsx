@@ -7,7 +7,7 @@ import { Pill } from "@/components/ui/pill";
 import { Team } from "@/models/Team";
 import useGetTeam from "@/queries/useGetTeam";
 
-interface BoardClientPageProps {
+type BoardClientPageProps = {
   teamId: string;
   initialTeamData: Team;
 }
