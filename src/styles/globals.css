@@ -40,11 +40,19 @@
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
+
+  --ease-in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+  --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+}
+
+:root[data-state-dim="true"] {
+  --background: oklch(0.2 0 0);
+  --foreground: oklch(1 0 0);
 }
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring/50 transition-all duration-500;
   }
   body {
     @apply bg-background text-foreground;
@@ -72,4 +80,56 @@
 }
 .poke4 {
   background-image: url("./images/L4_POKE.png");
+}
+
+.darkout,
+.blind-2 {
+  @apply transition-all duration-300;
+}
+
+.blind {
+  @apply transition-all duration-2000;
+}
+
+html[data-state-dim="true"] .darkout {
+  opacity: 0;
+  padding: 0px;
+  scale: 0;
+}
+
+html[data-state-dim="true"] .darkout-center {
+  padding-bottom: 96px;
+}
+
+html[data-state-pokehide="true"] .animate-pulse {
+  animation: none;
+  opacity: 0;
+}
+
+html[data-state-blind="true"] .blind {
+  height: 400dvh;
+}
+
+html[data-state-blind-2="true"] .blind-2 {
+  opacity: 1;
+}
+
+.blind-rad {
+  background: radial-gradient(#ffffff, #00000000, #00000000);
+}
+
+.slide-up {
+  opacity: 0;
+  animation: slideUp 0.5s both;
+  animation-delay: calc(var(--delay) * 1s);
+}
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
 }
