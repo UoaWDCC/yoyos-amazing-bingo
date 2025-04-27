@@ -6,6 +6,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-primary: var(--foreground);
+  --color-primary-foreground: var(--background);
   --color-destructive: var(--destructive);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
@@ -69,6 +71,9 @@
   }
 }
 
+.poke0 {
+  background-image: url("./images/L0_POKE.png");
+}
 .poke1 {
   background-image: url("./images/L1_POKE.png");
 }

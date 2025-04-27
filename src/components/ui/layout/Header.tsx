@@ -1,9 +1,16 @@
+import { getTeamName } from "@/actions/getTeamName";
+
 import { Heading } from "../heading";
 
-const Header = async ({ title }: { title: string }) => {
-  //TODO: fetch this using SWR instead
-  // const teamName = await getTeamName();
-  const teamName = "My team";
+/**
+ * This is the header component for the app.
+ * It displays the team name and the title of the page.
+ * @param title - The title of the page.
+ * @returns The header component.
+ */
+export default async function Header({ title }: { title: string }) {
+  // THIS IMPLEMENTATION MEANS THAT THE NormalLayout COMPONENT MUST BE SERVER SIDE RENDERED
+  const teamName = await getTeamName();
 
   return (
     <div className="flex justify-between">
@@ -18,6 +25,4 @@ const Header = async ({ title }: { title: string }) => {
       <p>{teamName}</p>
     </div>
   );
-};
-
-export default Header;
+}

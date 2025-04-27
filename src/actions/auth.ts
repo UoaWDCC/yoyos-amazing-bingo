@@ -14,7 +14,7 @@ type SignInState = {
 
 type Auth = {
   error?: string;
-  teamId?: string;
+  teamId: string;
 };
 
 /**
@@ -60,7 +60,7 @@ export async function auth(): Promise<Auth> {
   const teamId = session.teamId;
 
   if (!teamId) {
-    return { error: "Unauthorized" };
+    throw new Error("Unauthorized");
   }
 
   return {

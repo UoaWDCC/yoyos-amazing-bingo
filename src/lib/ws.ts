@@ -33,7 +33,7 @@ export function initWebSocketServer(httpServer: Server) {
     const code = new URL(
       req.url!,
       `http://${req.headers.host}`,
-    ).searchParams.get("invalidate-code");
+    ).searchParams.get("invalidate-codes");
 
     // This is kinda hacky, but for our implementation we literally only need to send the code on connect so is fine
     if (code) {

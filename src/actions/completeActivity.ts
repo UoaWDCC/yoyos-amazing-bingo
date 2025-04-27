@@ -1,19 +1,36 @@
 "use server";
+
 import "server-only";
 
 import { auth } from "@/actions/auth";
-import { updateTeamSquare } from "@/services/activity";
+import { sendInvalidationCodes } from "@/actions/sendInvalidationCode";
+import { completeActivityAndUpdateBoard } from "@/services/activity";
 
 /**
  * Complete the activity for a given team auth code and activity ID.
  *
  * @param activityId Activity ID to complete.
+ * @param answer The 6-character answer code to validate.
  */
-export async function completeActivity(activityId: string): Promise<void> {
-  // TODO: STUB
-  console.log(`completeActivity() called with activityId: ${activityId}`);
-
+export async function completeActivity(
+  activityId: string,
+  answer: string,
+): Promise<void> {
   const { teamId } = await auth();
-  console.log(teamId);
-  await updateTeamSquare(teamId || "", activityId);
+  if (!teamId) {
+    throw new Error("Unauthorized");
+  }
+
+  if (!answer || answer.length !== 6) {
+    throw new Error("Invalid answer format");
+  }
+
+  await completeActivityAndUpdateBoard({ teamId, activityId, answer });
+
+  //TODO: Send invalidation codes
+  sendInvalidationCodes([
+    `getBoard/${teamId}`,
+    `getTeam/${teamId}`,
+    `getAllTeams`,
+  ]);
 }

@@ -12,7 +12,7 @@ export function Input(props: InputProps) {
       <input
         {...props}
         className={cn(
-          "border-primary focus:ring-primary h-[45px] w-full rounded-none border px-4 py-2 font-mono focus:ring-2 focus:ring-offset-2 focus:outline-none",
+          "border-primary focus:ring-primary disabled:bg-muted/50 h-[45px] w-full rounded-none border px-4 py-2 font-mono focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
           props.error &&
             "border-destructive focus:ring-destructive placeholder-destructive/80",
         )}
