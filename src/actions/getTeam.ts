@@ -12,13 +12,6 @@ export async function getTeam(teamId: string): Promise<Team> {
   // TODO: STUB
   console.log(teamId);
 
-  const dummyBoard = [
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-  ];
-
   const dummyTeam = {
     id: teamId,
     name: "Dummy Team",

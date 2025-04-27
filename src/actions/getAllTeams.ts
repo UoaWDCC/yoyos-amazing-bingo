@@ -1,6 +1,7 @@
 "use server";
 
 import { Team } from "@/models/Team";
+import { getSquares } from "@/services/getSquares";
 import { getTeams } from "@/services/getTeams";
 
 /**
@@ -9,39 +10,20 @@ import { getTeams } from "@/services/getTeams";
  * @returns All teams (including boards).
  */
 export async function getAllTeams(): Promise<Team[]> {
-  const res = (await getTeams()) as Team[];
-  const dummyBoard = [
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-  ];
-  const newRes = res.map((row) => {
-    return {
-      id: row.id,
-      name: row.name,
-      code: row.code,
-      board: dummyBoard,
-    };
-  });
-  return newRes;
-  // // TODO: STUB
-  // console.log(code);
-  //
-  //
-  // const dummyTeam = {
-  //   id: "dummyId",
-  //   name: "Dummy Team",
-  //   code: "dummyCode",
-  //   board: dummyBoard.concat(),
-  // };
-  //
-  // const secondDummyTeam = {
-  //   id: "dummyId2",
-  //   name: "Second Dummy Team",
-  //   code: "dummyCode2",
-  //   board: dummyBoard.concat(),
-  // };
-  //
-  // return [dummyTeam, secondDummyTeam];
+  const res = await getTeams();
+
+  const teamsWithBoards = await Promise.all(
+    res.map(async (row) => {
+      const squares = await getSquares(row.id);
+
+      return {
+        id: row.id,
+        name: row.name,
+        code: row.code,
+        board: squares,
+      };
+    }),
+  );
+
+  return teamsWithBoards;
 }
