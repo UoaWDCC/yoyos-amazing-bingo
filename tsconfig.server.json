@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "lib": ["es2019"],
+    "target": "es2019",
+    "isolatedModules": false,
+    "noEmit": false,
+    "jsx": "react"
+  },
+  "include": ["server.ts", "src/lib/ws.ts"]
+}
