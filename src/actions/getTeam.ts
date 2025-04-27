@@ -23,6 +23,7 @@ export async function getTeam(teamId: string): Promise<Team> {
     id: teamId,
     name: "Dummy Team",
     code: "dummyCode",
+    points: 48,
     board: dummyBoard,
   };
 

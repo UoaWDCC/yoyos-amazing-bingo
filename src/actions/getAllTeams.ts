@@ -21,6 +21,7 @@ export async function getAllTeams(): Promise<Team[]> {
     id: "dummyId",
     name: "Dummy Team",
     code: "dummyCode",
+    points: 24,
     board: dummyBoard.concat(),
   };
 
@@ -28,8 +29,17 @@ export async function getAllTeams(): Promise<Team[]> {
     id: "dummyId2",
     name: "Second Dummy Team",
     code: "dummyCode2",
+    points: 48,
     board: dummyBoard.concat(),
   };
 
-  return [dummyTeam, secondDummyTeam];
+  const thirdDummyTeam = {
+    id: "dummyId3",
+    name: "Third Dummy Team",
+    code: "dummyCode3",
+    points: 48,
+    board: dummyBoard.concat(),
+  };
+
+  return [dummyTeam, secondDummyTeam, thirdDummyTeam];
 }
