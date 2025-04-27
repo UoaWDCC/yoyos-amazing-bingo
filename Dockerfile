@@ -32,18 +32,12 @@ RUN pnpm install --frozen-lockfile --prod=false
 COPY . .
 
 # Build application
-RUN --mount=type=secret,id=DATABASE_URI \
-    --mount=type=secret,id=PAYLOAD_SECRET \
-    --mount=type=secret,id=S3_BUCKET \
-    --mount=type=secret,id=S3_ACCESS_KEY_ID \
-    --mount=type=secret,id=S3_SECRET_ACCESS_KEY \
-    --mount=type=secret,id=S3_REGION \
-    DATABASE_URI="$(cat /run/secrets/DATABASE_URI)" \
-    PAYLOAD_SECRET="$(cat /run/secrets/PAYLOAD_SECRET)" \
-    S3_BUCKET="$(cat /run/secrets/S3_BUCKET)" \
-    S3_ACCESS_KEY_ID="$(cat /run/secrets/S3_ACCESS_KEY_ID)" \
-    S3_SECRET_ACCESS_KEY="$(cat /run/secrets/S3_SECRET_ACCESS_KEY)" \
-    S3_REGION="$(cat /run/secrets/S3_REGION)" \
+RUN --mount=type=secret,id=DB_URL \
+    --mount=type=secret,id=COOKIE_SECRET \
+    --mount=type=secret,id=APP_URL \
+    DB_URL="$(cat /run/secrets/DB_URL)" \
+    COOKIE_SECRET="$(cat /run/secrets/COOKIE_SECRET)" \
+    APP_URL="$(cat /run/secrets/APP_URL)" \
     pnpm run build
 
 # Remove development dependencies
