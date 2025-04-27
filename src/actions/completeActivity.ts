@@ -3,10 +3,9 @@
 /**
  * Complete the activity for a given team auth code and activity ID.
  *
- * @param code Team auth code.
  * @param activityId Activity ID to complete.
  */
-export async function completeActivity(code: string, activityId: string): Promise<void> {
+export async function completeActivity(activityId: string): Promise<void> {
   // TODO: STUB
-  console.log(`completeActivity() called with code: ${code}, activityId: ${activityId}`);
+  console.log(`completeActivity() called with activityId: ${activityId}`);
 }
