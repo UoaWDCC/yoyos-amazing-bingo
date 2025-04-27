@@ -15,5 +15,7 @@ export const SquareSchema = z.object({
   activity: ActivitySchema,
 });
 
+export const BoardSchema = z.array(SquareSchema);
+
 export type Activity = z.infer<typeof ActivitySchema>;
 export type Square = z.infer<typeof SquareSchema>;

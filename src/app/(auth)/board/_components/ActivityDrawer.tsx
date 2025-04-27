@@ -3,7 +3,6 @@
 import { memo, useState } from "react";
 import { DialogTitle } from "@radix-ui/react-dialog";
 
-import { completeActivity } from "@/actions/completeActivity";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -18,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Pill } from "@/components/ui/pill";
 import { Pokeball, pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
 import { Square } from "@/models/Square";
+import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
 
 export interface ActivityDrawerProps {
   square: Square;
@@ -26,20 +26,17 @@ export interface ActivityDrawerProps {
 const ActivityDrawer = ({ square }: ActivityDrawerProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [error, setError] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { completeActivity, isSubmitting } = useCompleteActivityMutation();
 
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const answer = e.target.value;
     if (answer.length === 6) {
-      setIsSubmitting(true);
       try {
-        await completeActivity(square.activity.id, answer);
+        await completeActivity({ activityId: square.activity.id, answer });
         setError("");
         setIsDrawerOpen(false);
       } catch {
         setError("Invalid answer");
-      } finally {
-        setIsSubmitting(false);
       }
     }
   };
