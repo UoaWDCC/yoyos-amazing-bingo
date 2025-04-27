@@ -21,12 +21,11 @@ export const squaresTable = pgTable(
     teamId: varchar("team_id", { length: 36 })
       .notNull()
       .references(() => teamsTable.id),
-    x: integer().notNull(),
-    y: integer().notNull(),
+
     completed: boolean().notNull().default(false),
     activityId: varchar("activity_id", { length: 36 }),
   },
-  (table) => [primaryKey({ columns: [table.teamId, table.x, table.y] })],
+  (table) => [primaryKey({ columns: [table.teamId, table.activityId] })],
 );
 
 export const activitiesTable = pgTable("activities", {
@@ -35,8 +34,8 @@ export const activitiesTable = pgTable("activities", {
   slug: varchar({ length: 255 }).notNull(),
   points: integer().notNull().default(1),
   description: text().notNull(),
-  defaultX: integer().notNull(),
-  defaultY: integer().notNull(),
+  x: integer().notNull(),
+  y: integer().notNull(),
 });
 
 export const squareRelations = relations(activitiesTable, ({ many }) => ({
