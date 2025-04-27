@@ -36,12 +36,12 @@ export async function getAllTeams(code: string): Promise<Team[]> {
   };
 
   const thirdDummyTeam = {
-    id: "dummyId2",
-    name: "Second Dummy Team",
-    code: "dummyCode2",
+    id: "dummyId3",
+    name: "Third Dummy Team",
+    code: "dummyCode3",
     points: 48,
     board: dummyBoard.concat(),
   };
 
-  return [dummyTeam, secondDummyTeam, thirdDummyTeam, dummyTeam, secondDummyTeam, thirdDummyTeam, dummyTeam, secondDummyTeam, thirdDummyTeam, dummyTeam, secondDummyTeam, thirdDummyTeam, dummyTeam, secondDummyTeam, thirdDummyTeam, dummyTeam, secondDummyTeam, thirdDummyTeam, dummyTeam, secondDummyTeam, thirdDummyTeam, ];
+  return [dummyTeam, secondDummyTeam, thirdDummyTeam];
 }
