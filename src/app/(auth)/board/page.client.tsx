@@ -16,32 +16,19 @@ export default function BoardClientPage({
   teamId,
   initialTeamData,
 }: BoardClientPageProps) {
-  const { data: team = initialTeamData, isLoading } = useGetTeam(teamId);
+  const { data: team = initialTeamData } = useGetTeam(teamId);
 
   return (
     <>
       <div className="flex w-full justify-center gap-2">
-        <Pill>
-          {isLoading ? (
-            <span className="animate-pulse">...</span>
-          ) : (
-            `${team.points}pts`
-          )}
-        </Pill>
+        <Pill>{team.points}pts</Pill>
       </div>
       <BingoBoard teamId={teamId} />
       <div className="flex w-full justify-center gap-2">
-        {isLoading ? (
-          <>
-            <Pill className="animate-pulse">-</Pill>
-            <Pill className="animate-pulse">Loading...</Pill>
-          </>
-        ) : (
-          <>
-            <Pill>4</Pill>
-            <Pill>Webster&apos;s groceries</Pill>
-          </>
-        )}
+        <>
+          <Pill>4</Pill>
+          <Pill>Webster&apos;s groceries</Pill>
+        </>
       </div>
     </>
   );
