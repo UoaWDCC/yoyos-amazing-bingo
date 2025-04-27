@@ -1,28 +1,56 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-import { Button } from "@/components/ui/button";
-import { Heading } from "@/components/ui/heading";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
-import { Pill } from "@/components/ui/pill";
 
-import CardDisplay from "./_components/CardDisplay";
+import StateCardDisplay from "./_components/StateCardDisplay";
+import StateCollectingDisplay from "./_components/StateCollectingDisplay";
 
-const page = () => {
+const ClientPage = () => {
+  const [cardState, setCardState] = useState(false);
+  const [isAnimating, setanimating] = useState(false);
+
+  const handleAnimating = () => {
+    setanimating(true);
+  };
+
+  useEffect(() => {
+    if (!isAnimating) return;
+
+    const html = window.document.querySelector("html");
+    // disaster
+    if (html) {
+      html.setAttribute("data-state-dim", "true");
+
+      setTimeout(() => {
+        html.setAttribute("data-state-pokehide", "true");
+      }, 200);
+      setTimeout(() => {
+        html.setAttribute("data-state-blind", "true");
+      }, 2000);
+      setTimeout(() => {
+        html.setAttribute("data-state-dim", "false");
+        html.setAttribute("data-state-blind-2", "true");
+      }, 3000);
+      setTimeout(() => {
+        html.removeAttribute("data-state-dim");
+        html.removeAttribute("data-state-pokehide");
+        html.removeAttribute("data-state-blind");
+        html.removeAttribute("data-state-blind-2");
+        setCardState(true);
+      }, 4000);
+    }
+  }, [isAnimating]);
   return (
     <NormalLayout title="CardFloat">
-      <div className="flex flex-col gap-4">
-        <div className="flex flex-col items-center justify-center gap-4">
-          <Heading.h2>You&apos;ve Collected</Heading.h2>
-          <Pill>SNORELAX</Pill>
-          <CardDisplay />
-          <Button className="w-min rounded-full px-8">Collect</Button>
-        </div>
-      </div>
-      <div></div>
+      {cardState ? (
+        <StateCardDisplay />
+      ) : (
+        <StateCollectingDisplay handleAnimating={handleAnimating} />
+      )}
     </NormalLayout>
   );
 };
 
-export default page;
+export default ClientPage;
