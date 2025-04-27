@@ -1,37 +1,63 @@
-import { db } from "@/db/connection";
-import { teamsTable } from "@/db/schema";
+import { activitiesTable, teamsTable } from "@/db/schema";
+import { generateAllActivities, generateAllTeams, generateSquaresTable } from "@/services/initBoard";
 
 import "dotenv/config";
 
-/** Commenting this out until we have db services created */
 async function main() {
-  // const user: typeof usersTable.$inferInsert = {
-  //   name: "John",
-  //   age: 30,
-  //   email: "john@example.com",
-  // };
-  // await db.insert(usersTable).values(user);
-  // console.log("New user created!");
-  // const users = await db.select().from(usersTable);
-  // console.log("Getting all users from the database: ", users);
-  // await db
-  //   .update(usersTable)
-  //   .set({
-  //     age: 31,
-  //   })
-  //   .where(eq(usersTable.email, user.email));
-  // console.log("User info updated!");
+    const activities: (typeof activitiesTable.$inferInsert)[] = []
 
-  const teams: (typeof teamsTable.$inferInsert)[] = [
-    {
-      id: "1",
-      name: "Team 1",
-      code: "ABCD-EFGH",
-    },
-  ];
+    for (let i: number = 0; i < 16; i++) {
+        const index = i.toString()
+        activities.push({
+            "id": index,
+            "name": `activity ${index}`,
+            "slug": index,
+            "description": `desc ${index}`,
+            "x": i % 4,
+            "y": Math.floor(i / 4),
+            "points": 1,
+        })
+    }
 
-  await db.insert(teamsTable).values(teams);
-  process.exit(0);
+    const teams: (typeof teamsTable.$inferInsert)[] = [
+        { id: "esports", name: "esports", code: "test" },
+        { id: "esa", name: "esa", code: "test" },
+        { id: "reng", name: "rainbow engineering", code: "test" },
+        { id: "uabc", name: "uabc", code: "test" },
+        { id: "ausa", name: "ausa", code: "test" },
+        { id: "ausco", name: "ausco", code: "test" },
+        { id: "vps", name: "vps", code: "test" },
+        { id: "aspa", name: "aspa", code: "test" },
+        { id: "aucc", name: "aucc", code: "test" },
+        { id: "fsae", name: "fsae", code: "test" },
+        { id: "motorsports", name: "motorsports", code: "test" },
+        { id: "tansa", name: "tansa", code: "test" },
+        { id: "uaic", name: "uaic", code: "test" },
+        { id: "medr", name: "med revue", code: "test" },
+        { id: "hidd", name: "hidden treasures", code: "test" },
+        { id: "volu", name: "volunteers", code: "test" },
+    ]
+
+    console.log("Running seed script...")
+    console.log("Number of activities: ", activities.length)
+    console.log("Number of teams: ", teams.length)
+
+    console.log("\nInserting Teams...")
+    generateAllTeams(teams)
+    console.log("\nInserting Activities...")
+    generateAllActivities(activities)
+
+    const teamIds = teams.map((team) => team.id)
+    const activityIds = activities.map((activity) => activity.id)
+    console.log(teamIds)
+    console.log(activityIds)
+
+    console.log("\nGenerating Squares...")
+    generateSquaresTable(teamIds, activityIds)
+
+    process.exit(0);
+    // const users = await db.select().from(usersTable);
+    // console.log("Getting all users from the database: ", users);
 }
 
 main();
