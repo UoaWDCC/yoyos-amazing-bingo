@@ -1,17 +1,20 @@
 import "@/components/ui/drawer";
 
+import { auth } from "@/actions/auth";
 import { BingoBoard } from "@/app/(auth)/board/_components/BingoBoard";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 import { Pill } from "@/components/ui/pill";
 
-export default function Home() {
+export default async function Home() {
+  const { teamId } = await auth();
+
   return (
     <NormalLayout title="Board">
       <div className="flex flex-col gap-8">
         <div className="flex w-full justify-center gap-2">
           <Pill>48pts</Pill>
         </div>
-        <BingoBoard />
+        <BingoBoard teamId={teamId} />
         <div className="flex w-full justify-center gap-2">
           <Pill>4</Pill>
           <Pill>Webster&apos;s groceries</Pill>

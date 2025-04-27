@@ -4,7 +4,7 @@ import "server-only";
 
 import { auth } from "@/actions/auth";
 import { Board } from "@/models/Board";
-import { getTeamBoard } from "@/services/teamBoard";
+import { getBoardByTeamId } from "@/services/team";
 
 export async function getBoard(): Promise<Board> {
   const { teamId } = await auth();
@@ -13,5 +13,5 @@ export async function getBoard(): Promise<Board> {
     throw new Error("Team ID is required");
   }
 
-  return await getTeamBoard(teamId);
+  return await getBoardByTeamId(teamId);
 }

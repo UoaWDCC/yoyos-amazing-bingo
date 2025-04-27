@@ -1,10 +1,11 @@
 "use server";
 
-import { getTeamBoard } from "@/services/teamBoard";
 import "server-only";
 
+import { getBoardByTeamId } from "@/services/team";
+
 export async function getTeamPoints(teamId: string) {
-  const board = await getTeamBoard(teamId);
+  const board = await getBoardByTeamId(teamId);
 
   let points = 0;
   board.forEach((square) => {

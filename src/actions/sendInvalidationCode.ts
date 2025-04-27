@@ -18,7 +18,7 @@ export async function sendInvalidationCodes(codes: string[]) {
   const wsProtocol = protocol === "https:" ? "wss:" : "ws:";
 
   const ws = new WebSocket(
-    `${wsProtocol}://${hostname}:${port}/api/ws?invalidate-codes=${codes.join(",")}`,
+    `${wsProtocol}//${hostname}:${port}/api/ws?invalidate-codes=${codes.join(",")}`,
     {
       headers: {
         Cookie: `bingo_session=${token}`,

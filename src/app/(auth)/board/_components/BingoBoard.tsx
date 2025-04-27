@@ -3,9 +3,19 @@
 import useGetBoard from "@/queries/useGetBoard";
 
 import { ActivityDrawer } from "./ActivityDrawer";
+import { useRevalidationSocket } from "@/hooks/useRevalidationSocket";
 
-export function BingoBoard() {
-  const { data: squares } = useGetBoard();
+interface BingoBoardProps {
+  teamId: string;
+}
+
+export function BingoBoard({ teamId }: BingoBoardProps) {
+  const { data: squares } = useGetBoard(teamId);
+  useRevalidationSocket({
+    onInvalidation: (codes) => {
+      console.log("Invalidation codes", codes);
+    },
+  });
 
   if (!squares) return null;
 
