@@ -4,10 +4,14 @@ import { Float, useTexture } from "@react-three/drei";
 
 import { cards } from "@/assets/pokecards";
 
+import { useCard } from "./Provider";
+
 const WebsterCard = () => {
+  const { imageIndex } = useCard();
+
   const texture = useTexture({
     alpha: cards.mask.src,
-    map: cards.images[0].src,
+    map: cards.images[imageIndex].src,
   });
   const backside = useTexture({
     alpha: cards.mask.src,

@@ -6,8 +6,11 @@ import { Heading } from "@/components/ui/heading";
 import { Pill } from "@/components/ui/pill";
 
 import CardDisplay from "./CardDisplay";
+import { useCard } from "./Provider";
 
 const StateCardDisplay = () => {
+  const { title } = useCard();
+
   return (
     <>
       <div className="flex flex-col gap-4">
@@ -22,7 +25,7 @@ const StateCardDisplay = () => {
             className="slide-up"
             style={{ "--delay": 1.25 } as React.CSSProperties}
           >
-            SNORELAX
+            {title}
           </Pill>
           <CardDisplay />
           <Link

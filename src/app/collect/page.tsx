@@ -4,10 +4,30 @@ import React, { useEffect, useState } from "react";
 
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 
+import CardProvider from "./_components/Provider";
 import StateCardDisplay from "./_components/StateCardDisplay";
 import StateCollectingDisplay from "./_components/StateCollectingDisplay";
 
 const ClientPage = () => {
+  const [data, setData] = useState<{
+    title: string;
+    imageIndex: number;
+  } | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate network delay
+      setData({
+        title: "Webster's groceries",
+        imageIndex: 0,
+      });
+    };
+
+    fetchData();
+  }, []);
+
+  // TODO: DELETE ABOVE AND REPLACE WITH SWR
+
   const [cardState, setCardState] = useState(false);
   const [isAnimating, setanimating] = useState(false);
 
@@ -42,14 +62,42 @@ const ClientPage = () => {
       }, 4000);
     }
   }, [isAnimating]);
+
+  if (!data) {
+    // loading
+    return (
+      <NormalLayout title="collect">
+        <div className="flex items-center justify-center">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="animate-spin"
+          >
+            <path className="stroke-rose-500" d="M21 12a9 9 0 1 1-6.219-8.56" />
+          </svg>
+        </div>
+        <div></div>
+      </NormalLayout>
+    );
+  }
+
   return (
-    <NormalLayout title="CardFloat">
-      {cardState ? (
-        <StateCardDisplay />
-      ) : (
-        <StateCollectingDisplay handleAnimating={handleAnimating} />
-      )}
-    </NormalLayout>
+    <CardProvider value={data}>
+      <NormalLayout title="collect">
+        {cardState ? (
+          <StateCardDisplay />
+        ) : (
+          <StateCollectingDisplay handleAnimating={handleAnimating} />
+        )}
+      </NormalLayout>
+    </CardProvider>
   );
 };
 
