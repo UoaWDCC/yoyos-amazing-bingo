@@ -1,15 +1,23 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
+import { useSWRConfig } from "swr";
 
-import { type Board } from "@/models/Board";
-
-interface BoardWebSocketMessage {
-  type: "BOARD_UPDATE";
-  board: Board;
-}
-
-export function useBoardWebSocket(onBoardUpdate: (board: Board) => void) {
+/**
+ * Use this to revalidate the cache when the board is updated.
+ * This hook should be used on any routes or client components that would involve dynamic revalidation logic.
+ * @returns
+ */
+export function useRevalidationSocket({
+  onInvalidation,
+}: {
+  /**
+   * This function will be called when the board is updated.
+   * Note: the revalidation logic is baked into the hook, this is just a callback for any additional logic you want to do.
+   */
+  onInvalidation: (code: string) => void;
+}) {
   const wsRef = useRef<WebSocket | null>(null);
   const isConnecting = useRef(false);
+  const { mutate } = useSWRConfig();
 
   useEffect(() => {
     // Prevent multiple simultaneous connection attempts
@@ -33,12 +41,11 @@ export function useBoardWebSocket(onBoardUpdate: (board: Board) => void) {
 
       ws.onmessage = async (event: MessageEvent<string>) => {
         try {
-          const data = JSON.parse(event.data) as BoardWebSocketMessage;
-          if (data.type === "BOARD_UPDATE") {
-            onBoardUpdate(data.board);
-          }
+          mutate(event.data);
+          onInvalidation(event.data);
+          console.log("Revalidating cache tag ", event.data);
         } catch (error) {
-          console.error("Error parsing WebSocket message:", error);
+          console.error("Error revalidating cache:", error);
         }
       };
 
@@ -67,14 +74,4 @@ export function useBoardWebSocket(onBoardUpdate: (board: Board) => void) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  return {
-    sendMessage: useCallback((message: BoardWebSocketMessage) => {
-      if (wsRef.current?.readyState === WebSocket.OPEN) {
-        wsRef.current.send(JSON.stringify(message));
-      } else {
-        console.warn("WebSocket is not connected");
-      }
-    }, []),
-  };
 }
