@@ -1,7 +1,7 @@
 import { HTMLAttributes } from "react";
 import { cva, VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 
 const pokeball = cva(
   "aspect-square size-full border rounded-lg bg-neutral-400 bg-size-[100%] select-none",
@@ -56,4 +56,4 @@ const Pokeball = ({ variant, size, ...props }: pokeballProps) => {
 };
 
 export { Pokeball };
-export type { PokeballVariants, Variant as PokeVariant, Size as PokeSize };
+export type { PokeballVariants, Size as PokeSize, Variant as PokeVariant };

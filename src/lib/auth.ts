@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { getIronSession } from "iron-session";
 
-import env from "@/utils/env";
+import env from "@/lib/env";
 
 export type SessionData = {
   teamId?: string;
