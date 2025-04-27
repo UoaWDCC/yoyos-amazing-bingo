@@ -4,7 +4,7 @@ import "server-only";
 
 import { auth } from "@/actions/auth";
 import { sendInvalidationCodes } from "@/actions/sendInvalidationCode";
-import { updateTeamSquare } from "@/services/activity";
+import { completeActivityAndUpdateBoard } from "@/services/activity";
 
 /**
  * Complete the activity for a given team auth code and activity ID.
@@ -25,11 +25,7 @@ export async function completeActivity(
     throw new Error("Invalid answer format");
   }
 
-  await updateTeamSquare(teamId || "", activityId);
-  // TODO: Implement actual answer validation
-  if (false) {
-    throw new Error("Incorrect answer");
-  }
+  await completeActivityAndUpdateBoard({ teamId, activityId, answer });
 
   //TODO: Send invalidation codes
   sendInvalidationCodes([

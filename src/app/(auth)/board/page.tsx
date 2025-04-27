@@ -1,27 +1,20 @@
 import "@/components/ui/drawer";
 
 import { auth } from "@/actions/auth";
-import { BingoBoard } from "@/app/(auth)/board/_components/BingoBoard";
+import { getTeam } from "@/actions/getTeam";
+import BoardClientPage from "@/app/(auth)/board/page.client";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
-import { Pill } from "@/components/ui/pill";
 
-export default async function Home() {
+export default async function BoardPage() {
   const { teamId } = await auth();
+  const initialTeamData = await getTeam(teamId);
 
   return (
     <NormalLayout title="Board">
       <div className="flex flex-col gap-8">
-        <div className="flex w-full justify-center gap-2">
-          <Pill>48pts</Pill>
-        </div>
-        <BingoBoard teamId={teamId} />
-        <div className="flex w-full justify-center gap-2">
-          <Pill>4</Pill>
-          <Pill>Webster&apos;s groceries</Pill>
-        </div>
+        <BoardClientPage teamId={teamId} initialTeamData={initialTeamData} />
       </div>
-
-      <div></div>
+      <div />
     </NormalLayout>
   );
 }

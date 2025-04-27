@@ -10,7 +10,7 @@ export const ActivitySchema = z.object({
 });
 
 export const SquareSchema = z.object({
-  complete: z.boolean(),
+  completed: z.boolean(),
   points: z.number(),
   activity: ActivitySchema,
 });

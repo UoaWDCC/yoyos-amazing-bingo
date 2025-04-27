@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Pill } from "@/components/ui/pill";
 import { Pokeball, pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
+import { cn } from "@/lib/utils";
 import { Square } from "@/models/Board";
 import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
 
@@ -50,10 +51,12 @@ const ActivityDrawer = ({ square }: ActivityDrawerProps) => {
       }}
       open={isDrawerOpen}
     >
-      <DrawerTrigger>
+      <DrawerTrigger disabled={square.completed}>
         <Pokeball
-          variant={pokeDifficulty[square.points - 1]}
-          className="cursor-pointer"
+          variant={
+            square.completed ? "completed" : pokeDifficulty[square.points]
+          }
+          className={cn("cursor-pointer", square.completed && "cursor-default")}
         />
       </DrawerTrigger>
       <DrawerContent>
@@ -67,7 +70,7 @@ const ActivityDrawer = ({ square }: ActivityDrawerProps) => {
         </DrawerHeader>
         <div className="flex w-full justify-center">
           <Pokeball
-            variant={pokeDifficulty[square.points - 1]}
+            variant={pokeDifficulty[square.points]}
             size="fixed"
             className="shadow-2xl"
           />

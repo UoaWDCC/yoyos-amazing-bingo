@@ -25,10 +25,14 @@ export async function getBoardByTeamId(teamId: string) {
     .where(eq(squaresTable.teamId, teamId));
 
   const board = result.map((row) => ({
-    complete: row.squares.completed,
+    completed: row.squares.completed,
     points: row.activities.points,
     activity: row.activities,
   }));
 
   return parseZod(BoardSchema, board);
+}
+
+export async function getAllTeams() {
+  return await db.query.teamsTable.findMany();
 }

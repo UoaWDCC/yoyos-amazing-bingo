@@ -9,7 +9,7 @@ export async function getTeamPoints(teamId: string) {
 
   let points = 0;
   board.forEach((square) => {
-    if (square.complete) {
+    if (square.completed) {
       points += square.points;
     }
   });

@@ -8,6 +8,7 @@ const pokeball = cva(
   {
     variants: {
       variant: {
+        completed: "poke0",
         normal: "poke1",
         great: "poke2",
         ultra: "poke3",
@@ -25,7 +26,13 @@ const pokeball = cva(
   },
 );
 
-export const pokeDifficulty = ["normal", "great", "ultra", "master"] as const;
+export const pokeDifficulty = [
+  "completed",
+  "normal",
+  "great",
+  "ultra",
+  "master",
+] as const;
 
 type PokeballVariants = VariantProps<typeof pokeball>;
 type Variant = (typeof pokeDifficulty)[number];
