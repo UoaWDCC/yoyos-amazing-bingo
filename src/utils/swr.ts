@@ -3,19 +3,24 @@ import { ZodSchema } from "zod";
 
 import { parseZod } from "./zod";
 
+type ExtendedSWROptions<T, E> = SWRConfiguration<T, E> & {
+  cacheKey: string;
+  fetcher: () => Promise<T>;
+  zodSchema: ZodSchema<T>;
+  thisFile: string;
+};
+
 /** useSWR with Zod Schema */
 export const useSWRWithZod = <T, E = unknown>(
-  key: string,
-  fetcher: () => Promise<T>,
-  zodSchema: ZodSchema<T>,
-  fileName: string,
-  options?: SWRConfiguration<T, E>,
+  extendedSWROptions: ExtendedSWROptions<T, E>,
 ) => {
-  const { data, ...rest } = useSWR<T, E>(key, fetcher, options);
+  const { cacheKey, fetcher, zodSchema, thisFile, ...options } =
+    extendedSWROptions;
+  const { data, ...rest } = useSWR<T, E>(cacheKey, fetcher, options);
 
   let parsedData: T | undefined = undefined;
   if (data) {
-    parsedData = parseZod(zodSchema, data, fileName);
+    parsedData = parseZod(zodSchema, data, thisFile);
   }
 
   return { data: parsedData, ...rest };
