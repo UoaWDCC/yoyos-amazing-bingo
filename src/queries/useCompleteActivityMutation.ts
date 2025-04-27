@@ -27,10 +27,6 @@ export default function useCompleteActivityMutation() {
     "completeActivity",
     completeActivityFetcher,
     {
-      // Revalidate the board data after successful completion
-      onSuccess: () => {
-        return { revalidate: ["useGetSquares"] };
-      },
       // Don't populate cache with mutation result since it's just a void
       populateCache: false,
       throwOnError: true,

@@ -11,14 +11,14 @@ import env from "@/utils/env";
  * Send an invalidation code to the websocket server
  * @param code The invalidation code to send
  */
-export async function sendInvalidationCode(code: string) {
+export async function sendInvalidationCodes(codes: string[]) {
   const token = await cookies().then((c) => c.get("bingo_session")?.value);
 
   const { hostname, port, protocol } = new URL(env.APP_URL);
   const wsProtocol = protocol === "https:" ? "wss:" : "ws:";
 
   const ws = new WebSocket(
-    `${wsProtocol}://${hostname}:${port}/api/ws?invalidate-code=${code}`,
+    `${wsProtocol}://${hostname}:${port}/api/ws?invalidate-codes=${codes.join(",")}`,
     {
       headers: {
         Cookie: `bingo_session=${token}`,

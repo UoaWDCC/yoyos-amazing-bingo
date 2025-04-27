@@ -1,7 +1,9 @@
 "use server";
+
 import "server-only";
 
 import { auth } from "@/actions/auth";
+import { sendInvalidationCodes } from "@/actions/sendInvalidationCode";
 import { updateTeamSquare } from "@/services/activity";
 
 /**
@@ -17,4 +19,8 @@ export async function completeActivity(activityId: string): Promise<void> {
   const { teamId } = await auth();
   console.log(teamId);
   await updateTeamSquare(teamId || "", activityId);
+  // TODO: Implement actual answer validation
+
+  //TODO: Send invalidation codes
+  sendInvalidationCodes([]);
 }

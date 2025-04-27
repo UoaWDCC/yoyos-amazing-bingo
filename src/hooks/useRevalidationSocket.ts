@@ -13,7 +13,7 @@ export function useRevalidationSocket({
    * This function will be called when the board is updated.
    * Note: the revalidation logic is baked into the hook, this is just a callback for any additional logic you want to do.
    */
-  onInvalidation: (code: string) => void;
+  onInvalidation: (codes: string[]) => void;
 }) {
   const wsRef = useRef<WebSocket | null>(null);
   const isConnecting = useRef(false);
@@ -40,8 +40,9 @@ export function useRevalidationSocket({
       };
 
       ws.onmessage = async (event: MessageEvent<string>) => {
-        mutate(event.data);
-        onInvalidation(event.data);
+        const codes = event.data.split(",");
+        mutate(codes);
+        onInvalidation(codes);
       };
 
       ws.onclose = (event) => {
