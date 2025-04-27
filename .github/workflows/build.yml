@@ -46,3 +46,6 @@ jobs:
       # build the application
       - name: Build Next.js project
         run: pnpm run build
+        env:
+          DB_URL: ${{ secrets.DB_URL }}
+          COOKIE_SECRET: ${{ secrets.COOKIE_SECRET }}
