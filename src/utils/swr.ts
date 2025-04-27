@@ -10,7 +10,7 @@ type ExtendedSWROptions<T, E> = SWRConfiguration<T, E> & {
   thisFile: string;
 };
 
-/** useSWR with Zod Schema */
+/** Custom useSWR extended with Zod Schema */
 export const useSWRWithZod = <T, E = unknown>(
   extendedSWROptions: ExtendedSWROptions<T, E>,
 ) => {

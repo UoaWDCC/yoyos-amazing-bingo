@@ -10,11 +10,11 @@ import { parseZod } from "./zod";
 
 // .env schema
 const envSchema = z.object({
+  APP_URL: z.string({ message: "APP_URL must be a string" }).url().trim(),
   DB_URL: z.string({ message: "DB_URL must be a string" }).trim(),
   COOKIE_SECRET: z
     .string({ message: "COOKIE_SECRET must be a string" })
     .min(32, "COOKIE_SECRET must be at least 32 characters long"),
-  APP_URL: z.string({ message: "APP_URL must be a string" }).url().trim(),
 });
 export type Env = z.infer<typeof envSchema>;
 

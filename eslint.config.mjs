@@ -13,7 +13,9 @@ const compat = new FlatCompat({
 const eslintConfig = [
   ...compat.config({
     extends: ["next/core-web-vitals", "next/typescript"],
-    rules: {},
+    rules: {
+      "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+    },
   }),
   eslintConfigPrettier,
 ];
