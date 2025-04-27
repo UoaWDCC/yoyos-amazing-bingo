@@ -1,6 +1,8 @@
 "use server";
 
 import { Team } from "@/models/Team";
+import { getSquares } from "@/services/getSquares";
+import { getTeamSerivce } from "@/services/getTeam";
 
 /**
  * Fetches the team info (including board) for a given team ID.
@@ -9,15 +11,8 @@ import { Team } from "@/models/Team";
  * @returns The team info (including board) for the given team ID.
  */
 export async function getTeam(teamId: string): Promise<Team> {
-  // TODO: STUB
-  console.log(teamId);
-
-  const dummyTeam = {
-    id: teamId,
-    name: "Dummy Team",
-    code: "dummyCode",
-    board: dummyBoard,
-  };
-
-  return dummyTeam;
+  const team = await getTeamSerivce(teamId);
+  const teamSquare = await getSquares(teamId);
+  const res = { ...team, board: teamSquare };
+  return res;
 }

@@ -4,6 +4,7 @@ import { eq } from "drizzle-orm";
 
 import { db } from "@/db/connection";
 import { squaresTable } from "@/db/schema";
+import { Square } from "@/models/Board";
 
 /**
  * Fetches all squares for a given teamId.
@@ -11,7 +12,7 @@ import { squaresTable } from "@/db/schema";
  * @param teamId The ID of the team to fetch squares for.
  * @returns Array of squares for the team.
  */
-export async function getSquares(teamId: string) {
+export async function getSquares(teamId: string): Promise<Square[]> {
   const squares = await db
     .select({
       x: squaresTable.x,
