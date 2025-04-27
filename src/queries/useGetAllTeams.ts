@@ -8,7 +8,7 @@ import { useSWRWithZod } from "@/utils/swr";
 export default function useGetAllTeams(code: string) {
   return useSWRWithZod({
     cacheKey: `getAllTeams/${code}`,
-    fetcher: () => getAllTeams(code),
+    fetcher: () => getAllTeams(),
     zodSchema: z.array(TeamSchema),
     thisFile: "queries/useGetAllTeams.ts",
   });

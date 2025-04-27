@@ -13,13 +13,6 @@ export async function getTeam(code: string, teamId: string): Promise<Team> {
   // TODO: STUB
   console.log(code, teamId);
 
-  const dummyBoard = [
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-    [false, false, false, false],
-  ];
-
   const dummyTeam = {
     id: teamId,
     name: "Dummy Team",
