@@ -40,13 +40,8 @@ export function useRevalidationSocket({
       };
 
       ws.onmessage = async (event: MessageEvent<string>) => {
-        try {
-          mutate(event.data);
-          onInvalidation(event.data);
-          console.log("Revalidating cache tag ", event.data);
-        } catch (error) {
-          console.error("Error revalidating cache:", error);
-        }
+        mutate(event.data);
+        onInvalidation(event.data);
       };
 
       ws.onclose = (event) => {

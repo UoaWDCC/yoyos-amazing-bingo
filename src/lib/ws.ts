@@ -33,23 +33,20 @@ export function initWebSocketServer(httpServer: Server) {
     const code = new URL(
       req.url!,
       `http://${req.headers.host}`,
-    ).searchParams.get("code");
+    ).searchParams.get("invalidate-code");
 
+    // This is kinda hacky, but for our implementation we literally only need to send the code on connect so is fine
     if (code) {
-      console.log(`Invalidation code: ${code}`);
-    }
-
-    ws.on("message", async (message: Buffer) => {
       connections.forEach((connection) => {
         if (connection.readyState === WebSocket.OPEN) {
-          connection.send(message.toString());
+          connection.send(code);
         }
       });
-    });
+      ws.close();
+    }
 
     ws.on("close", () => {
       connections.delete(ws);
-      console.log(`Client disconnected`);
     });
   });
 
