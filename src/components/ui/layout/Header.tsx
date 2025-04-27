@@ -1,8 +1,11 @@
-import React from "react";
+import { getTeamName } from "@/actions/getTeamName";
 
 import { Heading } from "../heading";
 
-const Header = ({ title }: { title: string }) => {
+const Header = async ({ title }: { title: string }) => {
+  //TODO: fetch this using SWR instead
+  const teamName = await getTeamName();
+
   return (
     <div className="flex justify-between">
       <div className="flex flex-col">
@@ -10,7 +13,7 @@ const Header = ({ title }: { title: string }) => {
         {/* technically for the non existance SEO */}
         <Heading.h1>{title || "Untitled"}</Heading.h1>
       </div>
-      <p>TEAM NAME</p>
+      <p>{teamName}</p>
     </div>
   );
 };

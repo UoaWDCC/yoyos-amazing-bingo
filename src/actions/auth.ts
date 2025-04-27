@@ -5,7 +5,7 @@ import "server-only";
 import { redirect } from "next/navigation";
 
 import { getSession } from "@/lib/session";
-import { getTeamByCode } from "@/services/auth";
+import { getTeamByCode } from "@/services/team";
 
 type SignInState = {
   error?: string;
