@@ -1,9 +1,9 @@
 import { db } from "@/db/connection";
 import { squaresTable, activitiesTable, teamsTable } from "@/db/schema";
 
-export function generateAllActivities(activities: (typeof activitiesTable.$inferInsert)[]) {
-    activities.forEach(async ({ id, name, slug, points, x, y, description }) => {
-        await db.insert(activitiesTable).values({
+export async function generateAllActivities(activities: (typeof activitiesTable.$inferInsert)[]) {
+    const promises = activities.map(({ id, name, slug, points, x, y, description }) => {
+        return db.insert(activitiesTable).values({
             id,
             name,
             slug,
@@ -13,29 +13,34 @@ export function generateAllActivities(activities: (typeof activitiesTable.$infer
             description
         })
     })
-    console.log("generating table")
+    await Promise.all(promises)
+    console.log("generating activity table")
 }
 
-export function generateAllTeams(teams: (typeof teamsTable.$inferInsert)[]) {
-    teams.forEach(async ({ id, name, code }) => {
-        await db.insert(teamsTable).values({
+export async function generateAllTeams(teams: (typeof teamsTable.$inferInsert)[]) {
+    const promises = teams.map(({ id, name, code }) => {
+        return db.insert(teamsTable).values({
             id,
             name,
             code
         })
     })
-    console.log("generating table")
+    await Promise.all(promises)
+    console.log("generating teams table")
 }
 
-export function generateSquaresTable(teamIds: string[], activityIds: string[]) {
-    teamIds.forEach(async (teamId: string) => {
-        activityIds.forEach(async (activityId: string) => {
-            await db.insert(squaresTable).values({
+export async function generateSquaresTable(teamIds: string[], activityIds: string[]) {
+    const promises = teamIds.map((teamId: string) => {
+        const nestedPromises = activityIds.map((activityId: string) => {
+            return db.insert(squaresTable).values({
                 teamId,
                 completed: false,
                 activityId,
             })
         })
+        return Promise.all(nestedPromises)
     })
-    console.log("generating table")
+
+    await Promise.all(promises)
+    console.log("generating squares table")
 }

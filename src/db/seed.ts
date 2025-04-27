@@ -1,9 +1,13 @@
 import { activitiesTable, teamsTable } from "@/db/schema";
 import { generateAllActivities, generateAllTeams, generateSquaresTable } from "@/services/initBoard";
+import { nukeActivityDb, nukeSquareDb, nukeTeamDb } from "@/services/nukeBoard";
 
 import "dotenv/config";
 
 async function main() {
+    await nukeSquareDb()
+    await nukeTeamDb()
+    await nukeActivityDb()
     const activities: (typeof activitiesTable.$inferInsert)[] = []
 
     for (let i: number = 0; i < 16; i++) {
@@ -43,9 +47,9 @@ async function main() {
     console.log("Number of teams: ", teams.length)
 
     console.log("\nInserting Teams...")
-    generateAllTeams(teams)
+    await generateAllTeams(teams)
     console.log("\nInserting Activities...")
-    generateAllActivities(activities)
+    await generateAllActivities(activities)
 
     const teamIds = teams.map((team) => team.id)
     const activityIds = activities.map((activity) => activity.id)
@@ -53,7 +57,7 @@ async function main() {
     console.log(activityIds)
 
     console.log("\nGenerating Squares...")
-    generateSquaresTable(teamIds, activityIds)
+    await generateSquaresTable(teamIds, activityIds)
 
     process.exit(0);
     // const users = await db.select().from(usersTable);
