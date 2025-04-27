@@ -43,5 +43,5 @@ export async function getAllTeams(code: string): Promise<Team[]> {
     board: dummyBoard.concat(),
   };
 
-  return [dummyTeam, secondDummyTeam, thirdDummyTeam];
+  return [dummyTeam, secondDummyTeam, thirdDummyTeam, dummyTeam, secondDummyTeam, thirdDummyTeam, dummyTeam, secondDummyTeam, thirdDummyTeam, dummyTeam, secondDummyTeam, thirdDummyTeam, dummyTeam, secondDummyTeam, thirdDummyTeam, dummyTeam, secondDummyTeam, thirdDummyTeam, dummyTeam, secondDummyTeam, thirdDummyTeam, ];
 }

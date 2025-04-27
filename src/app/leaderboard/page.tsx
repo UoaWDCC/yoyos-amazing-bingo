@@ -20,10 +20,10 @@ export default async function Leaderboard() {
 
       {/* Questionably hardcoded spacing with margin because NormalLayout doesn't accept class override and I can't be bothered changing it */}
 
-      <div className="flex flex-col gap-6 min-h-full mt-4">
+      <div className="flex flex-col gap-7 min-h-full mt-4">
         <Back/>
 
-        <ul className="min-h-full flex flex-col gap-0 divide-y-2 divide-foreground/75">
+        <ul className="min-h-full overflow-scroll flex flex-col gap-0 divide-y-2 divide-foreground/15">
           {
             teams.map((team, i) => {
               return <LeaderboardListItem key={i}
