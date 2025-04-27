@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { geistMono, geistSans } from "@/assets/fonts";
 
 import "@/assets/globals.css";
+// import "@/websocket/server";
 
 export const metadata: Metadata = {
   title: "Create Next App",

@@ -10,6 +10,9 @@ import { parseZod } from "./zod";
 
 // .env schema
 const envSchema = z.object({
+  NODE_ENV: z.enum(["development", "production"], {
+    message: "NODE_ENV must be either 'development' or 'production'",
+  }).default("development"),
   APP_URL: z.string({ message: "APP_URL must be a string" }).url().trim(),
   DB_URL: z.string({ message: "DB_URL must be a string" }).trim(),
   COOKIE_SECRET: z
