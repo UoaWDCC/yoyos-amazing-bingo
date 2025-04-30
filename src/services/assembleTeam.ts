@@ -7,6 +7,7 @@ type rawTeam = {
     id: string;
     name: string;
     code: string;
+    specialActivity: number;
   };
   activities: {
     id: string;
@@ -19,7 +20,7 @@ type rawTeam = {
   team_activities: {
     teamId: string;
     activityId: string;
-    completed: boolean;
+    isCompleted: boolean;
   };
 };
 
@@ -28,7 +29,7 @@ export const assembleTeams = (rawTeams: rawTeam[]): Team => {
 
   // Build the board
   const unSortedBoard = rawTeams.map((row) => ({
-    isCompleted: row.team_activities.completed,
+    isCompleted: row.team_activities.isCompleted,
     points: row.activities.basePoints,
     activity: row.activities,
   }));
@@ -48,5 +49,6 @@ export const assembleTeams = (rawTeams: rawTeam[]): Team => {
     name: teams.name,
     points,
     board: parseZod(BoardSchema, board),
+    specialActivity: teams.specialActivity
   };
 };
