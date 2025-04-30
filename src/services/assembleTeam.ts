@@ -13,6 +13,7 @@ type rawTeam = {
     id: string;
     name: string;
     code: string;
+    cardImageName: string;
     description: string;
     basePoints: number;
     boardOrder: number;

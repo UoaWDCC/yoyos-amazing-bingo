@@ -33,6 +33,7 @@ export async function getAllTeams(): Promise<Team[]> {
         points: number;
         activity: typeof activitiesTable.$inferSelect;
       }[];
+      specialActivity: number;
     }
   >();
 
@@ -45,11 +46,12 @@ export async function getAllTeams(): Promise<Team[]> {
         code: teams.code,
         name: teams.name,
         board: [],
+        specialActivity: teams.specialActivity,
       });
     }
 
     teamsMap.get(teams.id)!.board.push({
-      isCompleted: team_activities.completed,
+      isCompleted: team_activities.isCompleted,
       points: activities.basePoints,
       activity: activities,
     });
@@ -73,6 +75,7 @@ export async function getAllTeams(): Promise<Team[]> {
         name: teamData.name,
         board: parseZod(BoardSchema, board),
         points,
+        specialActivity: teamData.specialActivity,
       }),
     );
   }
