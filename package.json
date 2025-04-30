@@ -6,7 +6,7 @@
     "dev": "nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "cross-env NODE_ENV=production node dist/server.js",
-    "format": "pnpm dlx prettier . --write",
+    "format": "prettier . --write",
     "lint": "next lint --fix",
     "lint:all": "pnpm format && pnpm lint",
     "lint:no-cache": "next lint --no-cache",

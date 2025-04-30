@@ -11,7 +11,7 @@ export async function nukeTeamDb() {
   console.log("teams db has been nuked!");
 }
 
-export async function nukeSquareDb() {
+export async function nukeTeamActivitiesDb() {
   await db.delete(teamActivitiesTable);
-  console.log("squares db has been nuked!");
+  console.log("teamActivities db has been nuked!");
 }

@@ -3,13 +3,13 @@ import { ask } from "stdio";
 import { activitiesTable, teamsTable } from "@/db/schema";
 import {
   nukeActivityDb,
-  nukeSquareDb,
+  nukeTeamActivitiesDb,
   nukeTeamDb,
 } from "@/db/seed/nukeServices";
 import {
   generateAllActivities,
   generateAllTeams,
-  generateSquaresTable as generateTeamActivitiesTable,
+  generateTeamActivitiesTable,
 } from "@/db/seed/seedServices";
 
 async function main() {
@@ -22,7 +22,7 @@ async function main() {
   }
 
   console.log("Nuking all tables...");
-  await nukeSquareDb();
+  await nukeTeamActivitiesDb();
   await nukeTeamDb();
   await nukeActivityDb();
 
