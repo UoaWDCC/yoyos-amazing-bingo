@@ -14,14 +14,16 @@ import {
 export const teamsTable = pgTable("teams", {
   id: varchar({ length: 255 }).primaryKey(),
   name: varchar({ length: 255 }).notNull(),
-  code: varchar({ length: 6 }).notNull(),
+  code: varchar({ length: 6 }).notNull().unique(),
+  specialActivity: integer("special_activity").notNull(),
 });
 
 /** Global activities (e.g. description etc) */
 export const activitiesTable = pgTable("activities", {
   id: varchar({ length: 255 }).primaryKey(),
   name: varchar({ length: 255 }).notNull(),
-  code: varchar({ length: 255 }).notNull(),
+  code: varchar({ length: 6 }).notNull().unique(),
+  cardImageName: varchar("card_image_name", { length: 255 }).notNull(),
   description: text().notNull(),
   basePoints: integer().notNull().default(1),
   boardOrder: integer("board_order").notNull(),
@@ -33,7 +35,7 @@ export const teamActivitiesTable = pgTable(
   {
     teamId: varchar("team_id", { length: 255 }).notNull(),
     activityId: varchar("activity_id", { length: 255 }).notNull(),
-    completed: boolean().notNull().default(false),
+    isCompleted: boolean("is_completed").notNull().default(false),
   },
   (table) => [primaryKey({ columns: [table.teamId, table.activityId] })],
 );
@@ -56,9 +58,9 @@ export const teamActivitiesRelations = relations(
 );
 
 export const teamsRelations = relations(teamsTable, ({ many }) => ({
-    teamActivities: many(teamActivitiesTable),
+  teamActivity: many(teamActivitiesTable),
 }));
 
 export const activitiesRelations = relations(activitiesTable, ({ many }) => ({
-    teamActivities: many(teamActivitiesTable),
+  teamActivity: many(teamActivitiesTable),
 }));
