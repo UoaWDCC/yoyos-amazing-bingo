@@ -8,9 +8,14 @@ import { ActivitySchema } from "./Activity";
  *
  * On the frontend, this corresponds to a single square in the team's board
  */
-export const TeamActivitySchema = z.object({
-  activity: ActivitySchema,
-  isCompleted: z.boolean(),
-});
+export const TeamActivitySchema = z.object(
+  {
+    activity: ActivitySchema,
+    isCompleted: z.boolean({
+      message: "Team activity must have a boolean completion status",
+    }),
+  },
+  { message: "TeamActivity must contain an activity and a completion status" },
+);
 
 export type TeamActivity = z.infer<typeof TeamActivitySchema>;

@@ -9,5 +9,5 @@ export async function getAllTeams(): Promise<Team[]> {
 
   const teams: Team[] = []; // TODO: get teams correctly
 
-  return parseZod(z.array(TeamSchema), teams);
+  return parseZod(z.array(TeamSchema), teams, "services/getTeamsService.ts");
 }

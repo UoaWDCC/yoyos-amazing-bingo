@@ -16,24 +16,24 @@ import { auth, signOut } from "./authActions";
 export async function getTeamAction(teamId: string): Promise<Team> {
   // TODO: remove dummy data
   return {
-      id: "",
-      name: "",
-      code: "",
-      points: 0,
-      board: Array(16).map(() => ({
-        activity: {
-          id: "",
-          name: "",
-          code: "",
-          cardImageName: "",
-          description: "",
-          basePoints: 1,
-          boardOrder: 0
-        },
-        isCompleted: false
-      })),
-      specialActivity: 0
-    }
+    id: "",
+    name: "",
+    code: "",
+    points: 0,
+    board: Array(16).map(() => ({
+      activity: {
+        id: "",
+        name: "",
+        code: "",
+        cardImageName: "",
+        description: "",
+        basePoints: 1,
+        boardOrder: 0,
+      },
+      isCompleted: false,
+    })),
+    specialActivity: 0,
+  };
 
   const { teamId: sessionTeamId } = await auth();
   console.log(teamId, sessionTeamId);

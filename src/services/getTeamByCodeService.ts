@@ -25,5 +25,5 @@ export const getTeamByCode = async (code: string): Promise<Team> => {
     board: await getBoardByTeamId(rawTeam.id), // Don't do this, use a join
   };
 
-  return parseZod(TeamSchema, team);
+  return parseZod(TeamSchema, team, "services/getTeamByCodeService.ts");
 };

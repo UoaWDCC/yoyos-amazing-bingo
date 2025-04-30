@@ -26,5 +26,5 @@ export async function getBoardByTeamId(teamId: string): Promise<Board> {
     (a, b) => a.activity.boardOrder - b.activity.boardOrder,
   );
 
-  return parseZod(BoardSchema, board);
+  return parseZod(BoardSchema, board, "services/old/boardServices.ts");
 }
