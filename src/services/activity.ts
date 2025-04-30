@@ -1,12 +1,10 @@
 import { and, eq } from "drizzle-orm";
 
-
-
 import { db } from "@/db/connection";
 import { activitiesTable, teamActivitiesTable } from "@/db/schema";
 
 export const getTeamSquare = async (id: string) => {
-  return await db.query.squaresTable.findFirst({
+  return await db.query.teamActivitiesTable.findFirst({
     where: eq(teamActivitiesTable.teamId, id),
   });
 };
@@ -45,7 +43,7 @@ export async function completeActivityAndUpdateBoard({
     throw new Error("Activity not found");
   }
 
-  if (activity.slug !== answer) {
+  if (activity.code !== answer) {
     throw new Error("Incorrect answer");
   }
 

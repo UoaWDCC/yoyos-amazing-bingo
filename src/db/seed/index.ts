@@ -1,10 +1,10 @@
+import { nukeActivityDb, nukeSquareDb, nukeTeamDb } from "@/db/seed/nukeServices";
 import { activitiesTable, teamsTable } from "@/db/schema";
 import {
   generateAllActivities,
   generateAllTeams,
   generateSquaresTable,
-} from "@/services/initBoard";
-import { nukeActivityDb, nukeSquareDb, nukeTeamDb } from "@/services/nukeBoard";
+} from "@/db/seed/seedServices";
 
 import "dotenv/config";
 
@@ -19,11 +19,10 @@ async function main() {
     activities.push({
       id: index,
       name: `activity ${index}`,
-      slug: index,
+      code: index,
       description: `desc ${index}`,
-      x: i % 4,
-      y: Math.floor(i / 4),
-      points: 1,
+      boardOrder: i,
+      basePoints: 1,
     });
   }
 

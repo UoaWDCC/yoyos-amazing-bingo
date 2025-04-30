@@ -12,7 +12,7 @@
     "lint:no-cache": "next lint --no-cache",
     "nuke": "pnpm dlx rimraf .next && pnpm dlx rimraf node_modules",
     "db:push": "drizzle-kit push",
-    "db:seed": "tsx src/db/seed.ts",
+    "db:seed": "tsx src/db/seed",
     "db:view": "drizzle-kit studio"
   },
   "dependencies": {

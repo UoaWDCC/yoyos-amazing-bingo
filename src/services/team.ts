@@ -1,7 +1,5 @@
 import { eq } from "drizzle-orm";
 
-
-
 import { db } from "@/db/connection";
 import { activitiesTable, teamActivitiesTable, teamsTable } from "@/db/schema";
 import { parseZod } from "@/lib/zod";
@@ -30,8 +28,8 @@ export async function getBoardByTeamId(teamId: string) {
     .where(eq(teamActivitiesTable.teamId, teamId));
 
   const board = result.map((row) => ({
-    completed: row.squares.completed,
-    points: row.activities.points,
+    completed: row.team_activities.completed,
+    points: row.activities.basePoints,
     activity: row.activities,
   }));
 

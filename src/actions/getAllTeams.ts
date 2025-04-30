@@ -14,7 +14,7 @@ import { getAllTeams as getAllTeamsFromDb } from "@/services/team";
 export async function getAllTeams(): Promise<Team[]> {
   const teams = await getAllTeamsFromDb();
 
-  return await Promise.all(
+  return Promise.all(
     teams.map(async (team) => {
       const points = await getTeamPoints(team.id);
       return { ...team, points };

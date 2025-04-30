@@ -5,14 +5,13 @@ export async function generateAllActivities(
   activities: (typeof activitiesTable.$inferInsert)[],
 ) {
   const promises = activities.map(
-    ({ id, name, slug, points, x, y, description }) => {
+    ({ id, name, code, basePoints, boardOrder, description }) => {
       return db.insert(activitiesTable).values({
         id,
         name,
-        slug,
-        points,
-        x,
-        y,
+        code,
+        basePoints,
+        boardOrder,
         description,
       });
     },
