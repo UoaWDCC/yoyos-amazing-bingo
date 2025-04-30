@@ -1,3 +1,5 @@
+import { ask } from "stdio";
+
 import { activitiesTable, teamsTable } from "@/db/schema";
 import {
   nukeActivityDb,
@@ -7,46 +9,53 @@ import {
 import {
   generateAllActivities,
   generateAllTeams,
-  generateSquaresTable,
+  generateSquaresTable as generateTeamActivitiesTable,
 } from "@/db/seed/seedServices";
 
-import "dotenv/config";
-
 async function main() {
+  const confirmation = await ask(
+    "Are you sure you want to nuke the database? (y/n)",
+  );
+  if (confirmation !== "y") {
+    console.log("Aborting seed script...");
+    process.exit(0);
+  }
+
+  console.log("Nuking all tables...");
   await nukeSquareDb();
   await nukeTeamDb();
   await nukeActivityDb();
-  const activities: (typeof activitiesTable.$inferInsert)[] = [];
 
+  const activities: (typeof activitiesTable.$inferInsert)[] = [];
   for (let i: number = 0; i < 16; i++) {
     const index = i.toString();
     activities.push({
-      id: index,
-      name: `activity ${index}`,
-      code: index,
-      description: `desc ${index}`,
+      id: `activity-${index}`,
+      name: `Activity ${index}`,
+      code: `${index}`,
+      description: `Description for activity-${index}`,
       boardOrder: i,
       basePoints: 1,
     });
   }
 
   const teams: (typeof teamsTable.$inferInsert)[] = [
-    { id: "esports", name: "esports", code: "test" },
-    { id: "esa", name: "esa", code: "test" },
-    { id: "reng", name: "rainbow engineering", code: "test" },
-    { id: "uabc", name: "uabc", code: "test" },
-    { id: "ausa", name: "ausa", code: "test" },
-    { id: "ausco", name: "ausco", code: "test" },
-    { id: "vps", name: "vps", code: "test" },
-    { id: "aspa", name: "aspa", code: "test" },
-    { id: "aucc", name: "aucc", code: "test" },
-    { id: "fsae", name: "fsae", code: "test" },
-    { id: "motorsports", name: "motorsports", code: "test" },
-    { id: "tansa", name: "tansa", code: "test" },
-    { id: "uaic", name: "uaic", code: "test" },
-    { id: "medr", name: "med revue", code: "test" },
-    { id: "hidd", name: "hidden treasures", code: "test" },
-    { id: "volu", name: "volunteers", code: "test" },
+    { id: "esports", name: "esports", code: "code-1" },
+    { id: "esa", name: "esa", code: "code-2" },
+    { id: "reng", name: "rainbow engineering", code: "code-3" },
+    { id: "uabc", name: "uabc", code: "code-4" },
+    { id: "ausa", name: "ausa", code: "code-5" },
+    { id: "ausco", name: "ausco", code: "code-6" },
+    { id: "vps", name: "vps", code: "code-7" },
+    { id: "aspa", name: "aspa", code: "code-8" },
+    { id: "aucc", name: "aucc", code: "code-9" },
+    { id: "fsae", name: "fsae", code: "code10" },
+    { id: "motorsports", name: "motorsports", code: "code11" },
+    { id: "tansa", name: "tansa", code: "code12" },
+    { id: "uaic", name: "uaic", code: "code13" },
+    { id: "medr", name: "med revue", code: "code14" },
+    { id: "hidd", name: "hidden treasures", code: "code15" },
+    { id: "volu", name: "volunteers", code: "code16" },
   ];
 
   console.log("Running seed script...");
@@ -55,20 +64,19 @@ async function main() {
 
   console.log("\nInserting Teams...");
   await generateAllTeams(teams);
+  const teamIds = teams.map((team) => team.id);
+  console.log(teamIds);
+
   console.log("\nInserting Activities...");
   await generateAllActivities(activities);
-
-  const teamIds = teams.map((team) => team.id);
   const activityIds = activities.map((activity) => activity.id);
-  console.log(teamIds);
   console.log(activityIds);
 
-  console.log("\nGenerating Squares...");
-  await generateSquaresTable(teamIds, activityIds);
+  console.log("\nGenerating TeamActivities...");
+  await generateTeamActivitiesTable(teamIds, activityIds);
 
+  console.log("Seed script completed successfully!");
   process.exit(0);
-  // const users = await db.select().from(usersTable);
-  // console.log("Getting all users from the database: ", users);
 }
 
 main();
