@@ -15,13 +15,15 @@ export const teamsTable = pgTable("teams", {
   id: varchar({ length: 255 }).primaryKey(),
   name: varchar({ length: 255 }).notNull(),
   code: varchar({ length: 6 }).notNull().unique(),
+  specialActivity: integer("special_activity").notNull(),
 });
 
 /** Global activities (e.g. description etc) */
 export const activitiesTable = pgTable("activities", {
   id: varchar({ length: 255 }).primaryKey(),
   name: varchar({ length: 255 }).notNull(),
-  code: varchar({ length: 255 }).notNull().unique(),
+  code: varchar({ length: 6 }).notNull().unique(),
+  cardImageName: varchar("card_image_name", { length: 255 }).notNull(),
   description: text().notNull(),
   basePoints: integer().notNull().default(1),
   boardOrder: integer("board_order").notNull(),

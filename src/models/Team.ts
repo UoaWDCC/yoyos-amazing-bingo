@@ -9,6 +9,7 @@ export const TeamSchema = z.object({
   code: CodeSchema,
   points: z.number().int().min(0),
   board: BoardSchema,
+  specialActivity: z.number().int().min(0).max(15), // The index of the team's special square on the board (extra points)
 });
 
 export type Team = z.infer<typeof TeamSchema>;

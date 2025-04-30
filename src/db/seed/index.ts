@@ -36,26 +36,107 @@ async function main() {
       description: `Description for activity-${index}`,
       boardOrder: i,
       basePoints: 1,
+      cardImageName: "",
     });
   }
 
   const teams: (typeof teamsTable.$inferInsert)[] = [
-    { id: "esports", name: "esports", code: "code-1" },
-    { id: "esa", name: "esa", code: "code-2" },
-    { id: "reng", name: "rainbow engineering", code: "code-3" },
-    { id: "uabc", name: "uabc", code: "code-4" },
-    { id: "ausa", name: "ausa", code: "code-5" },
-    { id: "ausco", name: "ausco", code: "code-6" },
-    { id: "vps", name: "vps", code: "code-7" },
-    { id: "aspa", name: "aspa", code: "code-8" },
-    { id: "aucc", name: "aucc", code: "code-9" },
-    { id: "fsae", name: "fsae", code: "code10" },
-    { id: "motorsports", name: "motorsports", code: "code11" },
-    { id: "tansa", name: "tansa", code: "code12" },
-    { id: "uaic", name: "uaic", code: "code13" },
-    { id: "medr", name: "med revue", code: "code14" },
-    { id: "hidd", name: "hidden treasures", code: "code15" },
-    { id: "volu", name: "volunteers", code: "code16" },
+    {
+      id: "esports",
+      name: "Esports",
+      code: "code-1",
+      specialActivity: 1,
+    },
+    {
+      id: "esa",
+      name: "ESA",
+      code: "code-2",
+      specialActivity: 2,
+    },
+    {
+      id: "reng",
+      name: "Rainbow Engineering",
+      code: "code-3",
+      specialActivity: 3,
+    },
+    {
+      id: "uabc",
+      name: "UABC",
+      code: "code-4",
+      specialActivity: 4,
+    },
+    {
+      id: "ausa",
+      name: "AUSA",
+      code: "code-5",
+      specialActivity: 5,
+    },
+    {
+      id: "ausco",
+      name: "AUSCO",
+      code: "code-6",
+      specialActivity: 6,
+    },
+    {
+      id: "vps",
+      name: "VPS",
+      code: "code-7",
+      specialActivity: 7,
+    },
+    {
+      id: "aspa",
+      name: "ASPA",
+      code: "code-8",
+      specialActivity: 8,
+    },
+    {
+      id: "aucc",
+      name: "AUCC",
+      code: "code-9",
+      specialActivity: 9,
+    },
+    {
+      id: "fsae",
+      name: "FSAE",
+      code: "code10",
+      specialActivity: 10,
+    },
+    {
+      id: "motorsports",
+      name: "Motorsports",
+      code: "code11",
+      specialActivity: 11,
+    },
+    {
+      id: "tansa",
+      name: "TANSA",
+      code: "code12",
+      specialActivity: 12,
+    },
+    {
+      id: "uaic",
+      name: "UAIC",
+      code: "code13",
+      specialActivity: 13,
+    },
+    {
+      id: "medr",
+      name: "Med Revue",
+      code: "code14",
+      specialActivity: 14,
+    },
+    {
+      id: "hidd",
+      name: "Hidden Treasures",
+      code: "code15",
+      specialActivity: 15,
+    },
+    {
+      id: "volu",
+      name: "Volunteers",
+      code: "code16",
+      specialActivity: 16,
+    },
   ];
 
   console.log("Running seed script...");
