@@ -1,13 +1,18 @@
 import "@/components/ui/drawer";
 
+import { redirect } from "next/navigation";
+
 import { auth } from "@/actions/authActions";
-import { getTeam } from "@/actions/getTeamAction";
-import BoardClientPage from "@/app/(auth)/board/page.client";
+import { getTeamAction } from "@/actions/getTeamAction";
+import BoardClientPage from "@/app/board/page.client";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 
 export default async function BoardPage() {
   const { teamId } = await auth();
-  const initialTeamData = await getTeam(teamId);
+  if (!teamId) {
+    return redirect("/");
+  }
+  const initialTeamData = await getTeamAction(teamId);
 
   return (
     <NormalLayout title="Board">

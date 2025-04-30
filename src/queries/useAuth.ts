@@ -1,6 +1,7 @@
+import { z } from "zod";
+
 import { auth } from "@/actions/authActions";
 import { useSWRWithZod } from "@/lib/swr";
-import { z } from "zod";
 
 /** @see getTeam */
 export default function useAuth(code: string) {

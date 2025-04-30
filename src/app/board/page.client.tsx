@@ -2,7 +2,7 @@
 
 import "@/components/ui/drawer";
 
-import { BingoBoard } from "@/app/(auth)/board/_components/BingoBoard";
+import { BingoBoard } from "@/app/board/_components/BingoBoard";
 import { Pill } from "@/components/ui/pill";
 import { Team } from "@/models/Team";
 import useGetTeam from "@/queries/useGetTeam";
@@ -16,14 +16,14 @@ export default function BoardClientPage({
   teamId,
   initialTeamData,
 }: BoardClientPageProps) {
-  const { data: team = initialTeamData } = useGetTeam(teamId);
+  const { data: team = initialTeamData, isLoading } = useGetTeam(teamId);
 
   return (
     <>
       <div className="flex w-full justify-center gap-2">
         <Pill>{team.points}pts</Pill>
       </div>
-      <BingoBoard teamId={teamId} />
+      <BingoBoard board={team.board} isLoading={isLoading} />
       <div className="flex w-full justify-center gap-2">
         <>
           <Pill>4</Pill>
