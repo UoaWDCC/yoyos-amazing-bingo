@@ -2,7 +2,9 @@
 
 import "server-only";
 
-import { auth, signOut } from "@/actions/authActions";
+import { redirect } from "next/navigation";
+
+import { auth } from "@/actions/authActions";
 import { sendInvalidationCodes } from "@/revalidation/sendInvalidationCode";
 import { completeTeamActivity } from "@/services/completeActivityService";
 import { getActivityById } from "@/services/getActivityByIdService";
@@ -18,6 +20,10 @@ export async function completeActivityAction(
   activityCode: string,
 ): Promise<void> {
   const { teamId } = await auth();
+
+  if (!teamId) {
+    redirect("/");
+  }
 
   if (!activityCode || activityCode.length !== 6) {
     throw new Error("Incorrect activity code");

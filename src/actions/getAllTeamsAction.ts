@@ -2,10 +2,7 @@
 
 import "server-only";
 
-import { getSession } from "@/lib/auth";
-import env from "@/lib/env";
 import { Team } from "@/models/Team";
-import { getAllTeams } from "@/services/getTeamsService";
 
 /**
  * Fetches all teams with their points.
@@ -13,12 +10,24 @@ import { getAllTeams } from "@/services/getTeamsService";
  * @returns All teams with their points.
  */
 export async function getAllTeamsAction(): Promise<Team[]> {
-  const { teamId } = await getSession();
-  const teams = await getAllTeams();
-
-  if (teamId === env.ADMIN_ID) {
-    return teams;
-  } else {
-    return teams.slice(5, -1); // Remove the first 5 teams
-  }
+  // TODO: remove dummy data
+  return Array(16).map((_, i) => ({
+    id: i.toString(),
+    name: "Wow",
+    code: "Code" + i,
+    points: 1,
+    board: Array(16).map(() => ({
+      activity: {
+        id: "ACT-1",
+        name: "Activity",
+        code: "Code" + i,
+        cardImageName: "image" + i + ".png",
+        description: "Description for activity " + i,
+        basePoints: 1,
+        boardOrder: 0,
+      },
+      isCompleted: false,
+    })),
+    specialActivity: 0,
+  }));
 }
