@@ -3,10 +3,6 @@ import WebSocket from "ws";
 
 import env from "@/lib/env";
 
-
-
-
-
 /**
  * Send an invalidation code to the websocket server
  * @param code The invalidation code to send

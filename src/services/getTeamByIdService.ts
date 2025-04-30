@@ -1,8 +1,10 @@
+import { eq } from "drizzle-orm";
+
 import { db } from "@/db/connection";
 import { teamsTable } from "@/db/schema";
 import { parseZod } from "@/lib/zod";
 import { Team, TeamSchema } from "@/models/Team";
-import { eq } from "drizzle-orm";
+
 import { getBoardByTeamId } from "./old/boardServices";
 
 export const getTeamById = async (id: string): Promise<Team> => {

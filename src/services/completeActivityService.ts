@@ -1,8 +1,12 @@
-import { db } from "@/db/connection";
-import { teamActivitiesTable, activitiesTable } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 
-export const completeTeamActivity = async (teamId: string, activityId: string): Promise<void> => {
+import { db } from "@/db/connection";
+import { activitiesTable, teamActivitiesTable } from "@/db/schema";
+
+export const completeTeamActivity = async (
+  teamId: string,
+  activityId: string,
+): Promise<void> => {
   await db
     .update(teamActivitiesTable)
     .set({ completed: true })

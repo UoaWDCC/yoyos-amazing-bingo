@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-import { CodeSchema, IdSchema } from "./common";
 import { BoardSchema } from "./Board";
+import { CodeSchema, IdSchema } from "./common";
 
 export const TeamSchema = z.object({
   id: IdSchema,

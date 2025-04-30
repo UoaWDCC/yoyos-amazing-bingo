@@ -20,10 +20,6 @@ import { cn } from "@/lib/cn";
 import { Square } from "@/models/Board";
 import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
 
-
-
-
-
 export type ActivityDrawerProps = {
   square: Square;
 };

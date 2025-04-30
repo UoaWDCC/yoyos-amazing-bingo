@@ -1,5 +1,9 @@
-import { nukeActivityDb, nukeSquareDb, nukeTeamDb } from "@/db/seed/nukeServices";
 import { activitiesTable, teamsTable } from "@/db/schema";
+import {
+  nukeActivityDb,
+  nukeSquareDb,
+  nukeTeamDb,
+} from "@/db/seed/nukeServices";
 import {
   generateAllActivities,
   generateAllTeams,

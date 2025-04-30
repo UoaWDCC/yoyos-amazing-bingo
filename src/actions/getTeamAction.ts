@@ -1,19 +1,10 @@
 "use server";
 
-
-
-
 import "server-only";
-
-
 
 import { Team } from "@/models/Team";
 import { getTeamPoints } from "@/services/old/getTeamPoints";
 import { getTeamById } from "@/services/old/teamServices";
-
-
-
-
 
 /**
  * Fetches the team info for a given team ID.

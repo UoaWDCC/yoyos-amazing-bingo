@@ -1,11 +1,6 @@
 "use server";
 
-
-
-
 import "server-only";
-
-
 
 import { Team } from "@/models/Team";
 import { getTeamPoints } from "@/services/old/getTeamPoints";

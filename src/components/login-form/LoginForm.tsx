@@ -7,10 +7,6 @@ import { signIn } from "@/actions/authActions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-
-
-
-
 export function LoginForm() {
   const [state, action, isPending] = useActionState(signIn, null);
 
