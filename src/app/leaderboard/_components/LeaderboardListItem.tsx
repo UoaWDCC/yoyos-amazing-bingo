@@ -10,15 +10,14 @@ export default function LeaderboardListItem({
   points?: number;
 }) {
   return (
-    <li className="flex items-center justify-between gap-2 py-4">
+    <li className="flex w-full items-center justify-between gap-2 py-4">
       <div className="flex gap-4 font-medium">
         <p className="opacity-50">{rank}.</p>
         <p>{name}</p>
       </div>
-
-      <div>
-        <Pill className="font-medium">{`${points}pts`}</Pill>
-      </div>
+      <Pill variant="brand" className="font-medium">
+        {points}pts
+      </Pill>
     </li>
   );
 }

@@ -9,6 +9,7 @@ const pill = cva(
     variants: {
       variant: {
         solid: "bg-pill text-foreground",
+        brand: "bg-pill-blue text-white",
       },
     },
     defaultVariants: {

@@ -1,7 +1,6 @@
 "use client";
 
 import { useActionState } from "react";
-import { Loader2 } from "lucide-react";
 
 import { signIn } from "@/actions/auth";
 import { Button } from "@/components/ui/button";

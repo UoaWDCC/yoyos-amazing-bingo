@@ -23,9 +23,7 @@ export default async function CodePage() {
           className="object-contain"
         />
       </div>
-      {}
       <LoginForm />
-
       <div />
     </NormalLayout>
   );
