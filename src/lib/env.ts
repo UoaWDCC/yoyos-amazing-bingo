@@ -3,6 +3,7 @@
  * It exports the validated environment variables as an object to be used throughout the application
  */
 
+import "server-only";
 import dotenv from "dotenv";
 import { z } from "zod";
 
