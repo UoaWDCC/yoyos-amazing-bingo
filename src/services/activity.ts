@@ -1,22 +1,24 @@
 import { and, eq } from "drizzle-orm";
 
+
+
 import { db } from "@/db/connection";
-import { activitiesTable, squaresTable } from "@/db/schema";
+import { activitiesTable, teamActivitiesTable } from "@/db/schema";
 
 export const getTeamSquare = async (id: string) => {
   return await db.query.squaresTable.findFirst({
-    where: eq(squaresTable.teamId, id),
+    where: eq(teamActivitiesTable.teamId, id),
   });
 };
 
 export const updateTeamSquare = async (teamId: string, activityId: string) => {
   await db
-    .update(squaresTable)
+    .update(teamActivitiesTable)
     .set({ completed: true })
     .where(
       and(
-        eq(squaresTable.teamId, teamId),
-        eq(squaresTable.activityId, activityId),
+        eq(teamActivitiesTable.teamId, teamId),
+        eq(teamActivitiesTable.activityId, activityId),
       ),
     );
 };

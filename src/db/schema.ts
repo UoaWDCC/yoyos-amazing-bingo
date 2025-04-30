@@ -8,43 +8,60 @@ import {
   varchar,
 } from "drizzle-orm/pg-core";
 
+// --- TABLES ---
+
+/** A team in the game */
 export const teamsTable = pgTable("teams", {
-  id: varchar({ length: 36 }).primaryKey(),
+  id: varchar({ length: 255 }).primaryKey(),
   name: varchar({ length: 255 }).notNull(),
-  code: varchar({ length: 20 }).notNull(),
+  code: varchar({ length: 6 }).notNull(),
 });
 
-/** A single square in the board */
-export const squaresTable = pgTable(
-  "squares",
-  {
-    teamId: varchar("team_id", { length: 36 })
-      .notNull()
-      .references(() => teamsTable.id),
+/** Global activities (e.g. description etc) */
+export const activitiesTable = pgTable("activities", {
+  id: varchar({ length: 255 }).primaryKey(),
+  name: varchar({ length: 255 }).notNull(),
+  code: varchar({ length: 255 }).notNull(),
+  description: text().notNull(),
+  basePoints: integer().notNull().default(1),
+  boardOrder: integer("board_order").notNull(),
+});
 
+/** A team-specific activity (e.g. have they completed it yet etc) */
+export const teamActivitiesTable = pgTable(
+  "team_activities",
+  {
+    teamId: varchar("team_id", { length: 255 }).notNull(),
+    activityId: varchar("activity_id", { length: 255 }).notNull(),
     completed: boolean().notNull().default(false),
-    activityId: varchar("activity_id", { length: 36 }),
   },
   (table) => [primaryKey({ columns: [table.teamId, table.activityId] })],
 );
 
-export const activitiesTable = pgTable("activities", {
-  id: varchar({ length: 36 }).primaryKey(),
-  name: varchar({ length: 255 }).notNull(),
-  slug: varchar({ length: 255 }).notNull(),
-  points: integer().notNull().default(1),
-  description: text().notNull(),
-  x: integer().notNull(),
-  y: integer().notNull(),
-});
+// --- RELATIONS ---
+// Team <1---N> Team Activities <N---1> Activities
 
-export const squareRelations = relations(activitiesTable, ({ many }) => ({
-  squaresTable: many(squaresTable),
-}));
-
-export const activitiesRelations = relations(squaresTable, ({ one }) => ({
-  activity: one(activitiesTable, {
-    fields: [squaresTable.activityId],
-    references: [activitiesTable.id],
+export const teamActivitiesRelations = relations(
+  teamActivitiesTable,
+  ({ one }) => ({
+    team: one(teamsTable, {
+      fields: [teamActivitiesTable.teamId],
+      references: [teamsTable.id],
+    }),
+    activity: one(activitiesTable, {
+      fields: [teamActivitiesTable.activityId],
+      references: [activitiesTable.id],
+    }),
   }),
+);
+
+export const teamsRelations = relations(teamActivitiesTable, ({ many }) => ({
+  teamActivity: many(teamActivitiesTable),
 }));
+
+export const activitiesRelations = relations(
+  teamActivitiesTable,
+  ({ many }) => ({
+    teamActivity: many(teamActivitiesTable),
+  }),
+);

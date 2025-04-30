@@ -1,5 +1,5 @@
 import { db } from "@/db/connection";
-import { activitiesTable, squaresTable, teamsTable } from "@/db/schema";
+import { activitiesTable, teamActivitiesTable, teamsTable } from "@/db/schema";
 
 export async function generateAllActivities(
   activities: (typeof activitiesTable.$inferInsert)[],
@@ -41,7 +41,7 @@ export async function generateSquaresTable(
 ) {
   const promises = teamIds.map((teamId: string) => {
     const nestedPromises = activityIds.map((activityId: string) => {
-      return db.insert(squaresTable).values({
+      return db.insert(teamActivitiesTable).values({
         teamId,
         completed: false,
         activityId,

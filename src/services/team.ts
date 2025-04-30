@@ -3,13 +3,9 @@ import { eq } from "drizzle-orm";
 
 
 import { db } from "@/db/connection";
-import { activitiesTable, squaresTable, teamsTable } from "@/db/schema";
+import { activitiesTable, teamActivitiesTable, teamsTable } from "@/db/schema";
 import { parseZod } from "@/lib/zod";
 import { BoardSchema } from "@/models/Board";
-
-
-
-
 
 export const getTeamByCode = async (code: string) => {
   return await db.query.teamsTable.findFirst({
@@ -26,9 +22,12 @@ export const getTeamById = async (id: string) => {
 export async function getBoardByTeamId(teamId: string) {
   const result = await db
     .select()
-    .from(squaresTable)
-    .innerJoin(activitiesTable, eq(squaresTable.activityId, activitiesTable.id))
-    .where(eq(squaresTable.teamId, teamId));
+    .from(teamActivitiesTable)
+    .innerJoin(
+      activitiesTable,
+      eq(teamActivitiesTable.activityId, activitiesTable.id),
+    )
+    .where(eq(teamActivitiesTable.teamId, teamId));
 
   const board = result.map((row) => ({
     completed: row.squares.completed,

@@ -1,22 +1,8 @@
 import { z } from "zod";
 
-/** A single square in the board */
-export const ActivitySchema = z.object({
-  id: z.string(),
-  name: z.string(),
-  description: z.string(),
-  x: z.number(),
-  y: z.number(),
-});
+import { TeamActivitySchema } from "./TeamActivity";
 
-export const SquareSchema = z.object({
-  completed: z.boolean(),
-  points: z.number(),
-  activity: ActivitySchema,
-});
+/** A team's board, consisting on 16 squares */
+export const BoardSchema = z.array(TeamActivitySchema).length(16);
 
-export const BoardSchema = z.array(SquareSchema);
-
-export type Activity = z.infer<typeof ActivitySchema>;
-export type Square = z.infer<typeof SquareSchema>;
 export type Board = z.infer<typeof BoardSchema>;

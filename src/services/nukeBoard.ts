@@ -1,5 +1,5 @@
 import { db } from "@/db/connection";
-import { activitiesTable, squaresTable, teamsTable } from "@/db/schema";
+import { activitiesTable, teamActivitiesTable, teamsTable } from "@/db/schema";
 
 export async function nukeActivityDb() {
   await db.delete(activitiesTable);
@@ -12,6 +12,6 @@ export async function nukeTeamDb() {
 }
 
 export async function nukeSquareDb() {
-  await db.delete(squaresTable);
+  await db.delete(teamActivitiesTable);
   console.log("squares db has been nuked!");
 }
