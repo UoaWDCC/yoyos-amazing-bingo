@@ -1,19 +1,10 @@
 "use server";
 
-
-
-
 import "server-only";
 
-
-
-import { auth } from "@/actions/auth";
+import { auth } from "@/actions/authActions";
 import { sendInvalidationCodes } from "@/revalidation/sendInvalidationCode";
 import { completeActivityAndUpdateBoard } from "@/services/activityServices";
-
-
-
-
 
 /**
  * Complete the activity for a given team auth code and activity ID.

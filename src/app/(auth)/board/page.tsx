@@ -1,7 +1,7 @@
 import "@/components/ui/drawer";
 
-import { auth } from "@/actions/auth";
-import { getTeam } from "@/actions/getTeam";
+import { auth } from "@/actions/authActions";
+import { getTeam } from "@/actions/getTeamAction";
 import BoardClientPage from "@/app/(auth)/board/page.client";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 

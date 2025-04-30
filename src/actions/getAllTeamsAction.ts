@@ -1,9 +1,14 @@
 "use server";
 
+
+
+
 import "server-only";
 
-import { getTeamPoints } from "@/actions/getTeamPoints";
+
+
 import { Team } from "@/models/Team";
+import { getTeamPoints } from "@/services/old/getTeamPoints";
 import { getAllTeams as getAllTeamsFromDb } from "@/services/old/teamServices";
 
 /**

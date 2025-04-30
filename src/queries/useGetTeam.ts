@@ -1,10 +1,6 @@
-import { getTeam } from "@/actions/getTeam";
+import { getTeam } from "@/actions/getTeamAction";
 import { useSWRWithZod } from "@/lib/swr";
 import { TeamSchema } from "@/models/Team";
-
-
-
-
 
 /** @see getTeam */
 export default function useGetTeam(teamId: string) {

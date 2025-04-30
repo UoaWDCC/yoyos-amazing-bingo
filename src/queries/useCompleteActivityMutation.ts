@@ -1,6 +1,6 @@
 import useSWRMutation from "swr/mutation";
 
-import { completeActivity } from "@/actions/completeActivity";
+import { completeActivity } from "@/actions/completeActivityAction";
 
 export type CompleteActivityArgs = {
   activityId: string;

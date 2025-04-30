@@ -1,4 +1,4 @@
-import { getAllTeams } from "@/actions/getAllTeams";
+import { getAllTeams } from "@/actions/getAllTeamsAction";
 import Back from "@/components/ui/back/Back";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 

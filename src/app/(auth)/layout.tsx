@@ -1,4 +1,4 @@
-import { protect } from "@/actions/auth";
+import { protect } from "@/actions/authActions";
 
 export default async function AuthLayout({
   children,

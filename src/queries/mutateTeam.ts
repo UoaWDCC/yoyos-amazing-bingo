@@ -1,6 +1,6 @@
 import { mutate } from "swr";
 
-import { updateTeam } from "@/actions/updateTeam";
+import { updateTeam } from "@/actions/updateTeamNameAction";
 import { Team } from "@/models/Team";
 
 /** @see updateTeam */
