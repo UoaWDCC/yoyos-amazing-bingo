@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { getAllTeams } from "@/actions/getAllTeamsAction";
+import { getAllTeamsAction } from "@/actions/getAllTeamsAction";
 import { useSWRWithZod } from "@/lib/swr";
 import { TeamSchema } from "@/models/Team";
 
@@ -8,7 +8,7 @@ import { TeamSchema } from "@/models/Team";
 export default function useGetAllTeams() {
   return useSWRWithZod({
     cacheKey: `getAllTeams`,
-    fetcher: () => getAllTeams(),
+    fetcher: () => getAllTeamsAction(),
     zodSchema: z.array(TeamSchema),
     thisFile: "queries/useGetAllTeams.ts",
   });

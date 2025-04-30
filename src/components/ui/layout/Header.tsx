@@ -1,6 +1,7 @@
-import { getTeamName } from "@/actions/getTeamName";
+import { getTeamAction } from "@/actions/getTeamAction";
 
 import { Heading } from "../heading";
+import { auth } from "@/actions/authActions";
 
 /**
  * This is the header component for the app.
@@ -10,7 +11,8 @@ import { Heading } from "../heading";
  */
 export default async function Header({ title }: { title: string }) {
   // THIS IMPLEMENTATION MEANS THAT THE NormalLayout COMPONENT MUST BE SERVER SIDE RENDERED
-  const teamName = await getTeamName();
+  const { teamId } = await auth();
+  const teamName = (await getTeamAction(teamId)).name;
 
   return (
     <div className="flex justify-between">
