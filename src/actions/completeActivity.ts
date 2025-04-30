@@ -8,8 +8,8 @@ import "server-only";
 
 
 import { auth } from "@/actions/auth";
-import { sendInvalidationCodes } from "@/actions/sendInvalidationCode";
-import { completeActivityAndUpdateBoard } from "@/services/activity";
+import { sendInvalidationCodes } from "@/revalidation/sendInvalidationCode";
+import { completeActivityAndUpdateBoard } from "@/services/activityServices";
 
 
 

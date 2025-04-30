@@ -1,9 +1,13 @@
 "use server";
 
 import { auth } from "@/actions/auth";
-import { getTeamById } from "@/services/team";
+import { getTeamById } from "@/services/old/teamServices";
 
 import "server-only";
+
+
+
+
 
 export async function getTeamName(): Promise<string | null> {
   const { teamId } = await auth();

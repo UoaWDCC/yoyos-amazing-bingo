@@ -9,7 +9,7 @@ import "server-only";
 
 import { auth } from "@/actions/auth";
 import { Board } from "@/models/Board";
-import { getBoardByTeamId } from "@/services/team";
+import { getBoardByTeamId } from "@/services/old/teamServices";
 
 
 

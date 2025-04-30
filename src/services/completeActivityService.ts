@@ -1,15 +1,8 @@
+import { db } from "@/db/connection";
+import { teamActivitiesTable, activitiesTable } from "@/db/schema";
 import { and, eq } from "drizzle-orm";
 
-import { db } from "@/db/connection";
-import { activitiesTable, teamActivitiesTable } from "@/db/schema";
-
-export const getTeamSquare = async (id: string) => {
-  return await db.query.teamActivitiesTable.findFirst({
-    where: eq(teamActivitiesTable.teamId, id),
-  });
-};
-
-export const updateTeamSquare = async (teamId: string, activityId: string) => {
+export const completeTeamActivity = async (teamId: string, activityId: string): Promise<void> => {
   await db
     .update(teamActivitiesTable)
     .set({ completed: true })
@@ -21,12 +14,13 @@ export const updateTeamSquare = async (teamId: string, activityId: string) => {
     );
 };
 
+// Could merge this with the above function if you like
 /**
  * Complete an activity for a given team
  * @param activityId The ID of the activity to complete
  * @param answer The answer to the activity
  */
-export async function completeActivityAndUpdateBoard({
+async function completeActivityAndUpdateBoard({
   teamId,
   activityId,
   answer,
@@ -47,5 +41,5 @@ export async function completeActivityAndUpdateBoard({
     throw new Error("Incorrect answer");
   }
 
-  updateTeamSquare(teamId, activityId);
+  completeTeamActivity(teamId, activityId);
 }
