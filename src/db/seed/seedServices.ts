@@ -5,7 +5,15 @@ export async function generateAllActivities(
   activities: (typeof activitiesTable.$inferInsert)[],
 ) {
   const promises = activities.map(
-    ({ id, name, code, basePoints, boardOrder, description }) => {
+    ({
+      id,
+      name,
+      code,
+      basePoints,
+      boardOrder,
+      description,
+      cardImageName,
+    }) => {
       return db.insert(activitiesTable).values({
         id,
         name,
@@ -13,6 +21,7 @@ export async function generateAllActivities(
         basePoints,
         boardOrder,
         description,
+        cardImageName,
       });
     },
   );
@@ -23,18 +32,19 @@ export async function generateAllActivities(
 export async function generateAllTeams(
   teams: (typeof teamsTable.$inferInsert)[],
 ) {
-  const promises = teams.map(({ id, name, code }) => {
+  const promises = teams.map(({ id, name, code, specialActivity }) => {
     return db.insert(teamsTable).values({
       id,
       name,
       code,
+      specialActivity,
     });
   });
   await Promise.all(promises);
   console.log("generating teams table");
 }
 
-export async function generateSquaresTable(
+export async function generateTeamActivitiesTable(
   teamIds: string[],
   activityIds: string[],
 ) {
@@ -50,5 +60,5 @@ export async function generateSquaresTable(
   });
 
   await Promise.all(promises);
-  console.log("generating squares table");
+  console.log("generating teamActivities table");
 }

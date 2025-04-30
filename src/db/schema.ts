@@ -61,9 +61,6 @@ export const teamsRelations = relations(teamsTable, ({ many }) => ({
   teamActivity: many(teamActivitiesTable),
 }));
 
-export const activitiesRelations = relations(
-  activitiesTable,
-  ({ many }) => ({
-    teamActivity: many(teamActivitiesTable),
-  }),
-);
+export const activitiesRelations = relations(activitiesTable, ({ many }) => ({
+  teamActivity: many(teamActivitiesTable),
+}));
