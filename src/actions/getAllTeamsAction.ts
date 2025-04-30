@@ -2,22 +2,23 @@
 
 import "server-only";
 
+import { getSession } from "@/lib/auth";
+import env from "@/lib/env";
 import { Team } from "@/models/Team";
-import { getTeamPoints } from "@/services/old/getTeamPoints";
-import { getAllTeams as getAllTeamsFromDb } from "@/services/old/teamServices";
+import { getAllTeams } from "@/services/getTeamsService";
 
 /**
  * Fetches all teams with their points.
  *
  * @returns All teams with their points.
  */
-export async function getAllTeams(): Promise<Team[]> {
-  const teams = await getAllTeamsFromDb();
+export async function getAllTeamsAction(): Promise<Team[]> {
+  const { teamId } = await getSession();
+  const teams = await getAllTeams();
 
-  return Promise.all(
-    teams.map(async (team) => {
-      const points = await getTeamPoints(team.id);
-      return { ...team, points };
-    }),
-  );
+  if (teamId === env.ADMIN_ID) {
+    return teams;
+  } else {
+    return teams.slice(5, -1); // Remove the first 5 teams
+  }
 }

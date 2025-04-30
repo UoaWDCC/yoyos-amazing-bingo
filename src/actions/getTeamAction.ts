@@ -3,8 +3,9 @@
 import "server-only";
 
 import { Team } from "@/models/Team";
-import { getTeamPoints } from "@/services/old/getTeamPoints";
-import { getTeamById } from "@/services/old/teamServices";
+import { getTeamById } from "@/services/getTeamByIdService";
+
+import { auth } from "./authActions";
 
 /**
  * Fetches the team info for a given team ID.
@@ -12,14 +13,16 @@ import { getTeamById } from "@/services/old/teamServices";
  * @param teamId The ID of the team to fetch the info for.
  * @returns The team info for the given team ID.
  */
-export async function getTeam(teamId: string): Promise<Team> {
-  const team = await getTeamById(teamId);
+export async function getTeamAction(teamId: string): Promise<Team> {
+  const { teamId: sessionTeamId } = await auth();
+  if (sessionTeamId !== teamId && sessionTeamId !== process.env.ADMIN_ID) {
+    throw new Error("Unauthorized");
+  }
 
+  const team = await getTeamById(teamId);
   if (!team) {
     throw new Error("Team not found");
   }
 
-  const points = await getTeamPoints(teamId);
-
-  return { ...team, points };
+  return team;
 }
