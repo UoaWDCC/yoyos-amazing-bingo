@@ -1,11 +1,11 @@
-import { getAllTeams } from "@/actions/getAllTeamsAction";
+import { getAllTeamsAction } from "@/actions/getAllTeamsAction";
 import Back from "@/components/ui/back/Back";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 
 import LeaderboardListItem from "./_components/LeaderboardListItem";
 
 export default async function Leaderboard() {
-  const teams = await getAllTeams();
+  const teams = await getAllTeamsAction();
 
   /*
   TODO logic to sort teams by points before passing into LeaderboardListItem
