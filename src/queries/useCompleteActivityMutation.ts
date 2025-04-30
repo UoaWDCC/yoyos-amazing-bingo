@@ -1,6 +1,6 @@
 import useSWRMutation from "swr/mutation";
 
-import { completeActivity } from "@/actions/completeActivityAction";
+import { completeActivityAction } from "@/actions/completeActivityAction";
 
 export type CompleteActivityArgs = {
   activityId: string;
@@ -11,15 +11,7 @@ async function completeActivityFetcher(
   _key: string,
   { arg }: { arg: CompleteActivityArgs },
 ) {
-  try {
-    await completeActivity(arg.activityId, arg.answer);
-  } catch (error) {
-    // Convert any error to a string message
-    if (error instanceof Error) {
-      throw error.message;
-    }
-    throw "An error occurred";
-  }
+  await completeActivityAction(arg.activityId, arg.answer);
 }
 
 export default function useCompleteActivityMutation() {
