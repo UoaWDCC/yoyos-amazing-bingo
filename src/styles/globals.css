@@ -107,8 +107,8 @@ html[data-state-dim="true"] .darkout-center {
 }
 
 html[data-state-pokehide="true"] .animate-pulse {
+  @apply opacity-0 transition-opacity duration-1000;
   animation: none;
-  opacity: 0;
 }
 
 html[data-state-blind="true"] .blind {
@@ -136,5 +136,24 @@ html[data-state-blind-2="true"] .blind-2 {
   to {
     opacity: 1;
     transform: translateY(0px);
+  }
+}
+
+.load-popup {
+  opacity: 0;
+  width: 0px;
+  margin-left: 0px;
+  animation: loadPopup 0.25s both ease-in-out;
+}
+@keyframes loadPopup {
+  from {
+    opacity: 0;
+    margin-left: 0px;
+    width: 0px;
+  }
+  to {
+    opacity: 1;
+    margin-left: 8px;
+    width: 24px;
   }
 }

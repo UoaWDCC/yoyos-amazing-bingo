@@ -8,7 +8,7 @@ type InputProps = ComponentPropsWithoutRef<"input"> & {
 
 export function Input(props: InputProps) {
   return (
-    <>
+    <div className="relative">
       <input
         {...props}
         className={cn(
@@ -16,8 +16,12 @@ export function Input(props: InputProps) {
           props.error &&
             "border-destructive focus:ring-destructive placeholder-destructive/80",
         )}
-      />
-      {props.error && <p className="text-destructive text-sm">{props.error}</p>}
-    </>
+      ></input>
+      {props.error && (
+        <p className="text-destructive absolute top-0 -translate-y-full text-sm">
+          {props.error}
+        </p>
+      )}
+    </div>
   );
 }

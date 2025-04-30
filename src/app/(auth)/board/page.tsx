@@ -7,7 +7,8 @@ import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 
 export default async function BoardPage() {
   const { teamId } = await auth();
-  const initialTeamData = await getTeam(teamId);
+  // TODO: Revert to "aspa" to teamId
+  const initialTeamData = await getTeam("aspa");
 
   return (
     <NormalLayout title="Board">

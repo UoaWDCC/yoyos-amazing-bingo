@@ -27,8 +27,9 @@ export function LoginForm() {
         className="flex w-full items-center justify-center"
         type="submit"
         disabled={isPending}
+        isLoading={isPending}
       >
-        {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : "Enter"}
+        Enter
       </Button>
     </form>
   );
