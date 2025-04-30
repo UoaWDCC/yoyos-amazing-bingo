@@ -15,6 +15,10 @@ const envSchema = z.object({
   COOKIE_SECRET: z
     .string({ message: "COOKIE_SECRET must be a string" })
     .min(32, "COOKIE_SECRET must be at least 32 characters long"),
+  ADMIN_ID: z.string({ message: "ADMIN_ID must be a string" }).trim(),
+  ADMIN_CODE: z.string().length(6, {
+    message: "ADMIN_CODE must be exactly 6 characters long",
+  }),
 });
 export type Env = z.infer<typeof envSchema>;
 

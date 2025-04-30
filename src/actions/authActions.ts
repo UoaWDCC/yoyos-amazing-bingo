@@ -5,7 +5,8 @@ import "server-only";
 import { redirect } from "next/navigation";
 
 import { getSession } from "@/lib/auth";
-import { getTeamByCode } from "@/services/old/teamServices";
+import env from "@/lib/env";
+import { getTeamByCode } from "@/services/getTeamByCodeService";
 
 type SignInState = {
   error?: string;
@@ -36,16 +37,21 @@ export async function signIn(
     };
   }
 
-  const team = await getTeamByCode(code.toString().toLowerCase());
-
-  if (!team) {
-    return {
-      error: "Invalid team code",
-    };
+  let teamId;
+  if (code === env.ADMIN_CODE) {
+    teamId = env.ADMIN_ID;
+  } else {
+    const team = await getTeamByCode(code.toString());
+    if (!team) {
+      return {
+        error: "Invalid team code",
+      };
+    }
+    teamId = team.id;
   }
 
   const session = await getSession();
-  session.teamId = team.id;
+  session.teamId = teamId;
   await session.save();
 
   return redirect("/");

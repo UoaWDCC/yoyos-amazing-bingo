@@ -4,30 +4,41 @@ import "server-only";
 
 import { auth } from "@/actions/authActions";
 import { sendInvalidationCodes } from "@/revalidation/sendInvalidationCode";
-import { completeActivityAndUpdateBoard } from "@/services/activityServices";
+import { completeTeamActivity } from "@/services/completeActivityService";
+import { getActivityById } from "@/services/getActivityByIdService";
 
 /**
  * Complete the activity for a given team auth code and activity ID.
  *
  * @param activityId Activity ID to complete.
- * @param answer The 6-character answer code to validate.
+ * @param activityCode The 6-character answer code to validate.
  */
-export async function completeActivity(
+export async function completeActivityAction(
   activityId: string,
-  answer: string,
+  activityCode: string,
 ): Promise<void> {
   const { teamId } = await auth();
+
   if (!teamId) {
-    throw new Error("Unauthorized");
+    throw new Error("Unauthenticated");
   }
 
-  if (!answer || answer.length !== 6) {
-    throw new Error("Invalid answer format");
+  if (!activityCode || activityCode.length !== 6) {
+    throw new Error("Incorrect activity code");
   }
 
-  await completeActivityAndUpdateBoard({ teamId, activityId, answer });
+  const correctCode = (await getActivityById(activityId)).code;
+  if (correctCode !== activityCode) {
+    console.log(
+      `Team ${teamId} made incorrect attempt ${activityCode} for activity ${activityId}`,
+    );
+    throw new Error("Incorrect activity code");
+  }
 
-  //TODO: Send invalidation codes
+  console.log(`Team ${teamId} completed activity ${activityId}`);
+  await completeTeamActivity(teamId, activityId);
+
+  // TODO: Send invalidation codes
   sendInvalidationCodes([
     `getBoard/${teamId}`,
     `getTeam/${teamId}`,

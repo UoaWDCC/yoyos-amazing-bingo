@@ -35,7 +35,7 @@ export const teamActivitiesTable = pgTable(
   {
     teamId: varchar("team_id", { length: 255 }).notNull(),
     activityId: varchar("activity_id", { length: 255 }).notNull(),
-    completed: boolean().notNull().default(false),
+    isCompleted: boolean("is_completed").notNull().default(false),
   },
   (table) => [primaryKey({ columns: [table.teamId, table.activityId] })],
 );

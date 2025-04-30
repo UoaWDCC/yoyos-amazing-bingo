@@ -11,7 +11,6 @@ import { ActivitySchema } from "./Activity";
 export const TeamActivitySchema = z.object({
   activity: ActivitySchema,
   isCompleted: z.boolean(),
-  points: z.number(),
 });
 
 export type TeamActivity = z.infer<typeof TeamActivitySchema>;
