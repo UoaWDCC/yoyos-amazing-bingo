@@ -14,14 +14,14 @@ import {
 export const teamsTable = pgTable("teams", {
   id: varchar({ length: 255 }).primaryKey(),
   name: varchar({ length: 255 }).notNull(),
-  code: varchar({ length: 6 }).notNull(),
+  code: varchar({ length: 6 }).notNull().unique(),
 });
 
 /** Global activities (e.g. description etc) */
 export const activitiesTable = pgTable("activities", {
   id: varchar({ length: 255 }).primaryKey(),
   name: varchar({ length: 255 }).notNull(),
-  code: varchar({ length: 255 }).notNull(),
+  code: varchar({ length: 255 }).notNull().unique(),
   description: text().notNull(),
   basePoints: integer().notNull().default(1),
   boardOrder: integer("board_order").notNull(),
@@ -56,9 +56,12 @@ export const teamActivitiesRelations = relations(
 );
 
 export const teamsRelations = relations(teamsTable, ({ many }) => ({
-  teamActivities: many(teamActivitiesTable),
+  teamActivity: many(teamActivitiesTable),
 }));
 
-export const activitiesRelations = relations(activitiesTable, ({ many }) => ({
-  teamActivities: many(teamActivitiesTable),
-}));
+export const activitiesRelations = relations(
+  activitiesTable,
+  ({ many }) => ({
+    teamActivity: many(teamActivitiesTable),
+  }),
+);
