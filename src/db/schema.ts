@@ -56,9 +56,9 @@ export const teamActivitiesRelations = relations(
 );
 
 export const teamsRelations = relations(teamsTable, ({ many }) => ({
-    teamActivities: many(teamActivitiesTable),
+  teamActivities: many(teamActivitiesTable),
 }));
 
 export const activitiesRelations = relations(activitiesTable, ({ many }) => ({
-    teamActivities: many(teamActivitiesTable),
+  teamActivities: many(teamActivitiesTable),
 }));
