@@ -5,7 +5,7 @@ import "server-only";
 import { Team } from "@/models/Team";
 import { getTeamById } from "@/services/getTeamByIdService";
 
-import { auth } from "./authActions";
+import { auth, signOut } from "./authActions";
 
 /**
  * Fetches the team info for a given team ID.
@@ -15,8 +15,13 @@ import { auth } from "./authActions";
  */
 export async function getTeamAction(teamId: string): Promise<Team> {
   const { teamId: sessionTeamId } = await auth();
-  if (sessionTeamId !== teamId && sessionTeamId !== process.env.ADMIN_ID) {
-    throw new Error("Unauthorized");
+  console.log(teamId, sessionTeamId);
+
+  if (
+    !sessionTeamId ||
+    (sessionTeamId !== teamId && sessionTeamId !== process.env.ADMIN_ID)
+  ) {
+    return signOut();
   }
 
   const team = await getTeamById(teamId);

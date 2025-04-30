@@ -6,11 +6,11 @@ import logo from "@/assets/logo.svg";
 import { LoginForm } from "@/components/login-form";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 
-export default async function CodePage() {
+export default async function LoginPage() {
   const { teamId } = await auth();
 
   if (teamId) {
-    return redirect("/");
+    return redirect("/board");
   }
 
   return (
@@ -23,9 +23,7 @@ export default async function CodePage() {
           className="object-contain"
         />
       </div>
-      {}
       <LoginForm />
-
       <div />
     </NormalLayout>
   );

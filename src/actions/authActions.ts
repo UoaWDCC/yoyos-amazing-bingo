@@ -15,7 +15,7 @@ type SignInState = {
 
 type Auth = {
   error?: string;
-  teamId: string;
+  teamId: string | null;
 };
 
 /**
@@ -54,7 +54,7 @@ export async function signIn(
   session.teamId = teamId;
   await session.save();
 
-  return redirect("/");
+  return redirect("/board");
 }
 
 /**
@@ -66,25 +66,12 @@ export async function auth(): Promise<Auth> {
   const teamId = session.teamId;
 
   if (!teamId) {
-    return { teamId: "Unauthorized", error: "Unauthorized" };
+    return { teamId: null, error: "Unauthorized" };
   }
 
   return {
     teamId,
   };
-}
-
-/**
- * Protect the route
- * @returns Redirect to the code page if the user is not authenticated
- */
-export async function protect() {
-  try {
-    await auth();
-  } catch (error: unknown) {
-    console.error("Unauthorized", error);
-    return redirect("/code");
-  }
 }
 
 /**
@@ -94,6 +81,5 @@ export async function protect() {
 export async function signOut() {
   const session = await getSession();
   session.destroy();
-
-  return redirect("/code");
+  return redirect("/");
 }

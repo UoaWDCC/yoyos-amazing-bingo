@@ -6,7 +6,7 @@ import "server-only";
 
 import { updateTeamName } from "@/services/updateTeamNameService";
 
-import { auth } from "./authActions";
+import { auth, signOut } from "./authActions";
 
 /**
  * Allow a team to update itself. Currently, this only allows the team to update its name.
@@ -15,8 +15,11 @@ import { auth } from "./authActions";
  */
 export async function updateTeamAction(team: Team): Promise<void> {
   const { teamId: sessionTeamId } = await auth();
-  if (sessionTeamId !== team.id && sessionTeamId !== process.env.ADMIN_ID) {
-    throw new Error("Unauthorized");
+  if (
+    !sessionTeamId ||
+    (sessionTeamId !== team.id && sessionTeamId !== process.env.ADMIN_ID)
+  ) {
+    return signOut();
   }
 
   await updateTeamName(team.id, team.name);
