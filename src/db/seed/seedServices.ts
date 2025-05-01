@@ -1,6 +1,7 @@
+import random from "random-string-generator";
+
 import { db } from "@/db/connection";
 import { activitiesTable, teamActivitiesTable, teamsTable } from "@/db/schema";
-import random from "random-string-generator";
 
 export async function generateAllActivities(
   activities: (typeof activitiesTable.$inferInsert)[],
@@ -65,5 +66,5 @@ export async function generateTeamActivitiesTable(
 }
 
 export function generateRandomCode() {
-  return random(6, 'alphanumeric');
+  return random(6, "alphanumeric");
 }

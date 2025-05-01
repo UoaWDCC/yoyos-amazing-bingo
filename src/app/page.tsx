@@ -1,7 +1,5 @@
 import Image from "next/image";
-import { redirect } from "next/navigation";
 
-import { auth } from "@/actions/authActions";
 import logo from "@/assets/logo.svg";
 import { LoginForm } from "@/components/login-form";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
