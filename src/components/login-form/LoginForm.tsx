@@ -1,13 +1,17 @@
 "use client";
 
 import { useActionState } from "react";
+import { redirect } from "next/navigation";
 
-import { signIn } from "@/actions/auth";
+import { signIn } from "@/actions/authActions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export function LoginForm() {
   const [state, action, isPending] = useActionState(signIn, null);
+  if (state?.success) {
+    return redirect("/board");
+  }
 
   return (
     <form action={action} className="flex flex-col justify-between gap-6">

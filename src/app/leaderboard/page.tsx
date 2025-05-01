@@ -1,28 +1,20 @@
 import Image from "next/image";
 
-import { getAllTeams } from "@/actions/getAllTeams";
+import { auth } from "@/actions/authActions";
+import { getAllTeamsAction } from "@/actions/getAllTeamsAction";
 import Back from "@/components/ui/back/Back";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 import { Pill } from "@/components/ui/pill";
 import PixelArrowL from "@/components/ui/svg/PixelArrowL";
-import { Team } from "@/models/Team";
 
 import headingPic from "./_assets/headingPicture.png";
 import LeaderboardListItem from "./_components/LeaderboardListItem";
 
 export default async function Leaderboard() {
-  // const { teamId } = await auth();
-  const teamId = "1";
-  const teams: Team[] = Array.from({ length: 15 }).map((_, i) => ({
-    name: `team ${i}`,
-    id: i.toString(),
-    code: i.toString(),
-    points: i + Math.floor(Math.random() * 50),
-  }));
+  const { teamId } = await auth();
+  const teams = await getAllTeamsAction(); // Won't include top 5 if not admin
 
   teams.sort((a, b) => b.points - a.points);
-
-  const isTopFive = teams.slice(0, 5).some((team) => team.id === teamId);
 
   /*
   TODO logic to sort teams by points before passing into LeaderboardListItem
@@ -43,7 +35,7 @@ export default async function Leaderboard() {
             height={240}
           />
         </div>
-        {isTopFive && (
+        {teams && (
           <div className="flex w-full items-center justify-center gap-4">
             <PixelArrowL className="rotate-180 animate-[arrow-left_1s_infinite_ease-in-out]" />
             <Pill variant="gold">You&apos;re in the top 5!</Pill>

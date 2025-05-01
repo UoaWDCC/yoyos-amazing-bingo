@@ -25,7 +25,7 @@ app.prepare().then(async () => {
   // causes some issues with env validation, think its to do with
   // the way the server is bundled
   // maybe someone can figure out why and fix it?
-  await import("@/lib/ws").then(({ initWebSocketServer }) => {
+  await import("@/revalidation/ws").then(({ initWebSocketServer }) => {
     initWebSocketServer(httpServer);
   });
 

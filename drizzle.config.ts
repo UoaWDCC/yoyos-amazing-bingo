@@ -1,4 +1,4 @@
-import env from "@/utils/env";
+import env from "@/lib/env";
 
 import "dotenv/config";
 

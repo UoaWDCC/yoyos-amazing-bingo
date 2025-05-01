@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes } from "react";
 import { cva, VariantProps } from "class-variance-authority";
 import { LoaderCircle } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 
 const button = cva(
   "py-3 text-center flex items-center justify-center w-full px-4 cursor-pointer whitespace-nowrap disabled:opacity-50",

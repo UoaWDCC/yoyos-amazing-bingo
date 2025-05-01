@@ -1,7 +1,7 @@
 import { HTMLAttributes } from "react";
 import { cva, VariantProps } from "class-variance-authority";
 
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 
 const pill = cva(
   "py-1 flex gap-base text-center w-min whitespace-nowrap px-4 rounded-full select-none",

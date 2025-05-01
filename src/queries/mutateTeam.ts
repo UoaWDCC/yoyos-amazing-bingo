@@ -1,11 +1,11 @@
 import { mutate } from "swr";
 
-import { updateTeam } from "@/actions/updateTeam";
+import { updateTeamAction } from "@/actions/updateTeamNameAction";
 import { Team } from "@/models/Team";
 
 /** @see updateTeam */
 export default async function mutateTeam(team: Team) {
-  await updateTeam(team);
+  await updateTeamAction(team);
 
   // Invalidate the cache for the team and all teams
   mutate(`getTeam/${team.id}`);
