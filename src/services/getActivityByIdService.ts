@@ -15,5 +15,9 @@ export const getActivityById = async (activityId: string) => {
   }
 
   const activity: Activity = rawActivity;
-  return parseZod(ActivitySchema, activity);
+  return parseZod(
+    ActivitySchema,
+    activity,
+    "services/getActivityByIdService.ts",
+  );
 };

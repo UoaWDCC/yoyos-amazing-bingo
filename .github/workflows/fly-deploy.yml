@@ -21,5 +21,7 @@ jobs:
           --build-secret DB_URL=${{ secrets.DB_URL }} \
           --build-secret COOKIE_SECRET=${{ secrets.COOKIE_SECRET }} \
           --build-secret APP_URL=${{ secrets.APP_URL }} \
+          --build-secret ADMIN_ID=${{ secrets.ADMIN_ID }} \
+          --build-secret ADMIN_CODE=${{ secrets.ADMIN_CODE }} \
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}

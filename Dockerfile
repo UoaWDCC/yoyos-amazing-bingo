@@ -35,9 +35,13 @@ COPY . .
 RUN --mount=type=secret,id=DB_URL \
     --mount=type=secret,id=COOKIE_SECRET \
     --mount=type=secret,id=APP_URL \
+    --mount=type=secret,id=ADMIN_ID \
+    --mount=type=secret,id=ADMIN_CODE \
     DB_URL="$(cat /run/secrets/DB_URL)" \
     COOKIE_SECRET="$(cat /run/secrets/COOKIE_SECRET)" \
     APP_URL="$(cat /run/secrets/APP_URL)" \
+    ADMIN_ID="$(cat /run/secrets/ADMIN_ID)" \
+    ADMIN_CODE="$(cat /run/secrets/ADMIN_CODE)" \
     pnpm run build
 
 # Remove development dependencies

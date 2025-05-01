@@ -15,6 +15,7 @@ export function parseZod<T>(
         console.error(err.message);
       });
     }
+    console.log(error);
     throw error;
   }
 }

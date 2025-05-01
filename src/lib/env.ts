@@ -8,6 +8,13 @@ import { z } from "zod";
 
 import { parseZod } from "./zod";
 
+// Node.js check
+if (typeof window !== "undefined") {
+  throw new Error(
+    "env.ts should only be used in Node.js environment, not in the browser"
+  );
+}
+
 // .env schema
 const envSchema = z.object({
   APP_URL: z.string({ message: "APP_URL must be a string" }).url().trim(),

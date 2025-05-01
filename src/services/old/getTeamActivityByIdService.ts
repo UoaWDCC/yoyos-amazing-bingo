@@ -28,5 +28,9 @@ export const getTeamActivity = async (teamId: string, activityId: string) => {
   const rawTeamActivity = teamActivityAndActivityRows[0].team_activities;
   const activity = teamActivityAndActivityRows[0].activities;
   const teamActivity: TeamActivity = { ...rawTeamActivity, activity };
-  return parseZod(TeamActivitySchema, teamActivity);
+  return parseZod(
+    TeamActivitySchema,
+    teamActivity,
+    "services/old/getTeamActivityByIdService.ts",
+  );
 };

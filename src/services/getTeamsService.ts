@@ -80,5 +80,5 @@ export async function getAllTeams(): Promise<Team[]> {
     );
   }
 
-  return parseZod(z.array(TeamSchema), teams);
+  return parseZod(z.array(TeamSchema), teams, "services/getTeamsService.ts");
 }

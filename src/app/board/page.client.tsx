@@ -12,16 +12,18 @@ import { redirect } from "next/navigation";
 type BoardClientPageProps = {
   teamId: string;
   initialTeamData: Team;
+  adminId: string;
 };
 
 export default function BoardClientPage({
   teamId,
   initialTeamData,
+  adminId,
 }: BoardClientPageProps) {
   if (!teamId) {
     redirect("/");
   }
-  if (teamId === env.ADMIN_ID) {
+  if (teamId === adminId) {
     redirect("/leaderboard");
   }
 

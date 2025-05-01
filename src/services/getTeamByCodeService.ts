@@ -27,5 +27,5 @@ export const getTeamByCode = async (code: string): Promise<Team> => {
 
   const team = assembleTeams(rows);
 
-  return parseZod(TeamSchema, team);
+  return parseZod(TeamSchema, team, "services/getTeamByCodeService.ts");
 };
