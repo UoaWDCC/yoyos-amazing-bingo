@@ -3,20 +3,21 @@ import "@/components/ui/drawer";
 import Link from "next/link";
 import { Crown } from "lucide-react";
 
-import BoardClientPage from "@/app/(auth)/board/page.client";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 import { Pill } from "@/components/ui/pill";
 import CardStack from "@/components/ui/svg/CardStack";
+import { BingoBoard } from "./_components/BingoBoard";
+import { auth } from "@/actions/authActions";
 
 export default async function BoardPage() {
-  // const { teamId } = await auth();
+  const { teamId } = await auth(); // Retrieve the teamId from authentication
   // TODO: Revert to "aspa" to teamId
   // const initialTeamData = await getTeam("aspa");
 
   return (
     <NormalLayout title="Board">
       <div className="flex flex-col gap-8">
-        <BoardClientPage />
+        <BingoBoard teamId={teamId} />
       </div>
       <div className="flex w-full justify-center gap-4">
         <Link href="/leaderboard">

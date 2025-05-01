@@ -2,16 +2,10 @@
 
 import { useMemo } from "react";
 
-
-
 import { ActivityDrawer } from "@/app/board-old/_components/ActivityDrawer";
 
-
-
-
-
 type BingoBoardProps = {
-  teamId?: string;
+  teamId: string;
 };
 
 export function BingoBoard({ teamId }: BingoBoardProps) {

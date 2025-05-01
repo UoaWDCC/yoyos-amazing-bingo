@@ -1,6 +1,6 @@
 import { Pill } from "@/components/ui/pill";
 import PixelArrowL from "@/components/ui/svg/PixelArrowL";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/cn";
 
 type LeaderBoardItemProps = {
   name: string;
