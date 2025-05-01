@@ -11,6 +11,9 @@ const pill = cva(
         solid: "bg-pill text-foreground",
         brand: "bg-pill-blue text-white",
       },
+      size: {
+        large: "px-6 py-2",
+      },
     },
     defaultVariants: {
       variant: "solid",
@@ -20,15 +23,17 @@ const pill = cva(
 
 type PillVariants = VariantProps<typeof pill>;
 type Variant = PillVariants["variant"];
+type Size = PillVariants["size"];
 
 type PillProps = {
   className?: string;
   variant?: Variant;
+  size?: Size;
 } & HTMLAttributes<HTMLDivElement>;
 
-const Pill = ({ variant, ...props }: PillProps) => {
+const Pill = ({ variant, size, ...props }: PillProps) => {
   return (
-    <div {...props} className={cn(pill({ variant }), props.className)}>
+    <div {...props} className={cn(pill({ variant, size }), props.className)}>
       {props.children}
     </div>
   );

@@ -42,6 +42,10 @@ const ActivityDrawer = ({ square }: ActivityDrawerProps) => {
     }
   };
 
+  if (square.completed) {
+    return <Pokeball variant="completed" />;
+  }
+
   return (
     <Drawer
       key={`${square.activity.x}-${square.activity.y}`}
@@ -60,6 +64,7 @@ const ActivityDrawer = ({ square }: ActivityDrawerProps) => {
         />
       </DrawerTrigger>
       <DrawerContent>
+        <div className="bg-pill-blue absolute bottom-0 left-1/2 -z-10 size-64 -translate-x-1/2 translate-y-1/2 rounded-full blur-3xl"></div>
         <DrawerHeader>
           {/* required for screen reader */}
           <DialogTitle hidden>{square.activity.name || ""}</DialogTitle>

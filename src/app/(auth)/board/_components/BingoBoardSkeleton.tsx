@@ -1,4 +1,4 @@
-import { Pokeball } from "@/components/ui/pokeball/Pokeball";
+import Darkball from "@/app/collect/_components/Darkball";
 
 export function BingoBoardSkeleton() {
   // Create a 4x4 grid of skeleton squares
@@ -9,7 +9,7 @@ export function BingoBoardSkeleton() {
           key={index}
           className="bg-secondary/50 flex aspect-square w-full animate-pulse flex-col items-center justify-center rounded-lg"
         >
-          <Pokeball variant="completed" />
+          <Darkball className="aspect-square h-min w-full" />
         </div>
       ))}
     </div>

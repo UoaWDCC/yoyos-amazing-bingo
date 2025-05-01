@@ -3,17 +3,30 @@
 import { useMemo } from "react";
 
 import { useRevalidationSocket } from "@/hooks/useRevalidationSocket";
-import useGetBoard from "@/queries/useGetBoard";
 
 import { ActivityDrawer } from "./ActivityDrawer";
 import { BingoBoardSkeleton } from "./BingoBoardSkeleton";
 
 type BingoBoardProps = {
-  teamId: string;
+  teamId?: string;
 };
 
-export function BingoBoard({ teamId }: BingoBoardProps) {
-  const { data: squares, isLoading } = useGetBoard(teamId);
+export function BingoBoard() {
+  // const { data: squares, isLoading } = useGetBoard(teamId);
+
+  // mock data
+  const squares = Array.from({ length: 16 }).map((_, index) => ({
+    completed: Math.random() > 0.8,
+    points: 1 + Math.floor(Math.random() * 3),
+    activity: {
+      id: `${index}`,
+      name: `Activity ${index}`,
+      description: `Description ${index}`,
+      x: index % 4,
+      y: Math.floor(index / 4),
+    },
+  }));
+
   useRevalidationSocket({
     onInvalidation: (codes) => {
       console.log("Invalidation codes", codes);
@@ -29,9 +42,9 @@ export function BingoBoard({ teamId }: BingoBoardProps) {
     });
   }, [squares]);
 
-  if (isLoading || !sortedSquares) {
-    return <BingoBoardSkeleton />;
-  }
+  // if (isLoading || !sortedSquares) {
+  //   return <BingoBoardSkeleton />;
+  // }
 
   return (
     <div className="grid grid-cols-4 gap-2 px-8">
