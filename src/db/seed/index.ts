@@ -9,6 +9,7 @@ import {
 import {
   generateAllActivities,
   generateAllTeams,
+  generateRandomCode,
   generateTeamActivitiesTable,
 } from "@/db/seed/seedServices";
 
@@ -29,113 +30,114 @@ async function main() {
   const activities: (typeof activitiesTable.$inferInsert)[] = [];
   for (let i: number = 0; i < 16; i++) {
     const index = i.toString();
+    const id = String(index).padStart(2, "0");
     activities.push({
-      id: `activity-${index}`,
+      id,
       name: `Activity ${index}`,
-      code: `${index}`,
+      code: generateRandomCode(),
       description: `Description for activity-${index}`,
       boardOrder: i,
       basePoints: 1,
-      cardImageName: "",
+      cardImageName: `${id}-img.png`,
     });
   }
 
   const teams: (typeof teamsTable.$inferInsert)[] = [
     {
+      id: "volu",
+      name: "Volunteers",
+      code: generateRandomCode(),
+      specialActivity: 0,
+    },
+    {
       id: "esports",
       name: "Esports",
-      code: "code-1",
+      code: generateRandomCode(),
       specialActivity: 1,
     },
     {
       id: "esa",
       name: "ESA",
-      code: "code-2",
+      code: generateRandomCode(),
       specialActivity: 2,
     },
     {
       id: "reng",
       name: "Rainbow Engineering",
-      code: "code-3",
+      code: generateRandomCode(),
       specialActivity: 3,
     },
     {
       id: "uabc",
       name: "UABC",
-      code: "code-4",
+      code: generateRandomCode(),
       specialActivity: 4,
     },
     {
       id: "ausa",
       name: "AUSA",
-      code: "code-5",
+      code: generateRandomCode(),
       specialActivity: 5,
     },
     {
       id: "ausco",
       name: "AUSCO",
-      code: "code-6",
+      code: generateRandomCode(),
       specialActivity: 6,
     },
     {
       id: "vps",
       name: "VPS",
-      code: "code-7",
+      code: generateRandomCode(),
       specialActivity: 7,
     },
     {
       id: "aspa",
       name: "ASPA",
-      code: "code-8",
+      code: generateRandomCode(),
       specialActivity: 8,
     },
     {
       id: "aucc",
       name: "AUCC",
-      code: "code-9",
+      code: generateRandomCode(),
       specialActivity: 9,
     },
     {
       id: "fsae",
       name: "FSAE",
-      code: "code10",
+      code: generateRandomCode(),
       specialActivity: 10,
     },
     {
       id: "motorsports",
       name: "Motorsports",
-      code: "code11",
+      code: generateRandomCode(),
       specialActivity: 11,
     },
     {
       id: "tansa",
       name: "TANSA",
-      code: "code12",
+      code: generateRandomCode(),
       specialActivity: 12,
     },
     {
       id: "uaic",
       name: "UAIC",
-      code: "code13",
+      code: generateRandomCode(),
       specialActivity: 13,
     },
     {
       id: "medr",
       name: "Med Revue",
-      code: "code14",
+      code: generateRandomCode(),
       specialActivity: 14,
     },
     {
       id: "hidd",
       name: "Hidden Treasures",
-      code: "code15",
+      code: generateRandomCode(),
       specialActivity: 15,
-    },
-    {
-      id: "volu",
-      name: "Volunteers",
-      code: "code16",
-      specialActivity: 16,
     },
   ];
 

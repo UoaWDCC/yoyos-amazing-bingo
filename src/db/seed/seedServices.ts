@@ -1,5 +1,6 @@
 import { db } from "@/db/connection";
 import { activitiesTable, teamActivitiesTable, teamsTable } from "@/db/schema";
+import random from "random-string-generator";
 
 export async function generateAllActivities(
   activities: (typeof activitiesTable.$inferInsert)[],
@@ -52,7 +53,7 @@ export async function generateTeamActivitiesTable(
     const nestedPromises = activityIds.map((activityId: string) => {
       return db.insert(teamActivitiesTable).values({
         teamId,
-        completed: false,
+        isCompleted: false,
         activityId,
       });
     });
@@ -61,4 +62,8 @@ export async function generateTeamActivitiesTable(
 
   await Promise.all(promises);
   console.log("generating teamActivities table");
+}
+
+export function generateRandomCode() {
+  return random(6, 'alphanumeric');
 }

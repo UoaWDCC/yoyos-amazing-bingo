@@ -12,7 +12,7 @@ export const ActivitySchema = z.object(
     code: CodeSchema,
     cardImageName: z.string().nonempty({
       message: "Activity card image name must be a non-empty string",
-    }), // The URL of the card image for the activity
+    }), // The name of the card image for the activity, to be resolved on the frontend
     description: z.string({ message: "Activity description must be a string" }),
     basePoints: z.number().int().min(0, {
       message: "Activity base points must be a non-negative integer",

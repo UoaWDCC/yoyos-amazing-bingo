@@ -135,6 +135,9 @@ importers:
       prettier-plugin-tailwindcss:
         specifier: ^0.6.11
         version: 0.6.11(@ianvs/prettier-plugin-sort-imports@4.4.1(prettier@3.5.3))(prettier@3.5.3)
+      random-string-generator:
+        specifier: ^1.0.7
+        version: 1.0.7
       stdio:
         specifier: ^2.1.3
         version: 2.1.3
@@ -2591,6 +2594,9 @@ packages:
 
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
+
+  random-string-generator@1.0.7:
+    resolution: {integrity: sha512-Nypoclbe9hWE2TUy8z4TtncLdBYHGOnaywkJ3gWp2zNpCbhuDQ1oc0fYdzet5a7hOoisGYvcDN8lzrc+O8MWaw==}
 
   react-dom@19.1.0:
     resolution: {integrity: sha512-Xs1hdnE+DyKgeHJeJznQmYMIBG3TKIHJJT95Q58nHLSrElKlGQqDTR2HQ9fx5CN/Gk6Vh/kupBTDLU11/nDk/g==}
@@ -5406,6 +5412,8 @@ snapshots:
   punycode@2.3.1: {}
 
   queue-microtask@1.2.3: {}
+
+  random-string-generator@1.0.7: {}
 
   react-dom@19.1.0(react@19.1.0):
     dependencies:
