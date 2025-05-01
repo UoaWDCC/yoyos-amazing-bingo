@@ -6,7 +6,6 @@ import { redirect } from "next/navigation";
 
 import { BingoBoard } from "@/app/board/_components/BingoBoard";
 import { Pill } from "@/components/ui/pill";
-import env from "@/lib/env";
 import { Team } from "@/models/Team";
 import useGetTeam from "@/queries/useGetTeam";
 

@@ -6,7 +6,6 @@ import { redirect } from "next/navigation";
 
 import { getSession } from "@/lib/auth";
 import env from "@/lib/env";
-import { getTeamByCode } from "@/services/getTeamByCodeService";
 
 type SignInState = {
   error?: string;

@@ -5,6 +5,7 @@ import { parseZod } from "@/lib/zod";
 import { Team, TeamSchema } from "@/models/Team";
 
 export async function getAllTeams(): Promise<Team[]> {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const rawTeams = await db.query.teamsTable.findMany();
 
   const teams: Team[] = []; // TODO: get teams correctly

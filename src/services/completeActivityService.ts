@@ -9,7 +9,7 @@ export const completeTeamActivity = async (
 ): Promise<void> => {
   await db
     .update(teamActivitiesTable)
-    .set({ completed: true })
+    .set({ isCompleted: true })
     .where(
       and(
         eq(teamActivitiesTable.teamId, teamId),
@@ -24,6 +24,7 @@ export const completeTeamActivity = async (
  * @param activityId The ID of the activity to complete
  * @param answer The answer to the activity
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 async function completeActivityAndUpdateBoard({
   teamId,
   activityId,
