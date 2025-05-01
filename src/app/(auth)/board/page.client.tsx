@@ -14,12 +14,10 @@ export default function BoardClientPage() {
         {/* <Pill>{team.points}pts</Pill> */}
       </div>
       <BingoBoard />
-      <div className="flex w-full justify-center gap-2">
-        <>
+      {/* <div className="flex w-full justify-center gap-2">
           <Pill>4</Pill>
           <Pill>Webster&apos;s groceries</Pill>
-        </>
-      </div>
+      </div> */}
     </>
   );
 }

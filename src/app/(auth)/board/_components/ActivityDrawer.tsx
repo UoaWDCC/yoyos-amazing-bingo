@@ -21,9 +21,10 @@ import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
 
 export type ActivityDrawerProps = {
   square: Square;
+  index: number;
 };
 
-const ActivityDrawer = ({ square }: ActivityDrawerProps) => {
+const ActivityDrawer = ({ square, index }: ActivityDrawerProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [error, setError] = useState("");
   const { completeActivity, isSubmitting } = useCompleteActivityMutation();
@@ -55,12 +56,20 @@ const ActivityDrawer = ({ square }: ActivityDrawerProps) => {
       open={isDrawerOpen}
     >
       <DrawerTrigger disabled={square.completed}>
-        <Pokeball
-          variant={
-            square.completed ? "completed" : pokeDifficulty[square.points]
-          }
-          className={cn("cursor-pointer", square.completed && "cursor-default")}
-        />
+        <div className="relative">
+          <Pokeball
+            variant={
+              square.completed ? "completed" : pokeDifficulty[square.points]
+            }
+            className={cn(
+              "cursor-pointer",
+              square.completed && "cursor-default",
+            )}
+          />
+          <p className="bg-pill absolute right-0 bottom-0 rounded px-2 py-1 text-xs font-bold">
+            {index + 1}
+          </p>
+        </div>
       </DrawerTrigger>
       <DrawerContent>
         <div className="bg-pill-blue absolute bottom-0 left-1/2 -z-10 size-64 -translate-x-1/2 translate-y-1/2 rounded-full blur-3xl"></div>
