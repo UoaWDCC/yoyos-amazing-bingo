@@ -1,5 +1,3 @@
-import { parseZod } from "@/lib/zod";
-import { BoardSchema } from "@/models/Board";
 import { Team } from "@/models/Team";
 
 type rawTeam = {
@@ -25,31 +23,27 @@ type rawTeam = {
   };
 };
 
+/** Takes a list of rawTeams (a join) and assembles a Team domain object from it. */
 export const assembleTeams = (rawTeams: rawTeam[]): Team => {
-  const { teams } = rawTeams[0];
+  // Since this is a join, all rows will have the same team
+  const team = rawTeams[0].teams;
 
   // Build the board
-  const unSortedBoard = rawTeams.map((row) => ({
-    isCompleted: row.team_activities.isCompleted,
-    points: row.activities.basePoints,
-    activity: row.activities,
-  }));
-
-  const board = unSortedBoard.sort(
-    (a, b) => a.activity.boardOrder - b.activity.boardOrder,
-  );
+  const board = rawTeams
+    .map((row) => ({
+      isCompleted: row.team_activities.isCompleted,
+      activity: row.activities,
+    }))
+    .sort((a, b) => a.activity.boardOrder - b.activity.boardOrder);
 
   // Calculate points (e.g. sum of completed activity points)
-  const points = board
+  let points = board
     .filter((entry) => entry.isCompleted)
-    .reduce((sum, entry) => sum + entry.points, 0);
+    .reduce((sum, entry) => sum + entry.activity.basePoints, 0);
 
-  return {
-    id: teams.id,
-    code: teams.code,
-    name: teams.name,
-    points,
-    board: parseZod(BoardSchema, board),
-    specialActivity: teams.specialActivity,
-  };
+  if (board[team.specialActivity]?.isCompleted) {
+    points++; // Special activity gives +1 point
+  }
+
+  return { ...team, board, points };
 };

@@ -8,7 +8,8 @@ import { Team, TeamSchema } from "@/models/Team";
 import { assembleTeams } from "@/services/assembleTeam";
 
 export async function getAllTeams(): Promise<Team[]> {
-    const rows = await db
+  // Team <16-1> Team Activities <1-16> Activities (x16 teams)
+  const rows = await db
         .select()
         .from(teamsTable)
         .innerJoin(
@@ -35,7 +36,6 @@ export async function getAllTeams(): Promise<Team[]> {
 
     // Assemble each team
     const teams: Team[] = [];
-
     for (const group of groupedRows.values()) {
         const team = assembleTeams(group);
         teams.push(parseZod(TeamSchema, team));

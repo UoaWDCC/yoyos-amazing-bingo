@@ -7,6 +7,7 @@ import { Team, TeamSchema } from "@/models/Team";
 import { assembleTeams } from "@/services/assembleTeam";
 
 export const getTeamById = async (id: string): Promise<Team> => {
+  // Team <16-1> Team Activities <1-16> Activities
   const rows = await db
     .select()
     .from(teamsTable)
@@ -24,7 +25,6 @@ export const getTeamById = async (id: string): Promise<Team> => {
     throw new Error(`Team with id '${id}' not found`);
   }
 
-  const team = assembleTeams(rows);
-
+  const team: Team = assembleTeams(rows);
   return parseZod(TeamSchema, team, "services/getTeamByIdService.ts");
 };
