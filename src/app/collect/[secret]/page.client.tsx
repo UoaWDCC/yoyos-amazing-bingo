@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+import LoaderCircle from "@/components/ui/svg/LoaderCircle";
 
 import CardProvider from "../_components/Provider";
 import StateCardDisplay from "../_components/StateCardDisplay";
@@ -23,6 +24,7 @@ const mockdata = [
 ];
 
 export default function CollectClientPage({ secret }: { secret: string }) {
+  const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState<{
     title: string;
     imageIndex: number;
@@ -39,6 +41,7 @@ export default function CollectClientPage({ secret }: { secret: string }) {
           imageIndex: card.imageIndex,
         });
       }
+      setLoading(false);
     };
 
     fetchData();
@@ -72,6 +75,17 @@ export default function CollectClientPage({ secret }: { secret: string }) {
       }, 4000);
     }
   }, [isAnimating]);
+
+  if (isLoading) {
+    return (
+      <>
+        <div className="flex items-center justify-center">
+          <LoaderCircle className="size-6 animate-spin *:stroke-rose-500" />
+        </div>
+        <div></div>
+      </>
+    );
+  }
 
   if (!data) {
     return (

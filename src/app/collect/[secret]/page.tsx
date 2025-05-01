@@ -1,8 +1,12 @@
 import CollectClientPage from "@/app/collect/[secret]/page.client";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 
-export default function CollectPage() {
-  const secret = 'secret'; // TODO: get this from the URL
+export default async function CollectPage({
+  params,
+}: {
+  params: { secret: string };
+}) {
+  const { secret } = await params;
 
   return (
     <NormalLayout title="collect">

@@ -19,7 +19,7 @@ export function LoginForm() {
 
       <Input
         name="code"
-        placeholder="ABCD-EFGH"
+        placeholder="ABC123"
         className="w-full"
         error={state?.error}
         autoFocus
