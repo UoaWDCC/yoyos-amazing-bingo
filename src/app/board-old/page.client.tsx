@@ -4,7 +4,7 @@ import "@/components/ui/drawer";
 
 import { redirect } from "next/navigation";
 
-import { BingoBoard } from "@/app/board/_components/BingoBoard";
+import { BingoBoard } from "@/app/board-old/_components/BingoBoard";
 import { Team } from "@/models/Team";
 
 type BoardClientPageProps = {

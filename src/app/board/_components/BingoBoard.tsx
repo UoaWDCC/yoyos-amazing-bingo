@@ -2,29 +2,54 @@
 
 import { useMemo } from "react";
 
-import { Board } from "@/models/Board";
 
-import { ActivityDrawer } from "./ActivityDrawer";
-import { BingoBoardSkeleton } from "./BingoBoardSkeleton";
+
+import { ActivityDrawer } from "@/app/board-old/_components/ActivityDrawer";
+
+
+
+
 
 type BingoBoardProps = {
-  board?: Board;
-  isLoading?: boolean;
+  teamId?: string;
 };
 
-export function BingoBoard({ board, isLoading }: BingoBoardProps) {
-  const sortedSquares = useMemo(() => {
-    return board?.sort((a, b) => a.activity.boardOrder - b.activity.boardOrder);
-  }, [board]);
+export function BingoBoard({ teamId }: BingoBoardProps) {
+  // mock data
+  const squares = Array.from({ length: 16 }).map((_, index) => ({
+    completed: Math.random() > 0.8,
+    points: 1 + Math.floor(Math.random() * 3),
+    activity: {
+      id: `${index}`,
+      name: `Activity ${index}`,
+      description: `Description ${index}`,
+      x: index % 4,
+      y: Math.floor(index / 4),
+    },
+  }));
 
-  if (isLoading || !sortedSquares) {
-    return <BingoBoardSkeleton />;
-  }
+  const sortedSquares = useMemo(() => {
+    return squares?.sort((a, b) => {
+      if (a.activity.y === b.activity.y) {
+        return a.activity.x - b.activity.x;
+      }
+      return a.activity.y - b.activity.y;
+    });
+  }, [squares]);
+
+  // TODO: add loading skeleton back
+  // if (isLoading || !sortedSquares) {
+  //   return <BingoBoardSkeleton />;
+  // }
 
   return (
     <div className="grid grid-cols-4 gap-2 px-8">
-      {sortedSquares.map((square) => (
-        <ActivityDrawer key={square.activity.boardOrder} square={square} />
+      {sortedSquares.map((square, index) => (
+        <ActivityDrawer
+          key={`${square.activity.x}-${square.activity.y}`}
+          square={square}
+          index={index}
+        />
       ))}
     </div>
   );

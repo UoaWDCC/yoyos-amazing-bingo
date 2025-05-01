@@ -1,33 +1,35 @@
 import "@/components/ui/drawer";
 
-import { redirect } from "next/navigation";
+import Link from "next/link";
+import { Crown } from "lucide-react";
 
-import { auth } from "@/actions/authActions";
-import { getTeamAction } from "@/actions/getTeamAction";
-import BoardClientPage from "@/app/board/page.client";
+import BoardClientPage from "@/app/(auth)/board/page.client";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
-import env from "@/lib/env";
+import { Pill } from "@/components/ui/pill";
+import CardStack from "@/components/ui/svg/CardStack";
 
 export default async function BoardPage() {
-  const { teamId } = await auth();
-  if (!teamId) {
-    return redirect("/");
-  }
-  const initialTeamData = await getTeamAction(teamId);
-  if (!initialTeamData) {
-    return redirect("/");
-  }
+  // const { teamId } = await auth();
+  // TODO: Revert to "aspa" to teamId
+  // const initialTeamData = await getTeam("aspa");
 
   return (
     <NormalLayout title="Board">
       <div className="flex flex-col gap-8">
-        <BoardClientPage
-          teamId={teamId}
-          initialTeamData={initialTeamData}
-          adminId={env.ADMIN_ID}
-        />
+        <BoardClientPage />
       </div>
-      <div />
+      <div className="flex w-full justify-center gap-4">
+        <Link href="/leaderboard">
+          <Pill size="large" variant="brand">
+            <Crown color="white" />
+          </Pill>
+        </Link>
+        <Link href="/collection">
+          <Pill size="large" variant="brand">
+            <CardStack />
+          </Pill>
+        </Link>
+      </div>
     </NormalLayout>
   );
 }
