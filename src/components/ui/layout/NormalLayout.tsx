@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 
 import Header from "./Header";
+import Yoyover from "./Yoyover";
 
 type LayoutProps = {
   children: ReactNode;
@@ -14,6 +15,7 @@ export const NormalLayout = (props: LayoutProps) => {
         <Header title={props.title} />
         {props.children}
       </div>
+      {false && <Yoyover />}
     </div>
   );
 };
