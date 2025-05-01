@@ -9,19 +9,22 @@ import { auth } from "@/actions/authActions";
 
 export default async function CodePage() {
   const { teamId } = await auth();
+  console.log(teamId);
 
   // console.log(teamId);
 
-  const activities: Board = [
+  const teamActivities: Board = [
     ...Array.from({ length: 16 }).map((_, index) => ({
-      completed: Math.random() > 0.5,
+      isCompleted: Math.random() > 0.5,
       points: 1 + Math.floor(Math.random() * 3),
       activity: {
         id: index.toString(),
         name: "Name from API",
+        code: `code-${index}`,
+        cardImageName: `image-${index}.png`,
         description: "unused",
-        x: 1, //unused
-        y: 1, //unused
+        basePoints: 1 + Math.floor(Math.random() * 3),
+        boardOrder: index,
       },
     })),
   ];
@@ -32,13 +35,13 @@ export default async function CodePage() {
         <Back />
         <div className="flex w-full justify-center">
           <Pill>
-            {activities.filter((activity) => activity.completed).length}/16
+            {teamActivities.filter((teamActivity) => teamActivity.isCompleted).length}/16
             cards
           </Pill>
         </div>
         <div className="grid grid-cols-3 gap-4 overflow-y-scroll">
-          {activities.map((activity, index) =>
-            activity.completed ? (
+          {teamActivities.map((activity, index) =>
+            activity.isCompleted ? (
               <ViewCardDrawer {...activity} key={index} />
             ) : (
               <UnknownCard key={index} />

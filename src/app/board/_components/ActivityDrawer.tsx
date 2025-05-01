@@ -16,15 +16,15 @@ import { Input } from "@/components/ui/input";
 import { Pill } from "@/components/ui/pill";
 import { Pokeball, pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
 import { cn } from "@/lib/cn";
-import { Square } from "@/models/Board";
 import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
+import { TeamActivity } from "@/models/TeamActivity";
 
 export type ActivityDrawerProps = {
-  square: Square;
+  teamActivity: TeamActivity;
   index: number;
 };
 
-const ActivityDrawer = ({ square, index }: ActivityDrawerProps) => {
+const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [error, setError] = useState("");
   const { completeActivity, isSubmitting } = useCompleteActivityMutation();
@@ -33,7 +33,7 @@ const ActivityDrawer = ({ square, index }: ActivityDrawerProps) => {
     const answer = e.target.value;
     if (answer.length === 6) {
       try {
-        await completeActivity({ activityId: square.activity.id, answer });
+        await completeActivity({ activityId: teamActivity.activity.id, answer });
         setError("");
         setIsDrawerOpen(false);
       } catch {
@@ -42,28 +42,28 @@ const ActivityDrawer = ({ square, index }: ActivityDrawerProps) => {
     }
   };
 
-  if (square.completed) {
+  if (teamActivity.isCompleted) {
     return <Pokeball variant="completed" />;
   }
 
   return (
     <Drawer
-      key={`${square.activity.x}-${square.activity.y}`}
+      key={`${teamActivity.activity.boardOrder}`}
       onOpenChange={() => {
         if (!isDrawerOpen) setError("");
         setIsDrawerOpen((prev) => !prev);
       }}
       open={isDrawerOpen}
     >
-      <DrawerTrigger disabled={square.completed}>
+      <DrawerTrigger disabled={teamActivity.isCompleted}>
         <div className="relative">
           <Pokeball
             variant={
-              square.completed ? "completed" : pokeDifficulty[square.points]
+              teamActivity.isCompleted ? "completed" : pokeDifficulty[teamActivity.activity.basePoints]
             }
             className={cn(
               "cursor-pointer",
-              square.completed && "cursor-default",
+              teamActivity.isCompleted && "cursor-default",
             )}
           />
           <p className="bg-pill absolute right-0 bottom-0 rounded px-2 py-1 text-xs font-bold">
@@ -75,15 +75,15 @@ const ActivityDrawer = ({ square, index }: ActivityDrawerProps) => {
         <div className="bg-pill-blue absolute bottom-0 left-1/2 -z-10 size-64 -translate-x-1/2 translate-y-1/2 rounded-full blur-3xl"></div>
         <DrawerHeader>
           {/* required for screen reader */}
-          <DialogTitle hidden>{square.activity.name || ""}</DialogTitle>
+          <DialogTitle hidden>{teamActivity.activity.name || ""}</DialogTitle>
           <div className="flex w-full justify-center gap-2">
-            <Pill>{square.activity.name}</Pill>
+            <Pill>{teamActivity.activity.name}</Pill>
           </div>
-          <DrawerDescription>{square.activity.description}</DrawerDescription>
+          <DrawerDescription>{teamActivity.activity.description}</DrawerDescription>
         </DrawerHeader>
         <div className="flex w-full justify-center">
           <Pokeball
-            variant={pokeDifficulty[square.points]}
+            variant={pokeDifficulty[teamActivity.activity.basePoints]}
             size="fixed"
             className="shadow-2xl"
           />

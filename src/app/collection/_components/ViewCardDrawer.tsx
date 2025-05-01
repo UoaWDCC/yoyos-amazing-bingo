@@ -19,12 +19,12 @@ import {
 import { Pill } from "@/components/ui/pill";
 import { Pokeball } from "@/components/ui/pokeball";
 import { pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
-import { Square } from "@/models/Board";
 
 import { UnknownCard } from "./Card";
+import { TeamActivity } from "@/models/TeamActivity";
 
-const ViewCardDrawer = (activity: Square) => {
-  const pokeIndex = parseInt(activity.activity.id);
+const ViewCardDrawer = (teamActivity: TeamActivity) => {
+  const pokeIndex = parseInt(teamActivity.activity.id);
   const cardImage = cards.images[pokeIndex];
 
   if (cardImage === undefined) {
@@ -39,16 +39,16 @@ const ViewCardDrawer = (activity: Square) => {
             <Image
               fill
               src={cards.images[pokeIndex].src}
-              alt={activity.activity.name}
+              alt={teamActivity.activity.name}
             />
           </div>
         </DrawerTrigger>
         <DrawerContent>
           <div className="bg-pill-blue absolute bottom-0 left-1/2 -z-10 size-64 -translate-x-1/2 translate-y-1/2 rounded-full blur-3xl"></div>
           <DrawerHeader>
-            <DrawerTitle hidden>{activity.activity.name}</DrawerTitle>
+            <DrawerTitle hidden>{teamActivity.activity.name}</DrawerTitle>
             <div className="flex w-full justify-center">
-              <Pill variant="brand">{activity.activity.name} </Pill>
+              <Pill variant="brand">{teamActivity.activity.name} </Pill>
             </div>
           </DrawerHeader>
           <div className="h-120">
@@ -57,7 +57,7 @@ const ViewCardDrawer = (activity: Square) => {
           <DrawerFooter>
             <div className="flex gap-4">
               <Pokeball
-                variant={pokeDifficulty[activity.points]}
+                variant={pokeDifficulty[teamActivity.activity.basePoints]}
                 className="size-12 shadow-xl"
               />
               <DrawerClose asChild>
