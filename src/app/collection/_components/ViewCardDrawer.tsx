@@ -19,12 +19,12 @@ import {
 import { Pill } from "@/components/ui/pill";
 import { Pokeball } from "@/components/ui/pokeball";
 import { pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
-import { TeamActivity } from "@/models/TeamActivity";
+import { TeamCollection } from "@/models/TeamCollection";
 
 import { UnknownCard } from "./Card";
 
-const ViewCardDrawer = (teamActivity: TeamActivity) => {
-  const pokeImageKey = teamActivity.activity.cardImageName as cardNames;
+const ViewCardDrawer = (teamCollection: TeamCollection) => {
+  const pokeImageKey = teamCollection.imageKey as cardNames;
   const cardImage: StaticImageData = cards.images[pokeImageKey];
 
   if (cardImage === undefined) {
@@ -36,15 +36,15 @@ const ViewCardDrawer = (teamActivity: TeamActivity) => {
       <CardProvider value={{ title: "None", imageKey: pokeImageKey }}>
         <DrawerTrigger>
           <div className="bg-foreground relative grid aspect-[1/1.4] w-full place-items-center rounded">
-            <Image fill src={cardImage.src} alt={teamActivity.activity.name} />
+            <Image fill src={cardImage.src} alt={teamCollection.name} />
           </div>
         </DrawerTrigger>
         <DrawerContent>
           <div className="bg-pill-blue absolute bottom-0 left-1/2 -z-10 size-64 -translate-x-1/2 translate-y-1/2 rounded-full blur-3xl"></div>
           <DrawerHeader>
-            <DrawerTitle hidden>{teamActivity.activity.name}</DrawerTitle>
+            <DrawerTitle hidden>{teamCollection.name}</DrawerTitle>
             <div className="flex w-full justify-center">
-              <Pill variant="brand">{teamActivity.activity.name} </Pill>
+              <Pill variant="brand">{teamCollection.name} </Pill>
             </div>
           </DrawerHeader>
           <div className="h-120">
@@ -53,7 +53,7 @@ const ViewCardDrawer = (teamActivity: TeamActivity) => {
           <DrawerFooter>
             <div className="flex gap-4">
               <Pokeball
-                variant={pokeDifficulty[teamActivity.activity.basePoints]}
+                variant={pokeDifficulty[teamCollection.basePoints]}
                 className="size-12 shadow-xl"
               />
               <DrawerClose asChild>
