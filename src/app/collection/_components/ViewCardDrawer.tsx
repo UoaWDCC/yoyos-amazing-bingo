@@ -19,9 +19,9 @@ import {
 import { Pill } from "@/components/ui/pill";
 import { Pokeball } from "@/components/ui/pokeball";
 import { pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
+import { TeamActivity } from "@/models/TeamActivity";
 
 import { UnknownCard } from "./Card";
-import { TeamActivity } from "@/models/TeamActivity";
 
 const ViewCardDrawer = (teamActivity: TeamActivity) => {
   const pokeIndex = parseInt(teamActivity.activity.id);
@@ -33,7 +33,7 @@ const ViewCardDrawer = (teamActivity: TeamActivity) => {
 
   return (
     <Drawer>
-      <CardProvider value={{ title: "None", imageIndex: pokeIndex }}>
+      <CardProvider value={{ title: "None", imageKey: pokeIndex }}>
         <DrawerTrigger>
           <div className="bg-foreground relative grid aspect-[1/1.4] w-full place-items-center rounded">
             <Image

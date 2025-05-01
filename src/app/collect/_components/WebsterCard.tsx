@@ -7,11 +7,11 @@ import { cards } from "@/assets/pokecards";
 import { useCard } from "./Provider";
 
 const WebsterCard = () => {
-  const { imageIndex } = useCard();
+  const { imageKey } = useCard();
 
   const texture = useTexture({
     alpha: cards.mask.src,
-    map: cards.images[imageIndex].src,
+    map: cards.images[imageKey].src,
   });
   const backside = useTexture({
     alpha: cards.mask.src,
