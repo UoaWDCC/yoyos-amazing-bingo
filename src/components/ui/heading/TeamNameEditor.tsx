@@ -8,12 +8,15 @@ import { updateTeamAction } from "@/actions/updateTeamNameAction";
 
 import { Input } from "../input";
 
-interface Props {
+type TeamNameEditorProps = {
   teamId: string;
   initialName: string;
-}
+};
 
-export default function TeamNameEditor({ teamId, initialName }: Props) {
+export default function TeamNameEditor({
+  teamId,
+  initialName,
+}: TeamNameEditorProps) {
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState(initialName);
   const [error, setError] = useState<string | undefined>(undefined);
