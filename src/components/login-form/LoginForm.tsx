@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import { redirect } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
 import { signIn } from "@/actions/authActions";
@@ -9,6 +10,9 @@ import { Input } from "@/components/ui/input";
 
 export function LoginForm() {
   const [state, action, isPending] = useActionState(signIn, null);
+  if (state?.success) {
+    return redirect("/board");
+  }
 
   return (
     <form action={action} className="flex flex-col justify-between gap-6">

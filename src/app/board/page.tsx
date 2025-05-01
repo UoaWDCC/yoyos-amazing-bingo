@@ -14,6 +14,9 @@ export default async function BoardPage() {
     return redirect("/");
   }
   const initialTeamData = await getTeamAction(teamId);
+  if (!initialTeamData) {
+    return redirect("/");
+  }
 
   return (
     <NormalLayout title="Board">

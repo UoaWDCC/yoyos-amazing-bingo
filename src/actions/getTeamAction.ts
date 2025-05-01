@@ -2,11 +2,12 @@
 
 import "server-only";
 
+import env from "@/lib/env";
 import { Board } from "@/models/Board";
 import { Team } from "@/models/Team";
 import { getTeamById } from "@/services/getTeamByIdService";
 
-import { auth, signOut } from "./authActions";
+import { auth } from "./authActions";
 
 /**
  * Fetches the team info for a given team ID.
@@ -14,8 +15,24 @@ import { auth, signOut } from "./authActions";
  * @param teamId The ID of the team to fetch the info for.
  * @returns The team info for the given team ID.
  */
-export async function getTeamAction(teamId: string): Promise<Team> {
-  // TODO: remove dummy data
+export async function getTeamAction(teamId: string): Promise<Team | null> {
+  try {
+    const { teamId: sessionId } = await auth();
+    if (!sessionId || (sessionId !== teamId && sessionId !== env.ADMIN_ID)) {
+      return null;
+    }
+
+    return await getTeamById(teamId);
+  } catch (error) {
+    console.log("Error getting team in action, assuming session issue", error);
+    return null;
+  }
+}
+
+// --- DUMMY DATA ---
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function getDummyData() {
   const board: Board = Array.from({ length: 16 }, (_, i) => ({
     activity: {
       id: `ACT-${i}`,
@@ -37,21 +54,4 @@ export async function getTeamAction(teamId: string): Promise<Team> {
     specialActivity: 0,
   };
   return dummyTeam;
-
-  const { teamId: sessionTeamId } = await auth();
-  console.log(teamId, sessionTeamId);
-
-  if (
-    !sessionTeamId ||
-    (sessionTeamId !== teamId && sessionTeamId !== process.env.ADMIN_ID)
-  ) {
-    return signOut();
-  }
-
-  const team = await getTeamById(teamId);
-  if (!team) {
-    throw new Error("Team not found");
-  }
-
-  return team;
 }

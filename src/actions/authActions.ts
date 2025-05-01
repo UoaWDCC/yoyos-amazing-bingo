@@ -15,7 +15,7 @@ type SignInState = {
 
 type Auth = {
   error?: string;
-  teamId: string | null;
+  teamId: string;
 };
 
 /**
@@ -29,32 +29,33 @@ export async function signIn(
   _prevState: SignInState,
   formData: FormData,
 ): Promise<SignInState> {
-  const code = formData.get("code");
-
-  if (!code) {
-    return {
-      error: "Please enter a team code",
-    };
-  }
-
-  let teamId;
-  if (code === env.ADMIN_CODE) {
-    teamId = env.ADMIN_ID;
-  } else {
-    const team = await getTeamByCode(code.toString());
-    if (!team) {
-      return {
-        error: "Invalid team code",
-      };
+  try {
+    const code = formData.get("code");
+    if (!code) {
+      return { error: "Invalid team code" };
     }
-    teamId = team.id;
+
+    // Get teamId from code
+    let teamId;
+    if (code === env.ADMIN_CODE) {
+      // Admin
+      teamId = env.ADMIN_ID;
+    } else {
+      const team = await getTeamByCode(code.toString()); // Normal teams
+      if (!team) {
+        return { error: "Invalid team code" };
+      }
+      teamId = team.id;
+    }
+
+    const session = await getSession();
+    session.teamId = teamId;
+    await session.save();
+    return { success: true };
+  } catch (error) {
+    console.log("Error signing in", error);
+    return { error: "Invalid team code" };
   }
-
-  const session = await getSession();
-  session.teamId = teamId;
-  await session.save();
-
-  return redirect("/board");
 }
 
 /**
@@ -62,16 +63,14 @@ export async function signIn(
  * @returns Auth object
  */
 export async function auth(): Promise<Auth> {
-  const session = await getSession();
-  const teamId = session.teamId;
-
-  if (!teamId) {
-    return { teamId: null, error: "Unauthorized" };
+  try {
+    const { teamId } = await getSession();
+    if (!teamId) return signOut(); // Not logged in
+    return { teamId };
+  } catch (error) {
+    console.log("Error getting session, signing out", error);
+    return signOut();
   }
-
-  return {
-    teamId,
-  };
 }
 
 /**
