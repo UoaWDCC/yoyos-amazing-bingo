@@ -6,7 +6,6 @@ import { DialogTitle } from "@radix-ui/react-dialog";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
@@ -89,9 +88,7 @@ const ActivityDrawer = ({ square }: ActivityDrawerProps) => {
             error={error}
             disabled={isSubmitting}
           />
-          <DrawerClose asChild>
-            <Button>CLOSE</Button>
-          </DrawerClose>
+          <Button>Submit code</Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

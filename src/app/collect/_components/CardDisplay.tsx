@@ -6,7 +6,7 @@ import { Canvas } from "@react-three/fiber";
 
 import WebsterCard from "./WebsterCard";
 
-const CardDisplay = () => {
+const CardDisplay = ({ delay = 1.25 }: { delay?: number }) => {
   const [interacting, setInteracted] = useState(false);
 
   // debounce
@@ -28,7 +28,7 @@ const CardDisplay = () => {
 
   return (
     <div
-      style={{ "--delay": 1.25 } as React.CSSProperties}
+      style={{ "--delay": delay } as React.CSSProperties}
       className="slide-up aspect-square size-full"
       onMouseDown={handleInteraction}
       onTouchStart={handleInteraction}

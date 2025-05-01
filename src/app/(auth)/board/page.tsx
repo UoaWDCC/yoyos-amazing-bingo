@@ -24,7 +24,7 @@ export default async function BoardPage() {
             <Crown color="white" />
           </Pill>
         </Link>
-        <Link href="/collections">
+        <Link href="/collection">
           <Pill size="large" variant="brand">
             <CardStack />
           </Pill>
