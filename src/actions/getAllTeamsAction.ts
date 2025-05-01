@@ -3,6 +3,7 @@
 import "server-only";
 
 import { Team } from "@/models/Team";
+import {getAllTeams} from "@/services/getTeamsService";
 
 /**
  * Fetches all teams with their points.
@@ -11,23 +12,24 @@ import { Team } from "@/models/Team";
  */
 export async function getAllTeamsAction(): Promise<Team[]> {
   // TODO: remove dummy data
-  return Array.from({ length: 16 }, (_, i) => ({
-    id: i.toString(),
-    name: "Wow",
-    code: "Code" + i,
-    points: 1,
-    board: Array.from({ length: 16 }, (_, j) => ({
-      activity: {
-        id: "ACT-" + j,
-        name: "Activity " + j,
-        code: j + "-code",
-        cardImageName: "image" + j + ".png",
-        description: "Description for activity " + j,
-        basePoints: 1,
-        boardOrder: 0,
-      },
-      isCompleted: false,
-    })),
-    specialActivity: 0,
-  }));
+  // return Array.from({ length: 16 }, (_, i) => ({
+  //   id: i.toString(),
+  //   name: "Wow",
+  //   code: "Code" + i,
+  //   points: 1,
+  //   board: Array.from({ length: 16 }, (_, j) => ({
+  //     activity: {
+  //       id: "ACT-" + j,
+  //       name: "Activity " + j,
+  //       code: j + "-code",
+  //       cardImageName: "image" + j + ".png",
+  //       description: "Description for activity " + j,
+  //       basePoints: 1,
+  //       boardOrder: 0,
+  //     },
+  //     isCompleted: false,
+  //   })),
+  //   specialActivity: 0,
+  // }));
+  return await getAllTeams()
 }
