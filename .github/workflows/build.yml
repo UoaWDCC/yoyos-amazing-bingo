@@ -50,3 +50,5 @@ jobs:
           DB_URL: ${{ secrets.DB_URL }}
           COOKIE_SECRET: ${{ secrets.COOKIE_SECRET }}
           APP_URL: ${{ secrets.APP_URL }}
+          ADMIN_ID: ${{ secrets.ADMIN_ID }}
+          ADMIN_CODE: ${{ secrets.ADMIN_CODE }}
