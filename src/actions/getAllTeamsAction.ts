@@ -11,18 +11,18 @@ import { Team } from "@/models/Team";
  */
 export async function getAllTeamsAction(): Promise<Team[]> {
   // TODO: remove dummy data
-  return Array(16).map((_, i) => ({
+  return Array.from({length: 16}, (_, i) => ({
     id: i.toString(),
     name: "Wow",
     code: "Code" + i,
     points: 1,
-    board: Array(16).map(() => ({
+    board: Array.from({length: 16}, (_, j) => ({
       activity: {
-        id: "ACT-1",
-        name: "Activity",
-        code: "Code" + i,
-        cardImageName: "image" + i + ".png",
-        description: "Description for activity " + i,
+        id: "ACT-" + j,
+        name: "Activity " + j,
+        code: j + "-code",
+        cardImageName: "image" + j + ".png",
+        description: "Description for activity " + j,
         basePoints: 1,
         boardOrder: 0,
       },

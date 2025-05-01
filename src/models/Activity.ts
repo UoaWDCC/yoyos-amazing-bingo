@@ -8,8 +8,7 @@ export const ActivitySchema = z.object(
     id: IdSchema,
     name: z
       .string()
-      .min(1)
-      .max(255, { message: "Activity name must be a non-empty string" }),
+      .nonempty({ message: "Activity name must be a non-empty string" }),
     code: CodeSchema,
     cardImageName: z.string().nonempty({
       message: "Activity card image name must be a non-empty string",

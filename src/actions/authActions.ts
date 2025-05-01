@@ -41,13 +41,16 @@ export async function signIn(
   if (code === env.ADMIN_CODE) {
     teamId = env.ADMIN_ID;
   } else {
-    const team = await getTeamByCode(code.toString());
-    if (!team) {
-      return {
-        error: "Invalid team code",
-      };
-    }
-    teamId = team.id;
+    // TODO: remove dummy data
+    teamId = "test";
+
+    // const team = await getTeamByCode(code.toString());
+    // if (!team) {
+    //   return {
+    //     error: "Invalid team code",
+    //   };
+    // }
+    // teamId = team.id;
   }
 
   const session = await getSession();

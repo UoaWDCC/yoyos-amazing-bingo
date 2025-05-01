@@ -6,6 +6,7 @@ import { Team } from "@/models/Team";
 import { getTeamById } from "@/services/getTeamByIdService";
 
 import { auth, signOut } from "./authActions";
+import { Board } from "@/models/Board";
 
 /**
  * Fetches the team info for a given team ID.
@@ -15,25 +16,27 @@ import { auth, signOut } from "./authActions";
  */
 export async function getTeamAction(teamId: string): Promise<Team> {
   // TODO: remove dummy data
-  return {
-    id: "",
-    name: "",
-    code: "",
-    points: 0,
-    board: Array(16).map(() => ({
+  const board: Board = Array.from({ length: 16 }, (_, i) => ({
       activity: {
-        id: "",
-        name: "",
-        code: "",
-        cardImageName: "",
-        description: "",
-        basePoints: 1,
-        boardOrder: 0,
+        id: `ACT-${i}`,
+        name: "Sample Activity",
+        code: "act123",
+        cardImageName: "image.png",
+        description: "This is a sample activity.",
+        basePoints: Math.floor(Math.random() * 3) + 1,
+        boardOrder: i,
       },
       isCompleted: false,
-    })),
+    }));
+  const dummyTeam: Team = {
+    id: "test",
+    name: "Test Team",
+    code: "abc123",
+    points: 0,
+    board,
     specialActivity: 0,
   };
+  return dummyTeam;
 
   const { teamId: sessionTeamId } = await auth();
   console.log(teamId, sessionTeamId);
