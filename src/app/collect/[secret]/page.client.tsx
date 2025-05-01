@@ -3,49 +3,17 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
+import { cardNames } from "@/assets/pokecards";
 import { Button } from "@/components/ui/button";
 import LoaderCircle from "@/components/ui/svg/LoaderCircle";
+import useGetActivity from "@/queries/useGetActivity";
 
 import CardProvider from "../_components/Provider";
 import StateCardDisplay from "../_components/StateCardDisplay";
 import StateCollectingDisplay from "../_components/StateCollectingDisplay";
 
-const mockdata = [
-  {
-    title: "snorlax",
-    imageIndex: 0,
-    secret: "8f58666d",
-  },
-  {
-    title: "othercard",
-    imageIndex: 1,
-    secret: "3210741c",
-  },
-];
-
 export default function CollectClientPage({ secret }: { secret: string }) {
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState<{
-    title: string;
-    imageIndex: number;
-  } | null>(null);
-
-  useEffect(() => {
-    if (!secret) return;
-    const fetchData = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1000)); // Simulate network delay
-      const card = mockdata.find((item) => item.secret === secret);
-      if (card) {
-        setData({
-          title: card.title,
-          imageIndex: card.imageIndex,
-        });
-      }
-      setLoading(false);
-    };
-
-    fetchData();
-  }, [secret]);
+  const { data, isLoading } = useGetActivity(secret);
 
   const [cardState, setCardState] = useState(false);
   const [isAnimating, setAnimating] = useState(false);
@@ -101,7 +69,12 @@ export default function CollectClientPage({ secret }: { secret: string }) {
   }
 
   return (
-    <CardProvider value={data}>
+    <CardProvider
+      value={{
+        title: data.name,
+        imageKey: data.cardImageName as cardNames,
+      }}
+    >
       {cardState ? (
         <StateCardDisplay />
       ) : (

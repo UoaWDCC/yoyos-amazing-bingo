@@ -1,11 +1,11 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 import CardDisplay from "@/app/collect/_components/CardDisplay";
 import CardProvider from "@/app/collect/_components/Provider";
-import { cards } from "@/assets/pokecards";
+import { cardNames, cards } from "@/assets/pokecards";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -19,13 +19,13 @@ import {
 import { Pill } from "@/components/ui/pill";
 import { Pokeball } from "@/components/ui/pokeball";
 import { pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
-
-import { UnknownCard } from "./Card";
 import { TeamActivity } from "@/models/TeamActivity";
 
+import { UnknownCard } from "./Card";
+
 const ViewCardDrawer = (teamActivity: TeamActivity) => {
-  const pokeIndex = parseInt(teamActivity.activity.id);
-  const cardImage = cards.images[pokeIndex];
+  const pokeImageKey = teamActivity.activity.cardImageName as cardNames;
+  const cardImage: StaticImageData = cards.images[pokeImageKey];
 
   if (cardImage === undefined) {
     return <UnknownCard />;
@@ -33,14 +33,10 @@ const ViewCardDrawer = (teamActivity: TeamActivity) => {
 
   return (
     <Drawer>
-      <CardProvider value={{ title: "None", imageIndex: pokeIndex }}>
+      <CardProvider value={{ title: "None", imageKey: pokeImageKey }}>
         <DrawerTrigger>
           <div className="bg-foreground relative grid aspect-[1/1.4] w-full place-items-center rounded">
-            <Image
-              fill
-              src={cards.images[pokeIndex].src}
-              alt={teamActivity.activity.name}
-            />
+            <Image fill src={cardImage.src} alt={teamActivity.activity.name} />
           </div>
         </DrawerTrigger>
         <DrawerContent>

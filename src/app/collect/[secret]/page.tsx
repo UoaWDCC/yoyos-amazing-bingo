@@ -4,7 +4,7 @@ import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 export default async function CollectPage({
   params,
 }: {
-  params: { secret: string };
+  params: Promise<{ secret: string }>;
 }) {
   const { secret } = await params;
 

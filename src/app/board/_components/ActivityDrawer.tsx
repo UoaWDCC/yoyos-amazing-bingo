@@ -1,6 +1,7 @@
 "use client";
 
 import { memo, useState } from "react";
+import { useRouter } from "next/navigation";
 import { DialogTitle } from "@radix-ui/react-dialog";
 
 import { Button } from "@/components/ui/button";
@@ -16,8 +17,8 @@ import { Input } from "@/components/ui/input";
 import { Pill } from "@/components/ui/pill";
 import { Pokeball, pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
 import { cn } from "@/lib/cn";
-import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
 import { TeamActivity } from "@/models/TeamActivity";
+import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
 
 export type ActivityDrawerProps = {
   teamActivity: TeamActivity;
@@ -25,6 +26,7 @@ export type ActivityDrawerProps = {
 };
 
 const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
+  const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [error, setError] = useState("");
   const { completeActivity, isSubmitting } = useCompleteActivityMutation();
@@ -33,9 +35,13 @@ const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
     const answer = e.target.value;
     if (answer.length === 6) {
       try {
-        await completeActivity({ activityId: teamActivity.activity.id, answer });
+        await completeActivity({
+          activityId: teamActivity.activity.id.padStart(2, "0"),
+          answer,
+        });
         setError("");
         setIsDrawerOpen(false);
+        router.push(`/collect/${answer}`);
       } catch {
         setError("Invalid answer");
       }
@@ -59,7 +65,9 @@ const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
         <div className="relative">
           <Pokeball
             variant={
-              teamActivity.isCompleted ? "completed" : pokeDifficulty[teamActivity.activity.basePoints]
+              teamActivity.isCompleted
+                ? "completed"
+                : pokeDifficulty[teamActivity.activity.basePoints]
             }
             className={cn(
               "cursor-pointer",
@@ -79,7 +87,9 @@ const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
           <div className="flex w-full justify-center gap-2">
             <Pill>{teamActivity.activity.name}</Pill>
           </div>
-          <DrawerDescription>{teamActivity.activity.description}</DrawerDescription>
+          <DrawerDescription>
+            {teamActivity.activity.description}
+          </DrawerDescription>
         </DrawerHeader>
         <div className="flex w-full justify-center">
           <Pokeball

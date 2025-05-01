@@ -5,7 +5,7 @@ import jigglybuff from "./jigglybuff.webp";
 import pikachoo from "./pikachoo.webp";
 import pokewebster from "./pokewebster.webp";
 import psyweb from "./psyweb.webp";
-import snorelaxImage from "./snorelax.webp";
+import snorelax from "./snorelax.webp";
 import warill from "./warill.webp";
 import warizard from "./warizard.webp";
 import webbykarp from "./webbykarp.webp";
@@ -17,8 +17,8 @@ import worterra from "./worterra.webp";
 export const cards = {
   mask: alphaMask,
   back: backImage,
-  images: [
-    snorelaxImage,
+  images: {
+    snorelax,
     bulbasour,
     jigglybuff,
     pikachoo,
@@ -31,5 +31,7 @@ export const cards = {
     wewtwo,
     witto,
     worterra,
-  ],
+  } as const,
 };
+
+export type cardNames = keyof typeof cards.images;
