@@ -1,6 +1,5 @@
 import alphaMask from "./alpha.webp";
 import backImage from "./backside.webp";
-import backside from "./backside.webp";
 import bulbasour from "./bulbasour.webp";
 import jigglybuff from "./jigglybuff.webp";
 import pikachoo from "./pikachoo.webp";
@@ -20,7 +19,6 @@ export const cards = {
   back: backImage,
   images: [
     snorelaxImage,
-    backside,
     bulbasour,
     jigglybuff,
     pikachoo,

@@ -10,6 +10,7 @@ const pill = cva(
       variant: {
         solid: "bg-pill text-foreground",
         brand: "bg-pill-blue text-white",
+        gold: "gold-bg text-white",
       },
       size: {
         large: "px-6 py-2",

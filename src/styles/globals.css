@@ -159,3 +159,24 @@ html[data-state-blind-2="true"] .blind-2 {
     width: 24px;
   }
 }
+
+.gold-bg {
+  background: linear-gradient(
+    91.05deg,
+    #ffa220 4.36%,
+    #ffcd87 27.18%,
+    #ffa220 50%,
+    #ffc471 72.82%,
+    #ffa220 95.64%
+  );
+}
+
+.blue-gradient-bg {
+  background: linear-gradient(
+    90deg,
+    #ffffff 0%,
+    #e5f1fc 33.33%,
+    #e5f1fc 66.67%,
+    #ffffff 100%
+  );
+}
