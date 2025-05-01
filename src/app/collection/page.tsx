@@ -1,4 +1,3 @@
-import { auth } from "@/actions/auth";
 import Back from "@/components/ui/back/Back";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 import { Pill } from "@/components/ui/pill";
@@ -6,9 +5,10 @@ import { Board } from "@/models/Board";
 
 import { UnknownCard } from "./_components/Card";
 import ViewCardDrawer from "./_components/ViewCardDrawer";
+import { auth } from "@/actions/authActions";
 
 export default async function CodePage() {
-  // const { teamId } = await auth();
+  const { teamId } = await auth();
 
   // console.log(teamId);
 

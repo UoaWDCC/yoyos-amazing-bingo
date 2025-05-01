@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+
 import CardProvider from "../_components/Provider";
 import StateCardDisplay from "../_components/StateCardDisplay";
 import StateCollectingDisplay from "../_components/StateCollectingDisplay";
@@ -74,12 +75,10 @@ export default function CollectClientPage({ secret }: { secret: string }) {
 
   if (!data) {
     return (
-      <div className="flex flex-col h-screen items-center justify-center">
+      <div className="flex h-screen flex-col items-center justify-center">
         <div className="text-center">
           <p className="mb-4 font-mono text-lg">Invalid code</p>
-          <Link
-            href="/board"
-          >
+          <Link href="/board">
             <Button className="w-min rounded-full px-8">Back to board</Button>
           </Link>
         </div>

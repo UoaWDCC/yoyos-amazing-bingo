@@ -2,18 +2,13 @@
 
 import { useMemo } from "react";
 
-import { useRevalidationSocket } from "@/hooks/useRevalidationSocket";
-
-import { ActivityDrawer } from "./ActivityDrawer";
-import { BingoBoardSkeleton } from "./BingoBoardSkeleton";
+import { ActivityDrawer } from "@/app/board/_components/ActivityDrawer";
 
 type BingoBoardProps = {
   teamId?: string;
 };
 
-export function BingoBoard() {
-  // const { data: squares, isLoading } = useGetBoard(teamId);
-
+export function BingoBoard({ teamId }: BingoBoardProps) {
   // mock data
   const squares = Array.from({ length: 16 }).map((_, index) => ({
     completed: Math.random() > 0.8,
@@ -26,12 +21,6 @@ export function BingoBoard() {
       y: Math.floor(index / 4),
     },
   }));
-
-  useRevalidationSocket({
-    onInvalidation: (codes) => {
-      console.log("Invalidation codes", codes);
-    },
-  });
 
   const sortedSquares = useMemo(() => {
     return squares?.sort((a, b) => {
