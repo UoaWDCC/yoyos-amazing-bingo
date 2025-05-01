@@ -3,11 +3,17 @@
  * It exports the validated environment variables as an object to be used throughout the application
  */
 
-import "server-only";
 import dotenv from "dotenv";
 import { z } from "zod";
 
 import { parseZod } from "./zod";
+
+// Node.js check
+if (typeof window !== "undefined") {
+  throw new Error(
+    "env.ts should only be used in Node.js environment, not in the browser"
+  );
+}
 
 // .env schema
 const envSchema = z.object({
