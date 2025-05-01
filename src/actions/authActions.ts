@@ -65,11 +65,10 @@ export async function signIn(
 export async function auth(): Promise<Auth> {
   try {
     const { teamId } = await getSession();
-    if (!teamId) return signOut(); // Not logged in
-    return { teamId };
+    return { teamId: teamId ?? "", error: "Not authenticated" };
   } catch (error) {
-    console.log("Error getting session, signing out", error);
-    return signOut();
+    console.log("Error getting auth", error);
+    return { teamId: "", error: "Not authenticated" };
   }
 }
 
