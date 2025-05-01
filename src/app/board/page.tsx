@@ -18,7 +18,11 @@ export default async function BoardPage() {
   return (
     <NormalLayout title="Board">
       <div className="flex flex-col gap-8">
-        <BoardClientPage teamId={teamId} initialTeamData={initialTeamData} adminId={env.ADMIN_ID} />
+        <BoardClientPage
+          teamId={teamId}
+          initialTeamData={initialTeamData}
+          adminId={env.ADMIN_ID}
+        />
       </div>
       <div />
     </NormalLayout>

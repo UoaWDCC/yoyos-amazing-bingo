@@ -1,28 +1,30 @@
 import { eq } from "drizzle-orm";
 
 import { db } from "@/db/connection";
-import { teamsTable } from "@/db/schema";
+import { activitiesTable, teamActivitiesTable, teamsTable } from "@/db/schema";
 import { parseZod } from "@/lib/zod";
 import { Team, TeamSchema } from "@/models/Team";
-
-import { getBoardByTeamId } from "./old/boardServices";
+import { assembleTeams } from "@/services/assembleTeam";
 
 export const getTeamById = async (id: string): Promise<Team> => {
-  const rawTeam = await db.query.teamsTable.findFirst({
-    where: eq(teamsTable.id, id),
-  });
+  const rows = await db
+    .select()
+    .from(teamsTable)
+    .innerJoin(
+      teamActivitiesTable,
+      eq(teamsTable.id, teamActivitiesTable.teamId),
+    )
+    .innerJoin(
+      activitiesTable,
+      eq(teamActivitiesTable.activityId, activitiesTable.id),
+    )
+    .where(eq(teamsTable.id, id));
 
-  if (!rawTeam) {
+  if (rows.length === 0) {
     throw new Error(`Team with id '${id}' not found`);
   }
 
-  const team: Team = {
-    id: rawTeam.id,
-    code: rawTeam.code,
-    name: rawTeam.name,
-    points: -1, // TODO: Calculate points
-    board: await getBoardByTeamId(rawTeam.id), // Don't do this, use a join
-  };
+  const team = assembleTeams(rows);
 
   return parseZod(TeamSchema, team, "services/getTeamByIdService.ts");
 };

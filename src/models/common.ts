@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const IdSchema = z
   .string()
-  .nonempty({ message: "Id must be a non-empty string" })
+  .nonempty({ message: "Id must be a non-empty string" });
 export type Id = z.infer<typeof IdSchema>;
 
 export const CodeSchema = z

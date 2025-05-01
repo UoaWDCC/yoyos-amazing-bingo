@@ -11,7 +11,7 @@ import { parseZod } from "./zod";
 // Node.js check
 if (typeof window !== "undefined") {
   throw new Error(
-    "env.ts should only be used in Node.js environment, not in the browser"
+    "env.ts should only be used in Node.js environment, not in the browser",
   );
 }
 

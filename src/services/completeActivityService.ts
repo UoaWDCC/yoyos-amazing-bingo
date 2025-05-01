@@ -21,6 +21,7 @@ export const completeTeamActivity = async (
 // Could merge this with the above function if you like
 /**
  * Complete an activity for a given team
+ * @param teamId The ID of the team
  * @param activityId The ID of the activity to complete
  * @param answer The answer to the activity
  */
@@ -46,5 +47,5 @@ async function completeActivityAndUpdateBoard({
     throw new Error("Incorrect answer");
   }
 
-  completeTeamActivity(teamId, activityId);
+  await completeTeamActivity(teamId, activityId);
 }

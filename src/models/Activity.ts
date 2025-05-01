@@ -14,12 +14,9 @@ export const ActivitySchema = z.object(
       message: "Activity card image name must be a non-empty string",
     }), // The URL of the card image for the activity
     description: z.string({ message: "Activity description must be a string" }),
-    basePoints: z
-      .number()
-      .int()
-      .min(0, {
-        message: "Activity base points must be a non-negative integer",
-      }), // The base points for the activity, before team modifiers
+    basePoints: z.number().int().min(0, {
+      message: "Activity base points must be a non-negative integer",
+    }), // The base points for the activity, before team modifiers
     boardOrder: z
       .number()
       .int()
