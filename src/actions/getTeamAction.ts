@@ -2,11 +2,11 @@
 
 import "server-only";
 
+import { Board } from "@/models/Board";
 import { Team } from "@/models/Team";
 import { getTeamById } from "@/services/getTeamByIdService";
 
 import { auth, signOut } from "./authActions";
-import { Board } from "@/models/Board";
 
 /**
  * Fetches the team info for a given team ID.
@@ -17,17 +17,17 @@ import { Board } from "@/models/Board";
 export async function getTeamAction(teamId: string): Promise<Team> {
   // TODO: remove dummy data
   const board: Board = Array.from({ length: 16 }, (_, i) => ({
-      activity: {
-        id: `ACT-${i}`,
-        name: "Sample Activity",
-        code: "act123",
-        cardImageName: "image.png",
-        description: "This is a sample activity.",
-        basePoints: Math.floor(Math.random() * 3) + 1,
-        boardOrder: i,
-      },
-      isCompleted: false,
-    }));
+    activity: {
+      id: `ACT-${i}`,
+      name: "Sample Activity",
+      code: "act123",
+      cardImageName: "image.png",
+      description: "This is a sample activity.",
+      basePoints: Math.floor(Math.random() * 3) + 1,
+      boardOrder: i,
+    },
+    isCompleted: false,
+  }));
   const dummyTeam: Team = {
     id: "test",
     name: "Test Team",

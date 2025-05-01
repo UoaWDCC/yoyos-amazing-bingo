@@ -50,6 +50,6 @@ export const assembleTeams = (rawTeams: rawTeam[]): Team => {
     name: teams.name,
     points,
     board: parseZod(BoardSchema, board),
-    specialActivity: teams.specialActivity
+    specialActivity: teams.specialActivity,
   };
 };
