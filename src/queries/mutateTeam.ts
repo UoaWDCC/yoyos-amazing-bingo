@@ -2,7 +2,6 @@ import { mutate } from "swr";
 
 import { updateTeamAction } from "@/actions/updateTeamNameAction";
 import { Team } from "@/models/Team";
-import { getAllTeams } from "@/services/getTeamsService";
 
 /** @see updateTeamAction */
 export default async function mutateTeam(team: Team) {
