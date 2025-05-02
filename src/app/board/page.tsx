@@ -31,7 +31,7 @@ export default function BoardPage() {
         </Pill>
       </div>
       <div className="flex flex-col gap-8">
-        <BingoBoard board={team.board} />
+        <BingoBoard board={team.board} specialActivity={team.specialActivity} />
       </div>
       <div className="flex w-full justify-center gap-4">
         <Link href="/leaderboard">

@@ -1,5 +1,4 @@
 import { Activity } from "@/models/Activity";
-import { Team } from "@/models/Team";
 
 /**
  * Helper to get the points of an activity for a team.
@@ -9,9 +8,8 @@ import { Team } from "@/models/Team";
  */
 export function getPointsOfActivityForTeam(
   activity: Activity,
-  team?: Team,
+  isSpecialActivity: boolean,
 ): number {
   const basePoints = activity.basePoints;
-  const isSpecialActivity = team?.specialActivity === activity.boardOrder;
   return isSpecialActivity ? basePoints + 1 : basePoints;
 }

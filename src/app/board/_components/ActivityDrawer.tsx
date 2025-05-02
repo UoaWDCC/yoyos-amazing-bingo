@@ -4,7 +4,6 @@ import { memo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { DialogTitle } from "@radix-ui/react-dialog";
 
-import { Button } from "@/components/ui/button";
 import {
   Drawer,
   DrawerContent,
@@ -17,15 +16,21 @@ import { Input } from "@/components/ui/input";
 import { Pill } from "@/components/ui/pill";
 import { Pokeball, pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
 import { cn } from "@/lib/cn";
+import { getPointsOfActivityForTeam } from "@/logic/points/getPointsOfActivityForTeam";
 import { TeamActivity } from "@/models/TeamActivity";
 import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
 
 export type ActivityDrawerProps = {
   teamActivity: TeamActivity;
   index: number;
+  isSpecialActivity: boolean;
 };
 
-const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
+const ActivityDrawer = ({
+  teamActivity,
+  index,
+  isSpecialActivity,
+}: ActivityDrawerProps) => {
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [error, setError] = useState("");
@@ -67,7 +72,9 @@ const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
             variant={
               teamActivity.isCompleted
                 ? "completed"
-                : pokeDifficulty[teamActivity.activity.basePoints]
+                : isSpecialActivity
+                  ? "master"
+                  : pokeDifficulty[teamActivity.activity.basePoints]
             }
             className={cn(
               "cursor-pointer",
@@ -84,16 +91,34 @@ const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
         <DrawerHeader>
           {/* required for screen reader */}
           <DialogTitle hidden>{teamActivity.activity.name || ""}</DialogTitle>
-          <div className="flex w-full justify-center gap-2">
+          <div className="flex w-full justify-between gap-2">
             <Pill>{teamActivity.activity.name}</Pill>
+            <Pill>
+              {getPointsOfActivityForTeam(
+                teamActivity.activity,
+                isSpecialActivity,
+              )}
+              pts
+            </Pill>
           </div>
           <DrawerDescription>
+            {isSpecialActivity && (
+              <span>
+                MASTER BALL: +1 pts
+                <br />
+                <br />
+              </span>
+            )}
             {teamActivity.activity.description}
           </DrawerDescription>
         </DrawerHeader>
         <div className="flex w-full justify-center">
           <Pokeball
-            variant={pokeDifficulty[teamActivity.activity.basePoints]}
+            variant={
+              isSpecialActivity
+                ? "master"
+                : pokeDifficulty[teamActivity.activity.basePoints]
+            }
             size="fixed"
             className="shadow-2xl"
           />
@@ -101,13 +126,12 @@ const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
         <DrawerFooter>
           <Input
             type="text"
-            placeholder="Enter your answer"
+            placeholder="Enter code"
             maxLength={6}
             onChange={handleInputChange}
             error={error}
             disabled={isSubmitting}
           />
-          <Button>Submit code</Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>

@@ -2,14 +2,20 @@ import { Board } from "@/models/Board";
 
 import { ActivityDrawer } from "./ActivityDrawer";
 
-export function BingoBoard({ board }: { board: Board }) {
+type BingoBoardProps = {
+  board: Board;
+  specialActivity: number;
+};
+
+export function BingoBoard({ board, specialActivity }: BingoBoardProps) {
   return (
     <div className="grid grid-cols-4 gap-2 px-8">
-      {board.map((teamActivity, index) => (
+      {board.map((teamActivity, i) => (
         <ActivityDrawer
           key={teamActivity.activity.boardOrder}
           teamActivity={teamActivity}
-          index={index}
+          index={i}
+          isSpecialActivity={i === specialActivity}
         />
       ))}
     </div>
