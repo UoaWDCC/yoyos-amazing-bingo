@@ -1,8 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { LogOut } from "lucide-react";
-
 import { Heading } from "../heading";
 import TeamNameEditor from "../heading/TeamNameEditor";
 

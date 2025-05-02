@@ -1,26 +1,14 @@
-import { redirect } from "next/navigation";
-
-import useAuth from "@/queries/useAuth";
-import useGetTeam from "@/queries/useGetTeam";
+import { Board } from "@/models/Board";
 
 import { ActivityDrawer } from "./ActivityDrawer";
 
-export function BingoBoard() {
-  const { data: teamId } = useAuth();
-  if (teamId === "admin") {
-    redirect("/admin");
-  }
-  const { data: team } = useGetTeam(teamId ?? null);
-  if (!team) return null;
-
-  const squares = team.board;
-
+export function BingoBoard({ board }: { board: Board }) {
   return (
     <div className="grid grid-cols-4 gap-2 px-8">
-      {squares.map((square, index) => (
+      {board.map((teamActivity, index) => (
         <ActivityDrawer
-          key={square.activity.boardOrder}
-          teamActivity={square}
+          key={teamActivity.activity.boardOrder}
+          teamActivity={teamActivity}
           index={index}
         />
       ))}
