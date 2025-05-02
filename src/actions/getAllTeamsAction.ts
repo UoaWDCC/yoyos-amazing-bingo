@@ -6,6 +6,8 @@ import { Team } from "@/models/Team";
 import { getAllTeams } from "@/services/getTeamsService";
 
 import { auth } from "./authActions";
+import env from "@/lib/env";
+import { getTeamTotalPoints } from "@/logic/points/getTeamTotalPoints";
 
 /**
  * Fetches a list of teams with their points.
@@ -16,7 +18,8 @@ export async function getAllTeamsAction(): Promise<Team[]> {
   try {
     const teams = await getAllTeams();
     const { teamId } = await auth();
-    const isAdmin = teamId === process.env.ADMIN_ID;
+    const isAdmin = teamId === env.ADMIN_ID;
+    teams.sort((a, b) => getTeamTotalPoints(b) - getTeamTotalPoints(a));
     return isAdmin ? teams : teams.slice(5);
   } catch (error) {
     console.log("Error getting all teams in action, returning none", error);

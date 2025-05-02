@@ -51,7 +51,7 @@ export default function CollectClientPage({ cardName }: { cardName: string }) {
         <div className="flex items-center justify-center">
           <LoaderCircle className="size-6 animate-spin *:stroke-rose-500" />
         </div>
-        <div></div>
+        <div />
       </>
     );
   }
