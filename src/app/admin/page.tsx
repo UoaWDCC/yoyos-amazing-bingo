@@ -6,6 +6,7 @@ import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 import useAuth from "@/queries/useAuth";
 
 import { GameStatusField } from "./_components/GameStatusField";
+import Link from "next/link";
 
 export default function AdminPage() {
   const { data: teamId } = useAuth();
@@ -15,7 +16,7 @@ export default function AdminPage() {
   return (
     <NormalLayout title="Admin">
       <GameStatusField />
-      <div />
+      <Link className="underline" href="/leaderboard">Leaderboard</Link>
     </NormalLayout>
   );
 }
