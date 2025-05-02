@@ -9,7 +9,7 @@ import CardDisplay from "./CardDisplay";
 import { useCard } from "./Provider";
 
 const StateCardDisplay = () => {
-  const { title } = useCard();
+  const { imageKey } = useCard();
 
   return (
     <>
@@ -25,7 +25,7 @@ const StateCardDisplay = () => {
             className="slide-up"
             style={{ "--delay": 1.25 } as React.CSSProperties}
           >
-            {title}
+            {imageKey}
           </Pill>
           <CardDisplay />
           <Link
