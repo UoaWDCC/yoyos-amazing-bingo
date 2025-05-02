@@ -1,8 +1,8 @@
-import { ComponentProps} from "react";
+import { ComponentPropsWithoutRef } from "react";
 
 import { cn } from "@/lib/cn";
 
-type InputProps = ComponentProps<"input"> & {
+type InputProps = ComponentPropsWithoutRef<"input"> & {
   error?: string;
 };
 
@@ -12,11 +12,16 @@ export function Input(props: InputProps) {
       <input
         {...props}
         className={cn(
-          "focus:ring-primary disabled:bg-muted/50 focus:min-w-40 rounded-none bg-white font-mono focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
-          props.error && "focus:ring-destructive placeholder-destructive/80",
-          props.className
+          "border-primary focus:ring-primary disabled:bg-muted/50 h-[45px] w-full rounded-none border bg-white px-4 py-2 font-mono focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+          props.error &&
+            "border-destructive focus:ring-destructive placeholder-destructive/80",
         )}
-      />
+      ></input>
+      {props.error && (
+        <p className="text-destructive absolute top-0 -translate-y-full text-sm">
+          {props.error}
+        </p>
+      )}
     </div>
   );
 }

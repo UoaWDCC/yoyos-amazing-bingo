@@ -1,16 +1,15 @@
 "use client";
 
-import { FormEvent, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 import { Pencil } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
-import { updateTeamAction } from "@/actions/updateTeamNameAction";
 import useAuth from "@/queries/useAuth";
 import useGetTeam from "@/queries/useGetTeam";
 
-import { Input } from "../input";
 import { cn } from "@/lib/cn";
 import mutateTeam from "@/queries/mutateTeam";
+import { TeamNameInput } from "./TeamNameInput";
 
 export default function TeamNameEditor() {
   const { data: teamId } = useAuth();
@@ -24,6 +23,10 @@ export default function TeamNameEditor() {
   const [error, setError] = useState<string | undefined>(undefined);
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    setName(initialName);
+  }, [initialName])
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -56,7 +59,7 @@ export default function TeamNameEditor() {
     <form onBlur={handleSubmit} onSubmit={handleSubmit}
       className="flex flex-col"
     >
-      <Input
+      <TeamNameInput
         className={cn(!editing && "absolute -z-10 opacity-0")} // Hack to keep element in dom for focus
         ref={inputRef}
         value={name}
@@ -69,7 +72,7 @@ export default function TeamNameEditor() {
       {/* Input elements don't shrink to text width so we have to do this :( */}
       <div className={cn("flex items-center gap-2", editing && "absolute -z-10 opacity-0")} onClick={handleClick}>
         <span>{name}</span>
-        <Pencil size={16} />
+        {isEditorLive && <Pencil size={16} />}
       </div>
       {error && <p className="text-destructive text-sm">
         {error}

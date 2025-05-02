@@ -26,7 +26,6 @@ type Auth = {
  * @returns Sign in state
  */
 export async function signIn(
-  _prevState: SignInState,
   formData: FormData,
 ): Promise<SignInState> {
   try {
