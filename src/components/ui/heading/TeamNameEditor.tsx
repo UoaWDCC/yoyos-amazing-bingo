@@ -47,7 +47,6 @@ export default function TeamNameEditor() {
       console.error(err);
       setError("Failed to update team name");
     }
-    setName(initialName);
   };
 
   const handleClick = () => {
