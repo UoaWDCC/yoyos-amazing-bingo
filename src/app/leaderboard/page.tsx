@@ -9,12 +9,13 @@ import PixelArrowL from "@/components/ui/svg/PixelArrowL";
 
 import headingPic from "./_assets/headingPicture.png";
 import LeaderboardListItem from "./_components/LeaderboardListItem";
+import { getTeamTotalPoints } from "@/logic/points/getTeamTotalPoints";
 
 export default async function Leaderboard() {
   const { teamId } = await auth();
   const teams = await getAllTeamsAction(); // Won't include top 5 if not admin
 
-  teams.sort((a, b) => b.points - a.points);
+  teams.sort((a, b) => getTeamTotalPoints(b) - getTeamTotalPoints(a));
 
   /*
   TODO logic to sort teams by points before passing into LeaderboardListItem

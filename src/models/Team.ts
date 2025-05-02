@@ -10,10 +10,6 @@ export const TeamSchema = z.object(
       .string()
       .nonempty({ message: "Team name must be a non-empty string" }),
     code: CodeSchema,
-    points: z
-      .number()
-      .int()
-      .min(0, { message: "Team points must be a non-negative integer" }), // The team's total points
     board: BoardSchema,
     specialActivity: z
       .number()

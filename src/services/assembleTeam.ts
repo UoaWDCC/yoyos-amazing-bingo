@@ -26,7 +26,7 @@ type rawTeam = {
 /** Takes a list of rawTeams (a join) and assembles a Team domain object from it. */
 export const assembleTeams = (rawTeams: rawTeam[]): Team => {
   // Since this is a join, all rows will have the same team
-  const team = rawTeams[0].teams;
+  const rawTeam = rawTeams[0].teams;
 
   // Build the board
   const board = rawTeams
@@ -36,14 +36,5 @@ export const assembleTeams = (rawTeams: rawTeam[]): Team => {
     }))
     .sort((a, b) => a.activity.boardOrder - b.activity.boardOrder);
 
-  // Calculate points (e.g. sum of completed activity points)
-  let points = board
-    .filter((entry) => entry.isCompleted)
-    .reduce((sum, entry) => sum + entry.activity.basePoints, 0);
-
-  if (board[team.specialActivity]?.isCompleted) {
-    points++; // Special activity gives +1 point
-  }
-
-  return { ...team, board, points };
+  return { ...rawTeam, board };
 };
