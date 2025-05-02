@@ -1,8 +1,5 @@
-import { IncomingMessage, Server, ServerResponse } from "http";
-import { getIronSession } from "iron-session";
+import { IncomingMessage, Server } from "http";
 import { WebSocket, WebSocketServer } from "ws";
-
-import { SESSION_OPTIONS, SessionData } from "@/lib/auth";
 
 export function initWebSocketServer(httpServer: Server) {
   const wss = new WebSocketServer({
@@ -14,19 +11,6 @@ export function initWebSocketServer(httpServer: Server) {
   const connections = new Set<WebSocket>();
 
   wss.on("connection", async (ws: WebSocket, req: IncomingMessage) => {
-    const res = new ServerResponse(req);
-    const session = await getIronSession<SessionData>(
-      req,
-      res,
-      SESSION_OPTIONS,
-    );
-
-    if (!session.teamId) {
-      console.error("No team ID in session");
-      ws.close(1000, "Unauthorized");
-      return;
-    }
-
     // Handle initial connection
     connections.add(ws);
 
