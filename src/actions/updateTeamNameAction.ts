@@ -4,6 +4,7 @@ import { Team } from "@/models/Team";
 
 import "server-only";
 
+import { sendInvalidationCode } from "@/revalidation/sendInvalidationCode";
 import { updateTeamName } from "@/services/updateTeamNameService";
 
 import { auth } from "./authActions";
@@ -24,4 +25,6 @@ export async function updateTeamAction(team: Team): Promise<void> {
   }
 
   await updateTeamName(team.id, team.name);
+
+  sendInvalidationCode(`getTeam/${team.id}`);
 }
