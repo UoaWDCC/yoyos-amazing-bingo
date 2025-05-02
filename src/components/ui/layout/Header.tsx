@@ -1,5 +1,8 @@
 "use client";
 
+import Link from "next/link";
+import { LogOut } from "lucide-react";
+
 import { Heading } from "../heading";
 import TeamNameEditor from "../heading/TeamNameEditor";
 
@@ -20,7 +23,12 @@ export default function Header({ title }: { title: string }) {
         {/* technically for the non existance SEO */}
         <Heading.h1>{title || "Untitled"}</Heading.h1>
       </div>
-      <TeamNameEditor />
+      <div className="flex justify-between">
+        <TeamNameEditor />
+        <Link className="underline" href="/">
+          <LogOut size={16} />
+        </Link>
+      </div>
     </div>
   );
 }
