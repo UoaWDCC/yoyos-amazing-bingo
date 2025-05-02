@@ -5,7 +5,7 @@ import "server-only";
 import { redirect } from "next/navigation";
 
 import { auth } from "@/actions/authActions";
-import { sendInvalidationCodes } from "@/revalidation/sendInvalidationCode";
+import { sendInvalidationCode } from "@/revalidation/sendInvalidationCode";
 import { completeTeamActivity } from "@/services/completeActivityService";
 import { getActivityById } from "@/services/getActivityByIdService";
 
@@ -40,10 +40,6 @@ export async function completeActivityAction(
   console.log(`Team ${teamId} completed activity ${activityId}`);
   await completeTeamActivity(teamId, activityId);
 
-  // TODO: Send invalidation codes
-  sendInvalidationCodes([
-    `getBoard/${teamId}`,
-    `getTeam/${teamId}`,
-    `getAllTeams`,
-  ]);
+  sendInvalidationCode(`getTeam/${teamId}`);
+  sendInvalidationCode(`getAllTeams`);
 }
