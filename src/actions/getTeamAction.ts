@@ -49,7 +49,6 @@ function getDummyData() {
     id: "test",
     name: "Test Team",
     code: "abc123",
-    points: 0,
     board,
     specialActivity: 0,
   };
