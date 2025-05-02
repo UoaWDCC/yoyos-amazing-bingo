@@ -6,10 +6,12 @@ import { redirect } from "next/navigation";
 import { signIn } from "@/actions/authActions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { mutate } from "swr";
 
 export function LoginForm() {
   const [state, action, isPending] = useActionState(signIn, null);
   if (state?.success) {
+    mutate("auth"); // Revalidate auth cache
     return redirect("/board");
   }
 
