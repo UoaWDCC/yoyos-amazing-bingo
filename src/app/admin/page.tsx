@@ -1,10 +1,11 @@
 "use client";
 
+import { redirect } from "next/navigation";
+
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
+import useAuth from "@/queries/useAuth";
 
 import { GameStatusField } from "./_components/GameStatusField";
-import { redirect } from "next/navigation";
-import useAuth from "@/queries/useAuth";
 
 export default function AdminPage() {
   const { data: teamId } = useAuth();

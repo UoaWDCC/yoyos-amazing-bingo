@@ -15,7 +15,7 @@ export default function LeaderboardListItem({
   rank,
   isYou,
 }: LeaderBoardItemProps) {
-  const points = getTeamTotalPoints(team)
+  const points = getTeamTotalPoints(team);
 
   return (
     <li

@@ -2,23 +2,23 @@
 
 import { useActionState } from "react";
 import { redirect } from "next/navigation";
+import { mutate } from "swr";
 
 import { auth, signIn } from "@/actions/authActions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { mutate } from "swr";
 
 export function LoginForm() {
-  const handleSignIn = async (_prevState: unknown, formData: FormData ) => {
-    const res = await signIn(formData)
+  const handleSignIn = async (_prevState: unknown, formData: FormData) => {
+    const res = await signIn(formData);
     if (res?.success) {
       const { teamId } = await auth();
       mutate("auth", teamId); // Revalidate auth cache
       redirect("/board");
     }
     return res;
-  }
-  
+  };
+
   const [state, action, isPending] = useActionState(handleSignIn, null);
 
   return (

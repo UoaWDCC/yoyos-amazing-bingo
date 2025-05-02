@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { cardNames } from "@/assets/pokecards";
+import { CardNames } from "@/assets/pokecards";
 import { Button } from "@/components/ui/button";
 import LoaderCircle from "@/components/ui/svg/LoaderCircle";
 import useGetActivity from "@/queries/useGetActivity";
@@ -72,7 +72,7 @@ export default function CollectClientPage({ secret }: { secret: string }) {
     <CardProvider
       value={{
         title: data.name,
-        imageKey: data.cardImageName as cardNames,
+        imageKey: data.cardImageName as CardNames,
       }}
     >
       {cardState ? (

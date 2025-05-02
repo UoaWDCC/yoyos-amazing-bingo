@@ -13,9 +13,9 @@ export function TeamNameInput(props: InputProps) {
       <input
         {...props}
         className={cn(
-          "focus:ring-primary disabled:bg-muted/50 focus:min-w-40 rounded-none bg-white font-mono focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+          "focus:ring-primary disabled:bg-muted/50 rounded-none bg-white font-mono focus:min-w-40 focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
           props.error && "focus:ring-destructive placeholder-destructive/80",
-          props.className
+          props.className,
         )}
       />
     </div>

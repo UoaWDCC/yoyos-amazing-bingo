@@ -12,7 +12,7 @@ import TeamNameEditor from "../heading/TeamNameEditor";
 export default function Header({ title }: { title: string }) {
   return (
     <div className="flex flex-col">
-        <div className="flex justify-between">
+      <div className="flex justify-between">
         <Heading.h2>
           Yoyo&apos;s <em className="ml-[-3px] font-semibold">Amazing</em>{" "}
           Bingo!

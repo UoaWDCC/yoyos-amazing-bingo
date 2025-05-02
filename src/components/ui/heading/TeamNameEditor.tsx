@@ -1,14 +1,14 @@
 "use client";
 
-import { Pencil } from "lucide-react";
-import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useRef, useState } from "react";
-
-import useAuth from "@/queries/useAuth";
-import useGetTeam from "@/queries/useGetTeam";
+import { useRouter } from "next/navigation";
+import { Pencil } from "lucide-react";
 
 import { cn } from "@/lib/cn";
 import mutateTeam from "@/queries/mutateTeam";
+import useAuth from "@/queries/useAuth";
+import useGetTeam from "@/queries/useGetTeam";
+
 import { TeamNameInput } from "./TeamNameInput";
 
 export default function TeamNameEditor() {
@@ -26,7 +26,7 @@ export default function TeamNameEditor() {
 
   useEffect(() => {
     setName(initialName);
-  }, [initialName])
+  }, [initialName]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -56,7 +56,9 @@ export default function TeamNameEditor() {
   };
 
   return (
-    <form onBlur={handleSubmit} onSubmit={handleSubmit}
+    <form
+      onBlur={handleSubmit}
+      onSubmit={handleSubmit}
       className="flex flex-col"
     >
       <TeamNameInput
@@ -70,13 +72,17 @@ export default function TeamNameEditor() {
         error={error}
       />
       {/* Input elements don't shrink to text width so we have to do this :( */}
-      <div className={cn("flex items-center gap-2", editing && "absolute -z-10 opacity-0")} onClick={handleClick}>
+      <div
+        className={cn(
+          "flex items-center gap-2",
+          editing && "absolute -z-10 opacity-0",
+        )}
+        onClick={handleClick}
+      >
         <span>{name}</span>
         {isEditorLive && <Pencil size={16} />}
       </div>
-      {error && <p className="text-destructive text-sm">
-        {error}
-      </p>}
+      {error && <p className="text-destructive text-sm">{error}</p>}
     </form>
-  )
+  );
 }

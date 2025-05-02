@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { cards } from "@/assets/pokecards";
+
 import { CodeSchema, IdSchema } from "./common";
 
 /** A global object, representing an activity everyone has access to */
@@ -10,8 +12,8 @@ export const ActivitySchema = z.object(
       .string()
       .nonempty({ message: "Activity name must be a non-empty string" }),
     code: CodeSchema,
-    cardImageName: z.string().nonempty({
-      message: "Activity card image name must be a non-empty string",
+    cardImageName: z.enum(Object.keys(cards.images) as [string, ...string[]], { // I give up
+      message: "Activity card image name must match a valid card name",
     }), // The name of the card image for the activity, to be resolved on the frontend
     description: z.string({ message: "Activity description must be a string" }),
     basePoints: z.number().int().min(0, {

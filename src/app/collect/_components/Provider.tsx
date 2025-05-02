@@ -1,16 +1,18 @@
 import React, { createContext, useContext } from "react";
 
-import { cardNames } from "@/assets/pokecards";
+
+
+import { CardNames } from "@/assets/pokecards";
 
 const ProviderContext = createContext({
   title: "",
-  imageKey: "" as cardNames,
+  imageKey: "" as CardNames,
 });
 
 type CardProviderProps = {
   value: {
     title: string;
-    imageKey: cardNames;
+    imageKey: CardNames;
   };
   children: React.ReactNode;
 };

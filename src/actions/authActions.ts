@@ -25,9 +25,7 @@ type Auth = {
  * @param formData - Form data
  * @returns Sign in state
  */
-export async function signIn(
-  formData: FormData,
-): Promise<SignInState> {
+export async function signIn(formData: FormData): Promise<SignInState> {
   try {
     const code = formData.get("code");
     if (!code) {

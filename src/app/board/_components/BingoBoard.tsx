@@ -1,7 +1,9 @@
-import { ActivityDrawer } from "./ActivityDrawer";
-import useAuth from "@/queries/useAuth";
 import { redirect } from "next/navigation";
+
+import useAuth from "@/queries/useAuth";
 import useGetTeam from "@/queries/useGetTeam";
+
+import { ActivityDrawer } from "./ActivityDrawer";
 
 export function BingoBoard() {
   const { data: teamId } = useAuth();
@@ -9,11 +11,7 @@ export function BingoBoard() {
     redirect("/admin");
   }
   const { data: team } = useGetTeam(teamId ?? null);
-
-  if (!team) {
-    return "Loading..."
-    // return <BingoBoardSkeleton />;
-  }
+  if (!team) return null;
 
   const squares = team.board;
 

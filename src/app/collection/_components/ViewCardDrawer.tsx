@@ -1,11 +1,10 @@
 "use client";
 
-import React from "react";
 import Image, { StaticImageData } from "next/image";
 
 import CardDisplay from "@/app/collect/_components/CardDisplay";
 import CardProvider from "@/app/collect/_components/Provider";
-import { cardNames, cards } from "@/assets/pokecards";
+import { CardNames, cards } from "@/assets/pokecards";
 import { Button } from "@/components/ui/button";
 import {
   Drawer,
@@ -19,12 +18,16 @@ import {
 import { Pill } from "@/components/ui/pill";
 import { Pokeball } from "@/components/ui/pokeball";
 import { pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
-import { TeamCollection } from "@/models/TeamCollection";
+import { TeamActivity } from "@/models/TeamActivity";
 
 import { UnknownCard } from "./Card";
 
-const ViewCardDrawer = (teamCollection: TeamCollection) => {
-  const pokeImageKey = teamCollection.imageKey as cardNames;
+type ViewCardDrawerProps = {
+  teamActivity: TeamActivity;
+};
+
+const ViewCardDrawer = ({ teamActivity }: ViewCardDrawerProps) => {
+  const pokeImageKey = teamActivity.activity.cardImageName as CardNames;
   const cardImage: StaticImageData = cards.images[pokeImageKey];
 
   if (cardImage === undefined) {
@@ -36,15 +39,15 @@ const ViewCardDrawer = (teamCollection: TeamCollection) => {
       <CardProvider value={{ title: "None", imageKey: pokeImageKey }}>
         <DrawerTrigger>
           <div className="bg-foreground relative grid aspect-[1/1.4] w-full place-items-center rounded">
-            <Image fill src={cardImage.src} alt={teamCollection.name} />
+            <Image fill src={cardImage.src} alt={teamActivity.activity.name} />
           </div>
         </DrawerTrigger>
         <DrawerContent>
           <div className="bg-pill-blue absolute bottom-0 left-1/2 -z-10 size-64 -translate-x-1/2 translate-y-1/2 rounded-full blur-3xl"></div>
           <DrawerHeader>
-            <DrawerTitle hidden>{teamCollection.name}</DrawerTitle>
+            <DrawerTitle hidden>{teamActivity.activity.name}</DrawerTitle>
             <div className="flex w-full justify-center">
-              <Pill variant="brand">{teamCollection.name} </Pill>
+              <Pill variant="brand">{teamActivity.activity.name} </Pill>
             </div>
           </DrawerHeader>
           <div className="h-120">
@@ -53,7 +56,7 @@ const ViewCardDrawer = (teamCollection: TeamCollection) => {
           <DrawerFooter>
             <div className="flex gap-4">
               <Pokeball
-                variant={pokeDifficulty[teamCollection.basePoints]}
+                variant={pokeDifficulty[teamActivity.activity.basePoints]}
                 className="size-12 shadow-xl"
               />
               <DrawerClose asChild>
