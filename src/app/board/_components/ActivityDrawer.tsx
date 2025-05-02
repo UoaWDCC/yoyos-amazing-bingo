@@ -41,7 +41,7 @@ const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
         });
         setError("");
         setIsDrawerOpen(false);
-        router.push(`/collect/${answer}`);
+        router.push(`/collect/${teamActivity.activity.cardImageName}`);
       } catch {
         setError("Invalid answer");
       }
