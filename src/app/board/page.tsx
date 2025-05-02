@@ -1,16 +1,16 @@
 import "@/components/ui/drawer";
 
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { Crown } from "lucide-react";
 
 import { auth } from "@/actions/authActions";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 import { Pill } from "@/components/ui/pill";
 import CardStack from "@/components/ui/svg/CardStack";
+import env from "@/lib/env";
 
 import { BingoBoard } from "./_components/BingoBoard";
-import { redirect } from "next/navigation";
-import env from "@/lib/env";
 
 export default async function BoardPage() {
   const { teamId } = await auth(); // Retrieve the teamId from authentication

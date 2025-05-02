@@ -8,8 +8,10 @@ import {
 } from "@/models/GameStatus";
 
 import "server-only";
-import { auth } from "./authActions";
+
 import env from "@/lib/env";
+
+import { auth } from "./authActions";
 
 /**
  * Updates the current game status.
