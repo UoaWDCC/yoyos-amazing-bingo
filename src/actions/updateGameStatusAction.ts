@@ -6,6 +6,7 @@ import {
   gameStatusSchema,
   setGameStatus,
 } from "@/models/GameStatus";
+import { sendInvalidationCode } from "@/revalidation/sendInvalidationCode";
 
 import "server-only";
 
@@ -30,4 +31,6 @@ export async function updateGameStatusAction(
     "actions/updateGameStatusAction.ts",
   );
   setGameStatus(newStatusParsed);
+
+  sendInvalidationCode("getGameStatus");
 }
