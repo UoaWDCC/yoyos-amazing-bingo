@@ -8,11 +8,13 @@ import useGetTeam from "@/queries/useGetTeam";
 
 import { UnknownCard } from "./_components/Card";
 import ViewCardDrawer from "./_components/ViewCardDrawer";
+import { redirect } from "next/navigation";
 
 export default function CodePage() {
   const { data: teamId } = useAuth();
   const { data: team } = useGetTeam(teamId ?? null);
 
+  if (team === "NONE") redirect("/");
   if (!team) return null;
   const board = team.board;
 

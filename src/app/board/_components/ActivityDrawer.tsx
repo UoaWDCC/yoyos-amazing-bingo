@@ -1,6 +1,6 @@
 "use client";
 
-import { memo, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { DialogTitle } from "@radix-ui/react-dialog";
 
@@ -25,7 +25,7 @@ export type ActivityDrawerProps = {
   index: number;
 };
 
-const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
+export const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
   const router = useRouter();
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [error, setError] = useState("");
@@ -113,7 +113,3 @@ const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
     </Drawer>
   );
 };
-
-const MemoActivityDrawer = memo(ActivityDrawer);
-
-export { MemoActivityDrawer as ActivityDrawer };

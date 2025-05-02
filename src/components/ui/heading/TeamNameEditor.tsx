@@ -16,7 +16,17 @@ export default function TeamNameEditor() {
   const isAdmin = teamId === "admin";
   const isEditorLive = teamId !== undefined && !isAdmin; // Don't fetch or submit data if not live
   const { data: team } = useGetTeam(isEditorLive ? teamId : null);
-  const initialName = isAdmin ? "Admin" : (team?.name ?? "");
+
+  let initialName: string;
+  if (isAdmin) {
+    initialName = "Admin";
+  } else if (team === "NONE") {
+    initialName = "";
+  } else if (team === undefined) {
+    initialName = "Loading...";
+  } else {
+    initialName = team.name;
+  }
 
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState(initialName);
@@ -31,6 +41,7 @@ export default function TeamNameEditor() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setEditing(false);
+    setError(undefined);
     if (!name.trim()) {
       setError("Team name cannot be empty");
       setName(initialName);
@@ -40,7 +51,7 @@ export default function TeamNameEditor() {
       return;
     }
     try {
-      if (!team) return; // Only if loading or admin
+      if (!team || team === "NONE") return; // If loading or admin or NONE
       await mutateTeam({ ...team, name });
       router.refresh();
     } catch (err) {

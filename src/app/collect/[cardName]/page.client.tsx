@@ -12,6 +12,7 @@ import useGetTeam from "@/queries/useGetTeam";
 import CardProvider from "../_components/Provider";
 import StateCardDisplay from "../_components/StateCardDisplay";
 import StateCollectingDisplay from "../_components/StateCollectingDisplay";
+import { redirect } from "next/navigation";
 
 export default function CollectClientPage({ cardName }: { cardName: string }) {
   const { data: teamId } = useAuth();
@@ -44,6 +45,8 @@ export default function CollectClientPage({ cardName }: { cardName: string }) {
       }, 4000);
     }
   }, [isAnimating]);
+
+  if (team === "NONE") redirect("/");
 
   if (!team) {
     return (
