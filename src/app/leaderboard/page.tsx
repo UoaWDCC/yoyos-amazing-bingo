@@ -18,8 +18,7 @@ export default function Leaderboard() {
 
   if (!teams) return null;
   const isAdmin = teamId === "admin";
-  const yourRank = teams.findIndex((team) => team.id === teamId);
-  const isInTop5 = yourRank < 5 && yourRank !== -1;
+  const isInTop5 = !isAdmin && teams.findIndex((team) => team.id === teamId) === -1;
 
   return (
     <NormalLayout title="Leaderboard">
