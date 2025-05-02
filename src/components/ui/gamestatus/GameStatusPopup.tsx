@@ -1,6 +1,7 @@
 "use client";
 
 import useGetGameStatus from "@/queries/useGetGameStatus";
+
 import Yoyover from "./Yoyover";
 
 export function GameStatusPopup() {

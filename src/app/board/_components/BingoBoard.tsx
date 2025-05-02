@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+
 import { ActivityDrawer } from "./ActivityDrawer";
 
 type BingoBoardProps = {

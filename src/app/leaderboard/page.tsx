@@ -6,10 +6,10 @@ import Back from "@/components/ui/back/Back";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 import { Pill } from "@/components/ui/pill";
 import PixelArrowL from "@/components/ui/svg/PixelArrowL";
+import { getTeamTotalPoints } from "@/logic/points/getTeamTotalPoints";
 
 import headingPic from "./_assets/headingPicture.png";
 import LeaderboardListItem from "./_components/LeaderboardListItem";
-import { getTeamTotalPoints } from "@/logic/points/getTeamTotalPoints";
 
 export default async function Leaderboard() {
   const { teamId } = await auth();

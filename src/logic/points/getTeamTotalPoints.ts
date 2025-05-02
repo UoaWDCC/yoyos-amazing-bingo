@@ -1,7 +1,11 @@
 import { Team } from "@/models/Team";
 
+import {
+  isColumnComplete,
+  isDiagonalComplete,
+  isRowComplete,
+} from "./boardComboChecks";
 import { getPointsOfActivityForTeam } from "./getPointsOfActivityForTeam";
-import { isColumnComplete, isDiagonalComplete, isRowComplete } from "./boardComboChecks";
 
 export function getTeamTotalPoints(team: Team): number {
   const board = team.board;

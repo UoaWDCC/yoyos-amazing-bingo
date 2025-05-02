@@ -7,7 +7,10 @@ import { Team } from "@/models/Team";
  *
  * @returns number - The total points for the activity for the specific team.
  */
-export function getPointsOfActivityForTeam(activity: Activity, team?: Team): number {
+export function getPointsOfActivityForTeam(
+  activity: Activity,
+  team?: Team,
+): number {
   const basePoints = activity.basePoints;
   const isSpecialActivity = team?.specialActivity === activity.boardOrder;
   return isSpecialActivity ? basePoints + 1 : basePoints;

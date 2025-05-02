@@ -1,7 +1,8 @@
 import Image from "next/image";
 
-import { Pill } from "../pill";
 import yoyovergif from "@/assets/gif/yoyover.gif";
+
+import { Pill } from "../pill";
 
 const Yoyover = () => {
   return (
