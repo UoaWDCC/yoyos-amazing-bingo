@@ -2,14 +2,14 @@ import { auth } from "@/actions/authActions";
 import Back from "@/components/ui/back/Back";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 import { Pill } from "@/components/ui/pill";
-import { getCollectionByTeamIdService } from "@/services/getActivitiesByTeamIdService";
+import { getActivitiesByTeamIdService } from "@/services/getActivitiesByTeamIdService";
 
 import { UnknownCard } from "./_components/Card";
 import ViewCardDrawer from "./_components/ViewCardDrawer";
 
 export default async function CodePage() {
   const { teamId } = await auth();
-  const teamCollection = await getCollectionByTeamIdService(teamId);
+  const teamCollection = await getActivitiesByTeamIdService(teamId);
 
   teamCollection.sort((a, b) => a.order - b.order);
 

@@ -17,11 +17,11 @@ import { Input } from "@/components/ui/input";
 import { Pill } from "@/components/ui/pill";
 import { Pokeball, pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
 import { cn } from "@/lib/cn";
-import { TeamActivity } from "@/models/TeamActivity";
+import { TeamActivityClient } from "@/models/TeamCollection";
 import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
 
 export type ActivityDrawerProps = {
-  teamActivity: TeamActivity;
+  teamActivity: TeamActivityClient;
   index: number;
 };
 
@@ -36,7 +36,7 @@ const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
     if (answer.length === 6) {
       try {
         await completeActivity({
-          activityId: teamActivity.activity.id.padStart(2, "0"),
+          activityId: teamActivity.id.padStart(2, "0"),
           answer,
         });
         setError("");
@@ -54,7 +54,7 @@ const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
 
   return (
     <Drawer
-      key={`${teamActivity.activity.boardOrder}`}
+      key={`${teamActivity.order}`}
       onOpenChange={() => {
         if (!isDrawerOpen) setError("");
         setIsDrawerOpen((prev) => !prev);
@@ -67,7 +67,7 @@ const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
             variant={
               teamActivity.isCompleted
                 ? "completed"
-                : pokeDifficulty[teamActivity.activity.basePoints]
+                : pokeDifficulty[teamActivity.basePoints]
             }
             className={cn(
               "cursor-pointer",
@@ -83,17 +83,15 @@ const ActivityDrawer = ({ teamActivity, index }: ActivityDrawerProps) => {
         <div className="bg-pill-blue absolute bottom-0 left-1/2 -z-10 size-64 -translate-x-1/2 translate-y-1/2 rounded-full blur-3xl"></div>
         <DrawerHeader>
           {/* required for screen reader */}
-          <DialogTitle hidden>{teamActivity.activity.name || ""}</DialogTitle>
+          <DialogTitle hidden>{teamActivity.name || ""}</DialogTitle>
           <div className="flex w-full justify-center gap-2">
-            <Pill>{teamActivity.activity.name}</Pill>
+            <Pill>{teamActivity.name}</Pill>
           </div>
-          <DrawerDescription>
-            {teamActivity.activity.description}
-          </DrawerDescription>
+          <DrawerDescription>{teamActivity.description}</DrawerDescription>
         </DrawerHeader>
         <div className="flex w-full justify-center">
           <Pokeball
-            variant={pokeDifficulty[teamActivity.activity.basePoints]}
+            variant={pokeDifficulty[teamActivity.basePoints]}
             size="fixed"
             className="shadow-2xl"
           />

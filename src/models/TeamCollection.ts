@@ -6,9 +6,11 @@ import { z } from "zod";
  *
  * On the frontend, this corresponds to the entire collection card board
  */
-export const TeamCollectionSchema = z.object(
+export const TeamActivityClientSchema = z.object(
   {
+    id: z.string(),
     name: z.string(),
+    description: z.string(),
     imageKey: z.string(),
     order: z.number(),
     basePoints: z.number(),
@@ -21,4 +23,4 @@ export const TeamCollectionSchema = z.object(
   },
 );
 
-export type TeamCollection = z.infer<typeof TeamCollectionSchema>;
+export type TeamActivityClient = z.infer<typeof TeamActivityClientSchema>;

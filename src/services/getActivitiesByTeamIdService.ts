@@ -6,16 +6,21 @@ import { z } from "zod";
 import { db } from "@/db/connection";
 import { teamActivitiesTable } from "@/db/schema";
 import { parseZod } from "@/lib/zod";
-import { TeamCollection, TeamCollectionSchema } from "@/models/TeamCollection";
+import {
+  TeamActivityClient,
+  TeamActivityClientSchema,
+} from "@/models/TeamCollection";
 
-export const getCollectionByTeamIdService = async (teamId: string) => {
+export const getActivitiesByTeamIdService = async (teamId: string) => {
   const rawActivities = await db.query.teamActivitiesTable.findMany({
     where: eq(teamActivitiesTable.teamId, teamId),
     with: { activity: true },
   });
 
-  const rawCollection: TeamCollection[] = rawActivities.map((activity) => ({
+  const rawCollection: TeamActivityClient[] = rawActivities.map((activity) => ({
+    id: activity.activityId,
     name: activity.activity.name,
+    description: activity.activity.description,
     order: activity.activity.boardOrder,
     basePoints: activity.activity.basePoints,
     imageKey: activity.activity.cardImageName,
@@ -26,9 +31,9 @@ export const getCollectionByTeamIdService = async (teamId: string) => {
     throw new Error(`teamActivity table with teamId ${teamId} not found`);
   }
 
-  const teamCollection: TeamCollection[] = rawCollection;
+  const teamCollection: TeamActivityClient[] = rawCollection;
   return parseZod(
-    z.array(TeamCollectionSchema),
+    z.array(TeamActivityClientSchema),
     teamCollection,
     "services/getActivitiesByTeamIdService.ts",
   );

@@ -19,11 +19,11 @@ import {
 import { Pill } from "@/components/ui/pill";
 import { Pokeball } from "@/components/ui/pokeball";
 import { pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
-import { TeamCollection } from "@/models/TeamCollection";
+import { TeamActivityClient } from "@/models/TeamCollection";
 
 import { UnknownCard } from "./Card";
 
-const ViewCardDrawer = (teamCollection: TeamCollection) => {
+const ViewCardDrawer = (teamCollection: TeamActivityClient) => {
   const pokeImageKey = teamCollection.imageKey as cardNames;
   const cardImage: StaticImageData = cards.images[pokeImageKey];
 
