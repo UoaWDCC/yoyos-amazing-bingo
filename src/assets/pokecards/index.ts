@@ -10,8 +10,11 @@ import warill from "./warill.webp";
 import warizard from "./warizard.webp";
 import webbykarp from "./webbykarp.webp";
 import wengar from "./wengar.webp";
+import weowth from "./weowth.webp";
 import wewtwo from "./wewtwo.webp";
+import wiglet from "./wiglet.webp";
 import witto from "./witto.webp";
+import wogepi from "./wogepi.webp";
 import worterra from "./worterra.webp";
 
 export const cards = {
@@ -31,7 +34,10 @@ export const cards = {
     wewtwo,
     witto,
     worterra,
-  } as const,
-};
+    weowth,
+    wiglet,
+    wogepi,
+  },
+} as const;
 
-export type cardNames = keyof typeof cards.images;
+export type CardNames = keyof typeof cards.images;

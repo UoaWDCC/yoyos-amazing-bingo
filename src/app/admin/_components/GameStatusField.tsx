@@ -1,11 +1,10 @@
-"use client";
-
 import { ChangeEvent } from "react";
 
-import useGetGameStatus from "@/queries/useGetGameStatus";
-import mutateGameStatus from "@/queries/mutateGameStatus";
-import { parseZod } from './../../../lib/zod';
 import { gameStatusSchema } from "@/models/GameStatus";
+import mutateGameStatus from "@/queries/mutateGameStatus";
+import useGetGameStatus from "@/queries/useGetGameStatus";
+
+import { parseZod } from "./../../../lib/zod";
 
 export function GameStatusField() {
   const { data: currentGameStatus } = useGetGameStatus();

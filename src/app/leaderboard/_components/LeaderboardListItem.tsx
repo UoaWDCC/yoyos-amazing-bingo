@@ -1,23 +1,21 @@
 import { Pill } from "@/components/ui/pill";
 import PixelArrowL from "@/components/ui/svg/PixelArrowL";
 import { cn } from "@/lib/cn";
+import { getTeamTotalPoints } from "@/logic/points/getTeamTotalPoints";
+import { Team } from "@/models/Team";
 
 type LeaderBoardItemProps = {
-  name: string;
+  team: Team;
   rank: number;
-  points?: number;
-  teamId: string;
-  id: string;
+  isYou: boolean;
 };
 
 export default function LeaderboardListItem({
-  name,
+  team,
   rank,
-  id,
-  points,
-  teamId,
+  isYou,
 }: LeaderBoardItemProps) {
-  const isYou = teamId === id;
+  const points = getTeamTotalPoints(team);
 
   return (
     <li
@@ -29,7 +27,7 @@ export default function LeaderboardListItem({
       <div className="flex gap-4 font-medium">
         <p className="opacity-50">{rank}.</p>
         <p className="flex gap-2">
-          {name}{" "}
+          {team.name}{" "}
           {isYou && (
             <span className="flex items-center justify-center gap-4">
               (YOU){" "}

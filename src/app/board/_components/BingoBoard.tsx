@@ -1,45 +1,23 @@
-"use client";
+import { redirect } from "next/navigation";
 
-import { useMemo } from "react";
+import useAuth from "@/queries/useAuth";
+import useGetTeam from "@/queries/useGetTeam";
 
 import { ActivityDrawer } from "./ActivityDrawer";
 
-type BingoBoardProps = {
-  teamId: string;
-};
+export function BingoBoard() {
+  const { data: teamId } = useAuth();
+  if (teamId === "admin") {
+    redirect("/admin");
+  }
+  const { data: team } = useGetTeam(teamId ?? null);
+  if (!team) return null;
 
-export function BingoBoard({ teamId }: BingoBoardProps) {
-  console.log(teamId);
-
-  // mock data
-  const squares = Array.from({ length: 16 }).map((_, index) => ({
-    isCompleted: Math.random() > 0.8,
-    points: 1 + Math.floor(Math.random() * 3),
-    activity: {
-      id: `${index}`,
-      name: `Activity ${index}`,
-      description: `Description ${index}`,
-      code: `code-${index}`,
-      cardImageName: `image-${index}.png`,
-      basePoints: 1 + Math.floor(Math.random() * 3),
-      boardOrder: index,
-    },
-  }));
-
-  const sortedSquares = useMemo(() => {
-    return squares?.sort((a, b) => {
-      return a.activity.boardOrder - b.activity.boardOrder;
-    });
-  }, [squares]);
-
-  // TODO: add loading skeleton back
-  // if (isLoading || !sortedSquares) {
-  //   return <BingoBoardSkeleton />;
-  // }
+  const squares = team.board;
 
   return (
     <div className="grid grid-cols-4 gap-2 px-8">
-      {sortedSquares.map((square, index) => (
+      {squares.map((square, index) => (
         <ActivityDrawer
           key={square.activity.boardOrder}
           teamActivity={square}

@@ -1,20 +1,21 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 
-import { cardNames } from "@/assets/pokecards";
+import { CardNames } from "@/assets/pokecards";
 import { Button } from "@/components/ui/button";
 import LoaderCircle from "@/components/ui/svg/LoaderCircle";
-import useGetActivity from "@/queries/useGetActivity";
+import useAuth from "@/queries/useAuth";
+import useGetTeam from "@/queries/useGetTeam";
 
 import CardProvider from "../_components/Provider";
 import StateCardDisplay from "../_components/StateCardDisplay";
 import StateCollectingDisplay from "../_components/StateCollectingDisplay";
 
-export default function CollectClientPage({ secret }: { secret: string }) {
-  const { data, isLoading } = useGetActivity(secret);
-
+export default function CollectClientPage({ cardName }: { cardName: string }) {
+  const { data: teamId } = useAuth();
+  const { data: team } = useGetTeam(teamId ?? null);
   const [cardState, setCardState] = useState(false);
   const [isAnimating, setAnimating] = useState(false);
 
@@ -44,7 +45,7 @@ export default function CollectClientPage({ secret }: { secret: string }) {
     }
   }, [isAnimating]);
 
-  if (isLoading) {
+  if (!team) {
     return (
       <>
         <div className="flex items-center justify-center">
@@ -55,7 +56,11 @@ export default function CollectClientPage({ secret }: { secret: string }) {
     );
   }
 
-  if (!data) {
+  const teamActivity = team.board.find(
+    (teamActivity) => teamActivity.activity.cardImageName === cardName,
+  );
+
+  if (!teamActivity) {
     return (
       <div className="flex h-screen flex-col items-center justify-center">
         <div className="text-center">
@@ -68,11 +73,13 @@ export default function CollectClientPage({ secret }: { secret: string }) {
     );
   }
 
+  const activityName = teamActivity.activity.name;
+
   return (
     <CardProvider
       value={{
-        title: data.name,
-        imageKey: data.cardImageName as cardNames,
+        title: activityName,
+        imageKey: cardName as CardNames,
       }}
     >
       {cardState ? (

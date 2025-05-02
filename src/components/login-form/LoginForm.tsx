@@ -2,16 +2,24 @@
 
 import { useActionState } from "react";
 import { redirect } from "next/navigation";
+import { mutate } from "swr";
 
-import { signIn } from "@/actions/authActions";
+import { auth, signIn } from "@/actions/authActions";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
 export function LoginForm() {
-  const [state, action, isPending] = useActionState(signIn, null);
-  if (state?.success) {
-    return redirect("/board");
-  }
+  const handleSignIn = async (_prevState: unknown, formData: FormData) => {
+    const res = await signIn(formData);
+    if (res?.success) {
+      const { teamId } = await auth();
+      mutate("auth", teamId); // Revalidate auth cache
+      redirect("/board");
+    }
+    return res;
+  };
+
+  const [state, action, isPending] = useActionState(handleSignIn, null);
 
   return (
     <form action={action} className="flex flex-col justify-between gap-6">

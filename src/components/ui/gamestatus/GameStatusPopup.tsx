@@ -1,8 +1,8 @@
 "use client";
 
-import useGetGameStatus from "@/queries/useGetGameStatus";
-
 import { ReactNode, useState } from "react";
+
+import useGetGameStatus from "@/queries/useGetGameStatus";
 
 import Yoyover from "./Yoyover";
 
@@ -31,7 +31,7 @@ function Backdrop({ children }: { children: ReactNode }) {
 
   return (
     <div
-      onClick={() => {console.log("wow"); setIsPopupDismissed(true);}}
+      onClick={() => setIsPopupDismissed(true)}
       className={`${isPopupDismissed ? "hidden" : "fixed"} inset-0 flex h-dvh w-dvw flex-col items-center justify-center gap-4 bg-black/40 px-4`}
     >
       {children}

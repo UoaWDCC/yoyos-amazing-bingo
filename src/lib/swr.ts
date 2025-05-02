@@ -4,7 +4,7 @@ import { ZodSchema } from "zod";
 import { parseZod } from "./zod";
 
 type ExtendedSWROptions<T, E> = SWRConfiguration<T, E> & {
-  cacheKey: string;
+  cacheKey: string | null;
   fetcher: () => Promise<T>;
   zodSchema: ZodSchema<T>;
   thisFile: string;

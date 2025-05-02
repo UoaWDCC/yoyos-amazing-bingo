@@ -1,27 +1,21 @@
+"use client";
+
 import "@/components/ui/drawer";
 
 import Link from "next/link";
 import { Crown } from "lucide-react";
 
-import { auth } from "@/actions/authActions";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 import { Pill } from "@/components/ui/pill";
 import CardStack from "@/components/ui/svg/CardStack";
 
 import { BingoBoard } from "./_components/BingoBoard";
-import { redirect } from "next/navigation";
-import env from "@/lib/env";
 
-export default async function BoardPage() {
-  const { teamId } = await auth(); // Retrieve the teamId from authentication
-  if (teamId === env.ADMIN_ID) {
-    redirect("/admin");
-  }
-
+export default function BoardPage() {
   return (
     <NormalLayout title="Board">
       <div className="flex flex-col gap-8">
-        <BingoBoard teamId={teamId} />
+        <BingoBoard />
       </div>
       <div className="flex w-full justify-center gap-4">
         <Link href="/leaderboard">

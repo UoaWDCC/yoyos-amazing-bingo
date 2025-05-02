@@ -8,6 +8,6 @@ export default async function mutateTeam(team: Team) {
   await updateTeamAction(team);
 
   // Invalidate the cache for the team and all teams
-  mutate(`getTeam/${team.id}`);
+  mutate(`getTeam/${team.id}`, team);
   mutate(`getAllTeams`);
 }

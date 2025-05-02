@@ -1,11 +1,9 @@
 import { ask } from "stdio";
 
+
+
 import { activitiesTable, teamsTable } from "@/db/schema";
-import {
-  nukeActivityDb,
-  nukeTeamActivitiesDb,
-  nukeTeamDb,
-} from "@/db/seed/nukeServices";
+import { nukeActivityDb, nukeTeamActivitiesDb, nukeTeamDb } from "@/db/seed/nukeServices";
 import {
   generateAllActivities,
   generateAllTeams,
@@ -27,6 +25,25 @@ async function main() {
   await nukeTeamDb();
   await nukeActivityDb();
 
+  const imageNames = [
+    "snorelax",
+    "bulbasour",
+    "jigglybuff",
+    "pikachoo",
+    "pokewebster",
+    "psyweb",
+    "warill",
+    "warizard",
+    "webbykarp",
+    "wengar",
+    "wewtwo",
+    "witto",
+    "worterra",
+    "weowth",
+    "wiglet",
+    "wogepi",
+  ] as const;
+
   const activities: (typeof activitiesTable.$inferInsert)[] = [];
   for (let i: number = 0; i < 16; i++) {
     const index = i.toString();
@@ -38,7 +55,7 @@ async function main() {
       description: `Description for activity-${index}`,
       boardOrder: i,
       basePoints: 1,
-      cardImageName: `${id}-img.png`,
+      cardImageName: imageNames[i],
     });
   }
 
