@@ -9,11 +9,14 @@ import { Pill } from "@/components/ui/pill";
 import CardStack from "@/components/ui/svg/CardStack";
 
 import { BingoBoard } from "./_components/BingoBoard";
+import { redirect } from "next/navigation";
+import env from "@/lib/env";
 
 export default async function BoardPage() {
   const { teamId } = await auth(); // Retrieve the teamId from authentication
-  // TODO: Revert to "aspa" to teamId
-  // const initialTeamData = await getTeam("aspa");
+  if (teamId === env.ADMIN_ID) {
+    redirect("/admin");
+  }
 
   return (
     <NormalLayout title="Board">

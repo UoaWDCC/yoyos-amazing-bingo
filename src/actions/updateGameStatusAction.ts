@@ -8,6 +8,8 @@ import {
 } from "@/models/GameStatus";
 
 import "server-only";
+import { auth } from "./authActions";
+import env from "@/lib/env";
 
 /**
  * Updates the current game status.
@@ -15,6 +17,11 @@ import "server-only";
 export async function updateGameStatusAction(
   newStatus: GameStatus,
 ): Promise<void> {
+  const { teamId } = await auth();
+  if (teamId !== env.ADMIN_ID) {
+    throw new Error("Unauthorized: Only admins can update game status.");
+  }
+
   const newStatusParsed = parseZod(
     gameStatusSchema,
     newStatus,
