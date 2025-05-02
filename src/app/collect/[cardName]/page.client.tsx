@@ -51,7 +51,6 @@ export default function CollectClientPage({ cardName }: { cardName: string }) {
         <div className="flex items-center justify-center">
           <LoaderCircle className="size-6 animate-spin *:stroke-rose-500" />
         </div>
-        <div />
       </>
     );
   }
@@ -60,16 +59,19 @@ export default function CollectClientPage({ cardName }: { cardName: string }) {
     (teamActivity) => teamActivity.activity.cardImageName === cardName,
   );
 
-  if (!teamActivity) {
+  if (!teamActivity || !teamActivity.isCompleted) {
     return (
-      <div className="flex h-screen flex-col items-center justify-center">
-        <div className="text-center">
-          <p className="mb-4 font-mono text-lg">Invalid code</p>
-          <Link href="/board">
-            <Button className="w-min rounded-full px-8">Back to board</Button>
-          </Link>
+      <>
+        <div />
+        <div className="flex h-screen flex-col items-center justify-center">
+          <div className="text-center">
+            <p className="mb-4 font-mono text-lg">Invalid code</p>
+            <Link href="/board">
+              <Button className="w-min rounded-full px-8">Back to board</Button>
+            </Link>
+          </div>
         </div>
-      </div>
+      </>
     );
   }
 

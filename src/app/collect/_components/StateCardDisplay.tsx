@@ -37,7 +37,6 @@ const StateCardDisplay = () => {
           </Link>
         </div>
       </div>
-      <div></div>
     </>
   );
 };

@@ -16,7 +16,6 @@ export default async function LoginPage() {
         />
       </div>
       <LoginForm />
-      <div />
     </NormalLayout>
   );
 }

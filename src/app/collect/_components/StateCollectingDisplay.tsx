@@ -27,7 +27,6 @@ const StateCollectingDisplay = ({
           <Pill className="darkout">Collect</Pill>
         </button>
       </div>
-      <div></div>
     </>
   );
 };
