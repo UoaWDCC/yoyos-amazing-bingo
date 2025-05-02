@@ -44,13 +44,13 @@ export default async function Leaderboard() {
           </div>
         )}
         <ul className="divide-foreground/15 flex flex-col gap-0 divide-y-2">
-          {teams.slice(5).map((team, i) => {
+          {teams.map((team, i) => {
             return (
               <LeaderboardListItem
                 key={i}
                 rank={i + 6}
-                teamId={teamId}
-                {...team}
+                team={team}
+                isYou={teamId === team.id}
               />
             );
           })}

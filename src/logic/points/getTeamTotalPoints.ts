@@ -13,7 +13,9 @@ export function getTeamTotalPoints(team: Team): number {
 
   // Sum up all completed squares' points (factors in +1 point for special activity)
   for (const teamActivity of board) {
-    totalPoints += getPointsOfActivityForTeam(teamActivity.activity, team);
+    if (teamActivity.isCompleted) {
+      totalPoints += getPointsOfActivityForTeam(teamActivity.activity, team);
+    }
   }
 
   // +1 point per row
