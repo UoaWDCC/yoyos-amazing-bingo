@@ -17,7 +17,7 @@ export default function CodePage() {
   const board = team.board;
 
   return (
-    <NormalLayout title="collection">
+    <NormalLayout title="Collection">
       <div className="flex min-h-full flex-col gap-4">
         <Back />
         <div className="flex w-full justify-center">
