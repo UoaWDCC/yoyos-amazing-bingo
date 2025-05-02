@@ -13,7 +13,7 @@ export function Footer() {
   };
 
   return (
-    <div className="h-10 flex justify-end">
+    <div className="flex h-10 justify-end">
       <Link
         onClick={handleSignOut}
         href="/"

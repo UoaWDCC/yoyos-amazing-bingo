@@ -1,7 +1,5 @@
 import React, { createContext, useContext } from "react";
 
-
-
 import { CardNames } from "@/assets/pokecards";
 
 const ProviderContext = createContext({

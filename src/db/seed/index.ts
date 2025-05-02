@@ -1,9 +1,11 @@
 import { ask } from "stdio";
 
-
-
 import { activitiesTable, teamsTable } from "@/db/schema";
-import { nukeActivityDb, nukeTeamActivitiesDb, nukeTeamDb } from "@/db/seed/nukeServices";
+import {
+  nukeActivityDb,
+  nukeTeamActivitiesDb,
+  nukeTeamDb,
+} from "@/db/seed/nukeServices";
 import {
   generateAllActivities,
   generateAllTeams,

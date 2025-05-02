@@ -6,11 +6,11 @@ import Back from "@/components/ui/back/Back";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 import { Pill } from "@/components/ui/pill";
 import PixelArrowL from "@/components/ui/svg/PixelArrowL";
+import useAuth from "@/queries/useAuth";
+import useGetAllTeams from "@/queries/useGetAllTeams";
 
 import headingPic from "./_assets/headingPicture.png";
 import LeaderboardListItem from "./_components/LeaderboardListItem";
-import useAuth from "@/queries/useAuth";
-import useGetAllTeams from "@/queries/useGetAllTeams";
 
 export default function Leaderboard() {
   const { data: teamId } = useAuth();
@@ -18,22 +18,25 @@ export default function Leaderboard() {
 
   if (!teams) return null;
   const isAdmin = teamId === "admin";
-  const isInTop5 = !isAdmin && teams.findIndex((team) => team.id === teamId) === -1;
+  const isInTop5 =
+    !isAdmin && teams.findIndex((team) => team.id === teamId) === -1;
 
   return (
     <NormalLayout title="Leaderboard">
       {/* Questionably hardcoded spacing with margin because NormalLayout doesn't accept class override and I can't be bothered changing it */}
       <Back />
       <div className="flex flex-col gap-6 overflow-auto px-2">
-        {!isAdmin && <div className="relative w-full">
-          <Image
-            src={headingPic}
-            alt="Leaderboard"
-            className="mask-center"
-            width={680}
-            height={240}
-          />
-        </div>}
+        {!isAdmin && (
+          <div className="relative w-full">
+            <Image
+              src={headingPic}
+              alt="Leaderboard"
+              className="mask-center"
+              width={680}
+              height={240}
+            />
+          </div>
+        )}
         {isInTop5 && (
           <div className="flex w-full items-center justify-center gap-4">
             <PixelArrowL className="rotate-180 animate-[arrow-left_1s_infinite_ease-in-out]" />

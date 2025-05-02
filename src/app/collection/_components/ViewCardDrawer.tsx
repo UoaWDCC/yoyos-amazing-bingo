@@ -27,7 +27,10 @@ type ViewCardDrawerProps = {
   isSpecialActivity: boolean;
 };
 
-const ViewCardDrawer = ({ teamActivity, isSpecialActivity }: ViewCardDrawerProps) => {
+const ViewCardDrawer = ({
+  teamActivity,
+  isSpecialActivity,
+}: ViewCardDrawerProps) => {
   const pokeImageKey = teamActivity.activity.cardImageName as CardNames;
   const cardImage: StaticImageData = cards.images[pokeImageKey];
 
@@ -57,7 +60,11 @@ const ViewCardDrawer = ({ teamActivity, isSpecialActivity }: ViewCardDrawerProps
           <DrawerFooter>
             <div className="flex gap-4">
               <Pokeball
-                variant={isSpecialActivity ? "master" : pokeDifficulty[teamActivity.activity.basePoints]}
+                variant={
+                  isSpecialActivity
+                    ? "master"
+                    : pokeDifficulty[teamActivity.activity.basePoints]
+                }
                 className="size-12 shadow-xl"
               />
               <DrawerClose asChild>

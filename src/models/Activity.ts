@@ -12,7 +12,8 @@ export const ActivitySchema = z.object(
       .string()
       .nonempty({ message: "Activity name must be a non-empty string" }),
     code: CodeSchema,
-    cardImageName: z.enum(Object.keys(cards.images) as [string, ...string[]], { // I give up
+    cardImageName: z.enum(Object.keys(cards.images) as [string, ...string[]], {
+      // I give up
       message: "Activity card image name must match a valid card name",
     }), // The name of the card image for the activity, to be resolved on the frontend
     description: z.string({ message: "Activity description must be a string" }),

@@ -6,11 +6,8 @@ import { Pill } from "@/components/ui/pill";
 import useAuth from "@/queries/useAuth";
 import useGetTeam from "@/queries/useGetTeam";
 
-
-
 import { UnknownCard } from "./_components/Card";
 import ViewCardDrawer from "./_components/ViewCardDrawer";
-
 
 export default function CodePage() {
   const { data: teamId } = useAuth();

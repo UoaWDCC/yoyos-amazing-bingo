@@ -6,7 +6,7 @@ export default function Back() {
   return (
     <Link
       href="/board"
-      className="group flex items-center gap-2 font-medium transition-all duration-[500ms] hover:gap-3 hover:text-rose-500 hover:duration-[250ms] mt-4"
+      className="group mt-4 flex items-center gap-2 font-medium transition-all duration-[500ms] hover:gap-3 hover:text-rose-500 hover:duration-[250ms]"
     >
       <span className="group-hover:animate-[arrow-left_1s_infinite_ease-in-out]">
         {"<-"}

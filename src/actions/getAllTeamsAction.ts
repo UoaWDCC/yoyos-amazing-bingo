@@ -2,12 +2,12 @@
 
 import "server-only";
 
+import env from "@/lib/env";
+import { getTeamTotalPoints } from "@/logic/points/getTeamTotalPoints";
 import { Team } from "@/models/Team";
 import { getAllTeams } from "@/services/getTeamsService";
 
 import { auth } from "./authActions";
-import env from "@/lib/env";
-import { getTeamTotalPoints } from "@/logic/points/getTeamTotalPoints";
 
 /**
  * Fetches a list of teams with their points.
