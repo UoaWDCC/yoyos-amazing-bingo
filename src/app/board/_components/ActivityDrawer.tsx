@@ -4,21 +4,19 @@ import { memo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { DialogTitle } from "@radix-ui/react-dialog";
 
-import {
-  Drawer,
-  DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTrigger,
-} from "@/components/ui/drawer";
+
+
+import { Drawer, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTrigger } from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
 import { Pill } from "@/components/ui/pill";
 import { Pokeball, pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
 import { cn } from "@/lib/cn";
-import { getPointsOfActivityForTeam } from "@/logic/points/getPointsOfActivityForTeam";
 import { TeamActivity } from "@/models/TeamActivity";
 import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
+
+
+
+
 
 export type ActivityDrawerProps = {
   teamActivity: TeamActivity;
@@ -91,24 +89,19 @@ const ActivityDrawer = ({
         <DrawerHeader>
           {/* required for screen reader */}
           <DialogTitle hidden>{teamActivity.activity.name || ""}</DialogTitle>
-          <div className="flex w-full justify-between gap-2">
+          <div className="flex w-full justify-between items-start gap-2">
             <Pill>{teamActivity.activity.name}</Pill>
-            <Pill>
-              {getPointsOfActivityForTeam(
-                teamActivity.activity,
-                isSpecialActivity,
+            <div>
+              <Pill>
+                {teamActivity.activity.basePoints}
+                pts
+              </Pill>
+              {isSpecialActivity && (
+                <div className="mt-1 text-pink-500 text-center text-sm whitespace-pre"> +1!<br /></div>
               )}
-              pts
-            </Pill>
+            </div>
           </div>
           <DrawerDescription>
-            {isSpecialActivity && (
-              <span>
-                MASTER BALL: +1 pts
-                <br />
-                <br />
-              </span>
-            )}
             {teamActivity.activity.description}
           </DrawerDescription>
         </DrawerHeader>
