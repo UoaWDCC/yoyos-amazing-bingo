@@ -62,10 +62,10 @@ export async function signIn(formData: FormData): Promise<SignInState> {
 export async function auth(): Promise<Auth> {
   try {
     const { teamId } = await getSession();
-    return { teamId: teamId ?? "", error: "Not authenticated" };
+    return { teamId: teamId ?? "UNKNOWN", error: "Not authenticated" };
   } catch (error) {
     console.log("Error getting auth", error);
-    return { teamId: "", error: "Not authenticated" };
+    return { teamId: "UNKNOWN", error: "Not authenticated" };
   }
 }
 

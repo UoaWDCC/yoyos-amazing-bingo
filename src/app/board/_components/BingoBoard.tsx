@@ -7,11 +7,11 @@ import { ActivityDrawer } from "./ActivityDrawer";
 
 export function BingoBoard() {
   const { data: teamId } = useAuth();
-  if (teamId === "admin") {
-    redirect("/admin");
-  }
   const { data: team } = useGetTeam(teamId ?? null);
-  if (!team) return null;
+
+  if (teamId === "admin") redirect("/admin");
+  if (team === "NONE") redirect("/");
+  if (team === undefined) return <div>Loading...</div>;
 
   const squares = team.board;
 
