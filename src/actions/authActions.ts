@@ -76,5 +76,4 @@ export async function auth(): Promise<Auth> {
 export async function signOut() {
   const session = await getSession();
   session.destroy();
-  return redirect("/");
 }

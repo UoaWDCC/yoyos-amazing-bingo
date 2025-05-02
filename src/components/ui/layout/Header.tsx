@@ -25,9 +25,6 @@ export default function Header({ title }: { title: string }) {
       </div>
       <div className="flex justify-between">
         <TeamNameEditor />
-        <Link className="underline" href="/">
-          <LogOut size={16} />
-        </Link>
       </div>
     </div>
   );
