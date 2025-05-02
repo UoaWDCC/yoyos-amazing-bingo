@@ -1,11 +1,36 @@
-import { Team } from "@/models/Team";
+import { eq } from "drizzle-orm";
 
-// TODO: do
+import { db } from "@/db/connection";
+import { activitiesTable, teamActivitiesTable, teamsTable } from "@/db/schema";
+import { parseZod } from "@/lib/zod";
+import { Team, TeamSchema } from "@/models/Team";
+import { assembleTeams } from "@/services/assembleTeam";
+
 export async function updateTeamName(
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   teamId: string,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   name: string,
 ): Promise<Team> {
-  throw new Error("Not implemented");
+  // Update the team name
+  await db.update(teamsTable).set({ name }).where(eq(teamsTable.id, teamId));
+
+  // Refetch the team with all relations
+  const rows = await db
+    .select()
+    .from(teamsTable)
+    .innerJoin(
+      teamActivitiesTable,
+      eq(teamsTable.id, teamActivitiesTable.teamId),
+    )
+    .innerJoin(
+      activitiesTable,
+      eq(teamActivitiesTable.activityId, activitiesTable.id),
+    )
+    .where(eq(teamsTable.id, teamId));
+
+  if (rows.length === 0) {
+    throw new Error(`Team with ID '${teamId}' not found`);
+  }
+
+  const team: Team = assembleTeams(rows);
+  return parseZod(TeamSchema, team, "services/updateTeamName.ts");
 }

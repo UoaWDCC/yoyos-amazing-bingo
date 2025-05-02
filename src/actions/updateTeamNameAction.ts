@@ -14,7 +14,9 @@ import { auth } from "./authActions";
  * @param team New team.
  * @throws Error if the team is not authorized to update.
  */
-export async function updateTeamAction(team: Team): Promise<void> {
+export async function updateTeamAction(
+  team: Pick<Team, "id" | "name">,
+): Promise<void> {
   const { teamId: sessionTeamId } = await auth();
   if (
     !sessionTeamId ||
