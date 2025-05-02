@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
+import { GameStatusPopup } from "../gamestatus/GameStatusPopup";
 import Header from "./Header";
-import Yoyover from "./Yoyover";
 
 type LayoutProps = {
   children: ReactNode;
@@ -15,7 +15,7 @@ export const NormalLayout = (props: LayoutProps) => {
         <Header title={props.title} />
         {props.children}
       </div>
-      {false && <Yoyover />}
+      <GameStatusPopup />
     </div>
   );
 };

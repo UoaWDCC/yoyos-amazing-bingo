@@ -1,8 +1,7 @@
-import React from "react";
 import Image from "next/image";
 
 import { Pill } from "../pill";
-import yoyovergif from "./assets/gif/ItsYoyover-anim.gif";
+import yoyovergif from "@/assets/gif/yoyover.gif";
 
 const Yoyover = () => {
   return (
