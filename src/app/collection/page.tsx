@@ -18,23 +18,21 @@ export default function CodePage() {
 
   return (
     <NormalLayout title="Collection">
-      <div className="flex min-h-full flex-col gap-4">
-        <Back />
-        <div className="flex w-full justify-center">
-          <Pill>
-            {board.filter((teamActivity) => teamActivity.isCompleted).length}
-            /16 cards
-          </Pill>
-        </div>
-        <div className="grid grid-cols-3 gap-4 overflow-y-scroll">
-          {board.map((teamActivity, index) =>
-            teamActivity.isCompleted ? (
-              <ViewCardDrawer teamActivity={teamActivity} key={index} />
-            ) : (
-              <UnknownCard key={index} />
-            ),
-          )}
-        </div>
+      <Back />
+      <div className="flex w-full justify-center">
+        <Pill>
+          {board.filter((teamActivity) => teamActivity.isCompleted).length}
+          /16 cards
+        </Pill>
+      </div>
+      <div className="grid grid-cols-3 gap-4 px-2 overflow-y-auto">
+        {board.map((teamActivity, index) =>
+          teamActivity.isCompleted ? (
+            <ViewCardDrawer teamActivity={teamActivity} key={index} />
+          ) : (
+            <UnknownCard key={index} />
+          ),
+        )}
       </div>
     </NormalLayout>
   );

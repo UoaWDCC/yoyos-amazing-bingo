@@ -17,7 +17,7 @@ export const NormalLayout = (props: LayoutProps) => {
       <div className="flex flex-col justify-between gap-4 overflow-hidden border-x-2 p-6">
         <Header title={props.title} />
         {props.children}
-      <Footer />
+        <Footer />
       </div>
       <GameStatusPopup />
     </div>

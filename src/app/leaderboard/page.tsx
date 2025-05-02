@@ -23,9 +23,8 @@ export default function Leaderboard() {
   return (
     <NormalLayout title="Leaderboard">
       {/* Questionably hardcoded spacing with margin because NormalLayout doesn't accept class override and I can't be bothered changing it */}
-
-      <div className="mt-4 flex min-h-full flex-col gap-6">
-        <Back />
+      <Back />
+      <div className="flex flex-col gap-6 overflow-auto px-2">
         {!isAdmin && <div className="relative w-full">
           <Image
             src={headingPic}

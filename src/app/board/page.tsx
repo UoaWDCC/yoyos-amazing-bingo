@@ -26,7 +26,7 @@ export default function BoardPage() {
   return (
     <NormalLayout title="Board">
       <div className="flex w-full justify-center">
-        <Pill size="large" className="font-medium">
+        <Pill>
           {getTeamTotalPoints(team)}pts
         </Pill>
       </div>
