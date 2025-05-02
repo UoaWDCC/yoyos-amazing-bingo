@@ -4,19 +4,20 @@ import { memo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { DialogTitle } from "@radix-ui/react-dialog";
 
-
-
-import { Drawer, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTrigger } from "@/components/ui/drawer";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
 import { Pill } from "@/components/ui/pill";
 import { Pokeball, pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
 import { cn } from "@/lib/cn";
 import { TeamActivity } from "@/models/TeamActivity";
 import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
-
-
-
-
 
 export type ActivityDrawerProps = {
   teamActivity: TeamActivity;
@@ -89,7 +90,7 @@ const ActivityDrawer = ({
         <DrawerHeader>
           {/* required for screen reader */}
           <DialogTitle hidden>{teamActivity.activity.name || ""}</DialogTitle>
-          <div className="flex w-full justify-between items-start gap-2">
+          <div className="flex w-full items-start justify-between gap-2">
             <Pill>{teamActivity.activity.name}</Pill>
             <div>
               <Pill>
@@ -97,7 +98,11 @@ const ActivityDrawer = ({
                 pts
               </Pill>
               {isSpecialActivity && (
-                <div className="mt-1 text-pink-500 text-center text-sm whitespace-pre"> +1!<br /></div>
+                <div className="mt-1 text-center text-sm whitespace-pre text-pink-500">
+                  {" "}
+                  +1!
+                  <br />
+                </div>
               )}
             </div>
           </div>
