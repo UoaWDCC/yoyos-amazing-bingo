@@ -46,7 +46,7 @@ async function main() {
 
   const activities: (typeof activitiesTable.$inferInsert)[] = [];
   for (let i: number = 0; i < 16; i++) {
-    const index = i.toString();
+    const index = (i + 1).toString();
     const id = String(index).padStart(2, "0");
     activities.push({
       id,
