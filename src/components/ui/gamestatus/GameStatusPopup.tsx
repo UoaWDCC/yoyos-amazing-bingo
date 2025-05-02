@@ -2,8 +2,10 @@
 
 import { ReactNode, useState } from "react";
 
+import { cn } from "@/lib/cn";
 import useGetGameStatus from "@/queries/useGetGameStatus";
 
+import Credits from "./Credits";
 import Yoyover from "./Yoyover";
 
 export function GameStatusPopup() {
@@ -18,7 +20,7 @@ export function GameStatusPopup() {
   } else if (data === "finished") {
     return (
       <Backdrop>
-        <p>...</p>
+        <Credits />
       </Backdrop>
     ); // TODO: that page we talked about Ashton
   } else {
@@ -32,7 +34,10 @@ function Backdrop({ children }: { children: ReactNode }) {
   return (
     <div
       onClick={() => setIsPopupDismissed(true)}
-      className={`${isPopupDismissed ? "hidden" : "fixed"} inset-0 flex h-dvh w-dvw flex-col items-center justify-center gap-4 bg-black/40 px-4`}
+      className={cn(
+        "inset-0 flex h-dvh w-dvw flex-col items-center justify-center gap-4 bg-black/40 p-4",
+        isPopupDismissed ? "hidden" : "fixed",
+      )}
     >
       {children}
     </div>
