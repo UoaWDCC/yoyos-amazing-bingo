@@ -3,7 +3,7 @@ import { mutate } from "swr";
 import { updateTeamAction } from "@/actions/updateTeamNameAction";
 import { Team } from "@/models/Team";
 
-/** @see updateTeam */
+/** @see updateTeamAction */
 export default async function mutateTeam(team: Team) {
   await updateTeamAction(team);
 

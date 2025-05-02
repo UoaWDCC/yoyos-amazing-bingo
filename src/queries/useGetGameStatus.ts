@@ -1,6 +1,6 @@
 import { getGameStatusAction } from "@/actions/getGameStatusAction";
 import { useSWRWithZod } from "@/lib/swr";
-import { gameStatusSchema } from "@/models/gameStatus";
+import { gameStatusSchema } from "@/models/GameStatus";
 
 /** @see getGameStatusAction */
 export default function useGetGameStatus() {

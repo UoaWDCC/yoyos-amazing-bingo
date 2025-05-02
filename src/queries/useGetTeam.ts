@@ -2,7 +2,7 @@ import { getTeamAction } from "@/actions/getTeamAction";
 import { useSWRWithZod } from "@/lib/swr";
 import { TeamSchema } from "@/models/Team";
 
-/** @see getTeam */
+/** @see getTeamAction */
 export default function useGetTeam(teamId: string) {
   return useSWRWithZod({
     cacheKey: `getTeam/${teamId}`,
