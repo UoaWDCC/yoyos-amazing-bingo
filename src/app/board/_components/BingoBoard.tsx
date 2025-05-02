@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 
-import { TeamActivityClient } from "@/models/TeamCollection";
+import { TeamActivityClient } from "@/models/TeamActivityClientSchema";
 
 import { ActivityDrawer } from "./ActivityDrawer";
 

@@ -9,7 +9,7 @@ import { parseZod } from "@/lib/zod";
 import {
   TeamActivityClient,
   TeamActivityClientSchema,
-} from "@/models/TeamCollection";
+} from "@/models/TeamActivityClientSchema";
 
 export const getActivitiesByTeamIdService = async (teamId: string) => {
   const rawActivities = await db.query.teamActivitiesTable.findMany({
