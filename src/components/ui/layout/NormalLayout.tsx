@@ -9,6 +9,7 @@ import Header from "./Header";
 type LayoutProps = {
   children: ReactNode;
   title: string;
+  noFooter?: boolean;
 };
 
 export const NormalLayout = (props: LayoutProps) => {
@@ -17,7 +18,7 @@ export const NormalLayout = (props: LayoutProps) => {
       <div className="flex flex-col justify-between gap-4 overflow-hidden border-x-2 p-6">
         <Header title={props.title} />
         {props.children}
-        <Footer />
+        {!props.noFooter ? <Footer /> : <div />}
       </div>
       <GameStatusPopup />
     </div>

@@ -9,7 +9,7 @@ export default async function CollectPage({
   const { cardName } = await params;
 
   return (
-    <NormalLayout title="Collect">
+    <NormalLayout title="Collect" noFooter>
       <CollectClientPage cardName={cardName} />
     </NormalLayout>
   );
