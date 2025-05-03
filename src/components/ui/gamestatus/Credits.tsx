@@ -25,6 +25,7 @@ const Credits = () => {
             <p>Kevin Cheung</p>
             <p>Jerry Nguyen</p>
             <p>Andrew Qiu</p>
+            <p>Anton Garay</p>
           </ul>
           <ul>
             <h3>Webster Director</h3>
