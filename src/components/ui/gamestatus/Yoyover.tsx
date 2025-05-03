@@ -11,7 +11,7 @@ const Yoyover = () => {
         <Image src={yoyovergif} className="object-cover" fill alt="Yoyover" />
       </div>
       <Pill>It&apos;s yoyover</Pill>
-      <Pill>Please return to 405-422 :D</Pill>
+      <Pill>Please return to 401-439 :D</Pill>
     </>
   );
 };
