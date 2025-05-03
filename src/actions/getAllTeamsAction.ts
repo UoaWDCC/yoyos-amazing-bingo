@@ -8,6 +8,7 @@ import { Team } from "@/models/Team";
 import { getAllTeams } from "@/services/getTeamsService";
 
 import { auth } from "./authActions";
+import { cleanTeam } from "@/logic/cleanTeam";
 
 /**
  * Fetches a list of teams with their points.
@@ -16,7 +17,7 @@ import { auth } from "./authActions";
  */
 export async function getAllTeamsAction(): Promise<Team[]> {
   try {
-    const teams = await getAllTeams();
+    const teams = (await getAllTeams()).map(cleanTeam);
     const { teamId } = await auth();
     const isAdmin = teamId === env.ADMIN_ID;
     teams.sort((a, b) => getTeamTotalPoints(b) - getTeamTotalPoints(a));

@@ -8,6 +8,7 @@ import { Team } from "@/models/Team";
 import { getTeamById } from "@/services/getTeamByIdService";
 
 import { auth } from "./authActions";
+import { cleanTeam } from "@/logic/cleanTeam";
 
 /**
  * Fetches the team info for a given team ID.
@@ -22,7 +23,7 @@ export async function getTeamAction(teamId: string): Promise<Team | null> {
       return null;
     }
 
-    return await getTeamById(teamId);
+    return cleanTeam(await getTeamById(teamId));
   } catch (error) {
     console.log("Error getting team in action, assuming session issue", error);
     return null;
