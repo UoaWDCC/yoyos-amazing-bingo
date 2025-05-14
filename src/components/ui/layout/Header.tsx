@@ -14,10 +14,8 @@ export default function Header({ title }: { title: string }) {
     <div className="flex flex-col">
       <div className="flex justify-between">
         <Heading.h2>
-          Yoyo&apos;s <em className="ml-[-3px] font-semibold">Amazing</em>{" "}
-          Bingo!
+          Webster&apos;s <em className="ml-[-3px] font-semibold">Alternate Reality!</em>
         </Heading.h2>
-        {/* technically for the non existance SEO */}
         <Heading.h1>{title || "Untitled"}</Heading.h1>
       </div>
       <div className="flex justify-between">
