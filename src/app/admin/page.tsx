@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 import useAuth from "@/queries/useAuth";
 
+import ActivityEditor from "./_components/ActivityEditor";
 import { GameStatusField } from "./_components/GameStatusField";
 
 export default function AdminPage() {
@@ -19,6 +20,7 @@ export default function AdminPage() {
       <Link className="underline" href="/leaderboard">
         Leaderboard
       </Link>
+      <ActivityEditor />
     </NormalLayout>
   );
 }
