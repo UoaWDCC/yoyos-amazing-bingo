@@ -3,7 +3,6 @@
 import "server-only";
 
 import { auth } from "@/actions/authActions";
-import { sendInvalidationCode } from "@/revalidation/sendInvalidationCode";
 import { updateActivityDescription } from "@/services/updateActivityDescriptionService";
 
 export async function updateActivityDescriptionAction(
@@ -14,5 +13,4 @@ export async function updateActivityDescriptionAction(
   if (teamId !== "admin") throw new Error("Unauthorized");
 
   await updateActivityDescription(activityId, description);
-  sendInvalidationCode(`getActivity/${activityId}`);
 }

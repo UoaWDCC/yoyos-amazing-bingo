@@ -3,9 +3,7 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 
-import { getActivityByIdAction } from "@/actions/getActivityByIdAction";
-import { updateActivityDescriptionAction } from "@/actions/updateActivityDescriptionAction";
-import { Activity } from "@/models/Activity";
+import mutateActivityDescription from "@/queries/mutateActivityDescription";
 import useGetAllActivities from "@/queries/useGetAllActivities";
 
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
@@ -16,16 +14,18 @@ export default function ActivityEditor() {
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSelect = async (id: string) => {
+  const handleSelect = (id: string) => {
     setSelectedId(id);
-    const activity = await getActivityByIdAction(id);
-    setDescription(activity.description);
+    const activity = activities?.find((a) => a.id === id);
+    if (activity) {
+      setDescription(activity.description);
+    }
   };
 
   const handleSave = async () => {
     if (!selectedId) return;
     setLoading(true);
-    await updateActivityDescriptionAction(selectedId, description);
+    await mutateActivityDescription(selectedId, description);
     setLoading(false);
     alert("Updated successfully!");
   };
