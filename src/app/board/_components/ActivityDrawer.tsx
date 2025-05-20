@@ -3,6 +3,7 @@
 import { memo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import ReactMarkdown from "react-markdown";
 
 import {
   Drawer,
@@ -107,7 +108,7 @@ const ActivityDrawer = ({
             </div>
           </div>
           <DrawerDescription>
-            {teamActivity.activity.description}
+            <ReactMarkdown>{teamActivity.activity.description}</ReactMarkdown>
           </DrawerDescription>
         </DrawerHeader>
         <div className="flex w-full justify-center">
