@@ -3,6 +3,8 @@
 import { memo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { DialogTitle } from "@radix-ui/react-dialog";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 import {
   Drawer,
@@ -107,7 +109,9 @@ const ActivityDrawer = ({
             </div>
           </div>
           <DrawerDescription>
-            {teamActivity.activity.description}
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {teamActivity.activity.description}
+            </ReactMarkdown>
           </DrawerDescription>
         </DrawerHeader>
         <div className="flex w-full justify-center">
@@ -122,14 +126,16 @@ const ActivityDrawer = ({
           />
         </div>
         <DrawerFooter>
-          <Input
-            type="text"
-            placeholder="Enter code"
-            maxLength={6}
-            onChange={handleInputChange}
-            error={error}
-            disabled={isSubmitting}
-          />
+          <div className="flex w-full flex-col gap-4">
+            <Input
+              type="text"
+              placeholder="Enter code"
+              maxLength={6}
+              onChange={handleInputChange}
+              error={error}
+              disabled={isSubmitting}
+            />
+          </div>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
