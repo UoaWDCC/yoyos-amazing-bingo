@@ -6,6 +6,7 @@ import { DialogTitle } from "@radix-ui/react-dialog";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
+import { Button } from "@/components/ui/button/Button";
 import {
   Drawer,
   DrawerContent,
@@ -18,6 +19,7 @@ import { Input } from "@/components/ui/input";
 import { Pill } from "@/components/ui/pill";
 import { Pokeball, pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
 import { cn } from "@/lib/cn";
+import { markdownToText } from "@/lib/text";
 import { TeamActivity } from "@/models/TeamActivity";
 import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
 
@@ -52,6 +54,17 @@ const ActivityDrawer = ({
         setError("Invalid answer");
       }
     }
+  };
+
+  const handleDownload = () => {
+    const element = document.createElement("a");
+    const plainText = markdownToText(teamActivity.activity.description);
+    const file = new Blob([plainText], { type: "text/plain" });
+    element.href = URL.createObjectURL(file);
+    element.download = `clue-${teamActivity.activity.name.toLowerCase().replace(/\s+/g, "-")}.txt`;
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
   };
 
   if (teamActivity.isCompleted) {
@@ -126,14 +139,19 @@ const ActivityDrawer = ({
           />
         </div>
         <DrawerFooter>
-          <Input
-            type="text"
-            placeholder="Enter code"
-            maxLength={6}
-            onChange={handleInputChange}
-            error={error}
-            disabled={isSubmitting}
-          />
+          <div className="flex w-full flex-col gap-4">
+            <Button variant="outline" onClick={handleDownload}>
+              Download Clue
+            </Button>
+            <Input
+              type="text"
+              placeholder="Enter code"
+              maxLength={6}
+              onChange={handleInputChange}
+              error={error}
+              disabled={isSubmitting}
+            />
+          </div>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
