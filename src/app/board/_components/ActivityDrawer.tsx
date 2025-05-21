@@ -6,7 +6,6 @@ import { DialogTitle } from "@radix-ui/react-dialog";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
-import { Button } from "@/components/ui/button/Button";
 import {
   Drawer,
   DrawerContent,
