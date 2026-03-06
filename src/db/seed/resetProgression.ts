@@ -1,3 +1,16 @@
+/**
+ * Script to reset team progression (activity completions) in the database.
+ *
+ * Usage:
+ *   pnpm db:reset                        — resets all teams
+ *   pnpm db:reset <teamId> [teamId...]   — resets only the specified teams
+ *
+ * Args:
+ *   teamId  Optional. One or more team IDs (space-separated) to reset.
+ *           Unknown IDs are ignored with a warning.
+ *           If all provided IDs are invalid, the script aborts.
+ */
+
 import { ask } from "stdio";
 
 import { resetTeamProgress } from "@/services/resetTeamProgressService";

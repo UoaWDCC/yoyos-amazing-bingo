@@ -3,9 +3,9 @@
 import { useState } from "react";
 
 import { resetTeamProgressAction } from "@/actions/resetTeamProgressAction";
-import { teamList } from "@/db/data/teamList";
+import { teams } from "@/db/data/teamsData";
 
-const allIds = teamList.map((t) => t.id);
+const allIds = teams.map((t) => t.id);
 
 export function ResetProgressionButton() {
   const [selected, setSelected] = useState<Set<string>>(new Set(allIds));
@@ -62,7 +62,7 @@ export function ResetProgressionButton() {
         </label>
       </div>
       <div className="flex flex-col gap-1 pl-2">
-        {teamList.map((team) => (
+        {teams.map((team) => (
           <div key={team.id} className="flex items-center gap-2">
             <input
               type="checkbox"
