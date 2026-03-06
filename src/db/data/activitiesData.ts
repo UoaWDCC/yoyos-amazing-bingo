@@ -1,5 +1,5 @@
 import { activitiesTable } from "@/db/schema";
-import { generateRandomCode } from "@/db/seed/seedServices";
+import generateRandomCode from "@/db/data/generateRandomCode";
 
 const imageNames = [
   "snorelax",

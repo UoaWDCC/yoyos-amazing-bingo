@@ -1,10 +1,6 @@
-import random from "random-string-generator";
-
 import { teamsTable } from "@/db/schema";
+import generateRandomCode from "@/db/data/generateRandomCode";
 
-function generateRandomCode() {
-  return random(6, "alphanumeric");
-}
 
 export const teams: (typeof teamsTable.$inferInsert)[] = [
   { id: "volu", name: "Volunteers", code: generateRandomCode(), specialActivity: 0 },
