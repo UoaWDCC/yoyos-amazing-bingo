@@ -1,6 +1,6 @@
 import { ask } from "stdio";
 
-import { resetTeamProgressDb } from "@/db/seed/resetServices";
+import { resetTeamProgress } from "@/services/resetTeamProgressService";
 import { teamIds as allTeamIds } from "@/db/data/teamsData";
 
 async function main() {
@@ -38,7 +38,7 @@ async function main() {
   }
 
   console.log(`Resetting progression for ${target}...`);
-  await resetTeamProgressDb(isPartial ? validIds : undefined);
+  await resetTeamProgress(isPartial ? validIds : undefined);
 
   console.log("Reset completed successfully!");
   process.exit(0);

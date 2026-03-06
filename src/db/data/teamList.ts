@@ -1,0 +1,18 @@
+export const teamList = [
+  { id: "volu", name: "Volunteers", specialActivity: 0 },
+  { id: "esports", name: "Esports", specialActivity: 1 },
+  { id: "esa", name: "ESA", specialActivity: 2 },
+  { id: "reng", name: "Rainbow Engineering", specialActivity: 3 },
+  { id: "uabc", name: "UABC", specialActivity: 4 },
+  { id: "ausa", name: "AUSA", specialActivity: 5 },
+  { id: "ausco", name: "AUSCO", specialActivity: 6 },
+  { id: "vps", name: "VPS", specialActivity: 7 },
+  { id: "aspa", name: "ASPA", specialActivity: 8 },
+  { id: "aucc", name: "AUCC", specialActivity: 9 },
+  { id: "fsae", name: "FSAE", specialActivity: 10 },
+  { id: "motorsports", name: "Motorsports", specialActivity: 11 },
+  { id: "tansa", name: "TANSA", specialActivity: 12 },
+  { id: "uaic", name: "UAIC", specialActivity: 13 },
+  { id: "medr", name: "Med Revue", specialActivity: 14 },
+  { id: "hidd", name: "Hidden Treasures", specialActivity: 15 },
+] as const;

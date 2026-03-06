@@ -3,7 +3,7 @@ import { inArray } from "drizzle-orm";
 import { db } from "@/db/connection";
 import { teamActivitiesTable } from "@/db/schema";
 
-export async function resetTeamProgressDb(teamIds?: string[]) {
+export async function resetTeamProgress(teamIds?: string[]) {
   if (teamIds && teamIds.length > 0) {
     await db
       .update(teamActivitiesTable)

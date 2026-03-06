@@ -8,6 +8,7 @@ import useAuth from "@/queries/useAuth";
 
 import ActivityEditor from "./_components/ActivityEditor";
 import { GameStatusField } from "./_components/GameStatusField";
+import { ResetProgressionButton } from "./_components/ResetProgressionButton";
 
 export default function AdminPage() {
   const { data: teamId } = useAuth();
@@ -17,6 +18,7 @@ export default function AdminPage() {
   return (
     <NormalLayout title="Admin">
       <GameStatusField />
+      <ResetProgressionButton />
       <Link className="underline" href="/leaderboard">
         Leaderboard
       </Link>
