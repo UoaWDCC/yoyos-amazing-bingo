@@ -17,12 +17,14 @@ export default function AdminPage() {
 
   return (
     <NormalLayout title="Admin">
-      <GameStatusField />
-      <ResetProgressionButton />
-      <Link className="underline" href="/leaderboard">
-        Leaderboard
-      </Link>
-      <ActivityEditor />
+      <div className="flex flex-col gap-4 overflow-auto">
+        <GameStatusField />
+        <ResetProgressionButton />
+        <Link className="underline" href="/leaderboard">
+          Leaderboard
+        </Link>
+        <ActivityEditor />
+      </div>
     </NormalLayout>
   );
 }
