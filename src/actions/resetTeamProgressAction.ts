@@ -5,6 +5,7 @@ import "server-only";
 import { auth } from "@/actions/authActions";
 import { sendInvalidationCode } from "@/revalidation/sendInvalidationCode";
 import { resetTeamProgress } from "@/services/resetTeamProgressService";
+import env from "@/lib/env";
 
 /**
  * Resets the progression (activity completions) for one or more teams.
@@ -18,11 +19,16 @@ export async function resetTeamProgressAction(
 ): Promise<void> {
   const { teamId } = await auth();
 
-  if (teamId !== "admin") {
+  if (teamId !== env.ADMIN_ID) {
     throw new Error("Unauthorized");
   }
 
   await resetTeamProgress(teamIds);
 
   sendInvalidationCode("getAllTeams");
+  if (Array.isArray(teamIds)) {
+    for (const id of teamIds) {
+      sendInvalidationCode(`getTeam/${id}`);
+    }
+  }
 }
