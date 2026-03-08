@@ -1,4 +1,3 @@
-import random from "random-string-generator";
 
 import { db } from "@/db/connection";
 import { activitiesTable, teamActivitiesTable, teamsTable } from "@/db/schema";
@@ -63,8 +62,4 @@ export async function generateTeamActivitiesTable(
 
   await Promise.all(promises);
   console.log("generating teamActivities table");
-}
-
-export function generateRandomCode() {
-  return random(6, "alphanumeric");
 }
