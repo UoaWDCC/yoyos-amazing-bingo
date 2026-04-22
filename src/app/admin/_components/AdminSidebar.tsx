@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
-
-type Section = "game" | "activities" | "teams";
+type Section = "game" | "activities" | "teams" | "leaderboard";
 
 type AdminSidebarProps = {
   activeSection: Section;
@@ -13,6 +11,7 @@ const navItems: { label: string; value: Section }[] = [
   { label: "Game", value: "game" },
   { label: "Activities", value: "activities" },
   { label: "Teams", value: "teams" },
+  { label: "Leaderboard", value: "leaderboard" },
 ];
 
 export function AdminSidebar({ activeSection, onSelect }: AdminSidebarProps) {
@@ -33,11 +32,6 @@ export function AdminSidebar({ activeSection, onSelect }: AdminSidebarProps) {
           </button>
         ))}
       </nav>
-      <div className="mt-auto p-4">
-        <Link href="/leaderboard" className="text-sm text-gray-500 underline">
-          Leaderboard
-        </Link>
-      </div>
     </aside>
   );
 }

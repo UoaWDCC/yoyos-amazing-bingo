@@ -11,9 +11,10 @@ import useAuth from "@/queries/useAuth";
 import { ActivitySection } from "./_components/ActivitySection";
 import { AdminSidebar } from "./_components/AdminSidebar";
 import { GameSection } from "./_components/GameSection";
+import { LeaderboardSection } from "./_components/LeaderboardSection";
 import { TeamsSection } from "./_components/TeamsSection";
 
-type Section = "game" | "activities" | "teams";
+type Section = "game" | "activities" | "teams" | "leaderboard";
 
 export default function AdminPage() {
   const { data: teamId } = useAuth();
@@ -45,6 +46,7 @@ export default function AdminPage() {
           {activeSection === "game" && <GameSection />}
           {activeSection === "activities" && <ActivitySection />}
           {activeSection === "teams" && <TeamsSection />}
+          {activeSection === "leaderboard" && <LeaderboardSection />}
         </main>
       </div>
     </div>
