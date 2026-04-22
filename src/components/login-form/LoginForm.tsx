@@ -14,7 +14,12 @@ export function LoginForm() {
     if (res?.success) {
       const { teamId } = await auth();
       mutate("auth", teamId); // Revalidate auth cache
-      redirect("/board");
+
+      if (teamId == "admin") {
+        redirect("/admin");
+      } else {
+        redirect("/board");
+      }
     }
     return res;
   };
