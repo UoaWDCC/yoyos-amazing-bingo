@@ -34,7 +34,13 @@ export function ActivitySection() {
         boardOrder: activity.boardOrder,
       });
     }
-  }, [selectedId, activities]);
+    // Intentionally exclude `activities` — we only want to reset the form when
+    // the user selects a different activity, not on every SWR revalidation (e.g.
+    // window focus). This means external updates to the selected activity won't
+    // be reflected in the form while editing, but that's fine since there is
+    // only one admin account and no concurrent edits are possible.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedId]);
 
   const handleSave = async () => {
     if (!selectedId || !form) return;
