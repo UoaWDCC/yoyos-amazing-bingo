@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { LogOutIcon } from "lucide-react";
 import { mutate } from "swr";
 
@@ -17,16 +17,22 @@ import { TeamsSection } from "./_components/TeamsSection";
 type Section = "game" | "activities" | "teams" | "leaderboard";
 
 export default function AdminPage() {
-  const { data: teamId } = useAuth();
+  const { data: teamId, isLoading } = useAuth();
   const [activeSection, setActiveSection] = useState<Section>("game");
+  const router = useRouter();
 
-  if (!teamId) return null;
-  if (teamId !== "admin") redirect("/board");
+  useEffect(() => {
+    if (isLoading) return;
+    if (!teamId) router.replace("/");
+    else if (teamId !== "admin") router.replace("/board");
+  }, [isLoading, teamId, router]);
+
+  if (isLoading || teamId !== "admin") return null;
 
   const handleSignOut = async () => {
     await signOut();
     mutate("auth", null);
-    redirect("/");
+    router.push("/");
   };
 
   return (
