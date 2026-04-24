@@ -14,7 +14,7 @@ import { GameSection } from "./_components/GameSection";
 import { LeaderboardSection } from "./_components/LeaderboardSection";
 import { TeamsSection } from "./_components/TeamsSection";
 
-type Section = "game" | "activities" | "teams" | "leaderboard";
+import type { Section } from "./_components/AdminSidebar";
 
 export default function AdminPage() {
   const { data: teamId, isLoading } = useAuth();
@@ -23,8 +23,12 @@ export default function AdminPage() {
 
   useEffect(() => {
     if (isLoading) return;
-    if (!teamId) router.replace("/");
-    else if (teamId !== "admin") router.replace("/board");
+    
+    if (!teamId) {
+      router.replace("/")
+    } else if (teamId !== "admin") {
+      router.replace("/board")
+    };
   }, [isLoading, teamId, router]);
 
   if (isLoading || teamId !== "admin") return null;
@@ -46,6 +50,7 @@ export default function AdminPage() {
           Sign out <LogOutIcon size={16} />
         </button>
       </header>
+      
       <div className="flex flex-1 overflow-hidden">
         <AdminSidebar activeSection={activeSection} onSelect={setActiveSection} />
         <main className="flex-1 overflow-auto p-8">

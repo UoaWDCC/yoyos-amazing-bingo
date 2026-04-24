@@ -14,7 +14,7 @@ export function LeaderboardSection() {
       <h2 className="text-lg font-semibold">Leaderboard</h2>
       <ul className="divide-foreground/15 flex flex-col gap-0 divide-y-2">
         {teams.map((team, i) => (
-          // This is located under leader/_components
+          // This is located under leaderboard/_components
           <LeaderboardListItem key={team.id} rank={i + 1} team={team} isYou={false} />
         ))}
       </ul>

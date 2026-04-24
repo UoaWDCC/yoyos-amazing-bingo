@@ -1,6 +1,6 @@
 "use client";
 
-type Section = "game" | "activities" | "teams" | "leaderboard";
+export type Section = "game" | "activities" | "teams" | "leaderboard";
 
 type AdminSidebarProps = {
   activeSection: Section;
