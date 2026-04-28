@@ -27,15 +27,23 @@ export function ActivityEditForm({ activity }: ActivityEditFormProps) {
     boardOrder: activity.boardOrder,
   });
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleSave = async () => {
+    setError(null);
     setLoading(true);
-    await mutateActivity({ id: activity.id, ...form });
-    setLoading(false);
+    try {
+      await mutateActivity({ id: activity.id, ...form });
+    } catch {
+      setError("Failed to save activity.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="flex max-w-2xl flex-col gap-4">
+      {error && <p className="text-sm text-red-500">{error}</p>}
       <h2 className="text-xl font-bold">Edit: {activity.name}</h2>
 
       <label className="flex flex-col gap-1">
@@ -92,6 +100,7 @@ export function ActivityEditForm({ activity }: ActivityEditFormProps) {
       <Button isLoading={loading} onClick={handleSave} className="mt-2 w-32">
         Save
       </Button>
+      
     </div>
   );
 }
