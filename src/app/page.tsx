@@ -6,7 +6,7 @@ import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 
 export default async function LoginPage() {
   return (
-    <NormalLayout title="Login">
+    <NormalLayout title="Login" noFooter={true}>
       <div className="relative h-[180px] w-full">
         <Image
           src={logo}

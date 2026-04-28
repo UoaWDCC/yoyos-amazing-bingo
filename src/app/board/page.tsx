@@ -2,8 +2,9 @@
 
 import "@/components/ui/drawer";
 
+import { useEffect } from "react";
 import Link from "next/link";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Crown } from "lucide-react";
 
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
@@ -16,12 +17,19 @@ import useGetTeam from "@/queries/useGetTeam";
 import { BingoBoard } from "./_components/BingoBoard";
 
 export default function BoardPage() {
-  const { data: teamId } = useAuth();
-  if (teamId === "admin") {
-    redirect("/admin");
-  }
-  const { data: team } = useGetTeam(teamId ?? null);
-  if (!team) return null;
+  const { data: teamId, isLoading } = useAuth();
+  const { data: team } = useGetTeam(
+    !isLoading && teamId && teamId !== "admin" ? teamId : null,
+  );
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLoading) return;
+    if (!teamId) router.replace("/");
+    else if (teamId === "admin") router.replace("/admin");
+  }, [isLoading, teamId, router]);
+
+  if (isLoading || teamId === "admin" || !team) return null;
 
   return (
     <NormalLayout title="Board">
