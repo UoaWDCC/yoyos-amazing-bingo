@@ -3,22 +3,20 @@ import generateRandomCode from "@/db/data/generateRandomCode";
 
 
 export const teams: (typeof teamsTable.$inferInsert)[] = [
-  { id: "volu", name: "Volunteers", code: generateRandomCode(), specialActivity: 0 },
-  { id: "esports", name: "Esports", code: generateRandomCode(), specialActivity: 1 },
-  { id: "esa", name: "ESA", code: generateRandomCode(), specialActivity: 2 },
-  { id: "reng", name: "Rainbow Engineering", code: generateRandomCode(), specialActivity: 3 },
-  { id: "uabc", name: "UABC", code: generateRandomCode(), specialActivity: 4 },
-  { id: "ausa", name: "AUSA", code: generateRandomCode(), specialActivity: 5 },
-  { id: "ausco", name: "AUSCO", code: generateRandomCode(), specialActivity: 6 },
-  { id: "vps", name: "VPS", code: generateRandomCode(), specialActivity: 7 },
-  { id: "aspa", name: "ASPA", code: generateRandomCode(), specialActivity: 8 },
-  { id: "aucc", name: "AUCC", code: generateRandomCode(), specialActivity: 9 },
-  { id: "fsae", name: "FSAE", code: generateRandomCode(), specialActivity: 10 },
-  { id: "motorsports", name: "Motorsports", code: generateRandomCode(), specialActivity: 11 },
-  { id: "tansa", name: "TANSA", code: generateRandomCode(), specialActivity: 12 },
-  { id: "uaic", name: "UAIC", code: generateRandomCode(), specialActivity: 13 },
-  { id: "medr", name: "Med Revue", code: generateRandomCode(), specialActivity: 14 },
-  { id: "hidd", name: "Hidden Treasures", code: generateRandomCode(), specialActivity: 15 },
+  { id: "vps", name: "VPS", code: generateRandomCode(), specialActivity: 0 },
+  { id: "web3", name: "WEB3UOA", code: generateRandomCode(), specialActivity: 1 },
+  { id: "lug", name: "LUG", code: generateRandomCode(), specialActivity: 2 },
+  { id: "medr", name: "Med Revue", code: generateRandomCode(), specialActivity: 3 },
+  { id: "uoavc", name: "UOAVC", code: generateRandomCode(), specialActivity: 4 },
+  { id: "rap", name: "RAP", code: generateRandomCode(), specialActivity: 5 },
+  { id: "wphd", name: "WPHD", code: generateRandomCode(), specialActivity: 6 },
+  { id: "oce", name: "OCE", code: generateRandomCode(), specialActivity: 7 },
+  { id: "kac", name: "KAC", code: generateRandomCode(), specialActivity: 8 },
+  { id: "ssa", name: "SSA", code: generateRandomCode(), specialActivity: 9 },
+  { id: "uaic", name: "UAIC", code: generateRandomCode(), specialActivity: 10 },
+  { id: "umsa", name: "UMSA", code: generateRandomCode(), specialActivity: 11 },
+  { id: "aucc", name: "AUCC", code: generateRandomCode(), specialActivity: 12 },
+  { id: "ayo", name: "AYO", code: generateRandomCode(), specialActivity: 13 },
 ];
 
 export const teamIds: string[] = teams.map((t) => t.id);
