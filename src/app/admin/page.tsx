@@ -8,6 +8,8 @@ import { mutate } from "swr";
 import { signOut } from "@/actions/authActions";
 import useAuth from "@/queries/useAuth";
 
+import { GameStatusPopup } from "@/components/ui/gamestatus/GameStatusPopup";
+
 import { ActivitySection } from "./_components/ActivitySection";
 import { AdminSidebar } from "./_components/AdminSidebar";
 import { GameSection } from "./_components/GameSection";
@@ -60,6 +62,7 @@ export default function AdminPage() {
           {activeSection === "leaderboard" && <LeaderboardSection />}
         </main>
       </div>
+      <GameStatusPopup />
     </div>
   );
 }

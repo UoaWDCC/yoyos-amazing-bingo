@@ -180,3 +180,16 @@ html[data-state-blind-2="true"] .blind-2 {
     #ffffff 100%
   );
 }
+
+@keyframes credits-roll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+.credits-roll {
+  animation: credits-roll 45s linear infinite;
+}
