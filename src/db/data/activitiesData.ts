@@ -2,22 +2,22 @@ import { activitiesTable } from "@/db/schema";
 import generateRandomCode from "@/db/data/generateRandomCode";
 
 const imageNames = [
-  "snorelax",
-  "bulbasour",
-  "jigglybuff",
-  "pikachoo",
-  "pokewebster",
-  "psyweb",
-  "warill",
-  "warizard",
-  "webbykarp",
-  "wengar",
-  "wewtwo",
-  "witto",
-  "worterra",
-  "weowth",
-  "wiglet",
-  "wogepi",
+  "abbey_card",
+  "andrew_card",
+  "brandon_card",
+  "chris_card",
+  "deasy_card",
+  "eshana_card",
+  "henry_card",
+  "kot_card",
+  "kyle_card",
+  "maternus_card",
+  "matthew_card",
+  "nancy_card",
+  "nick_card",
+  "sam_card",
+  "shuaib_card",
+  "tom_card",
 ] as const;
 
 export const activities: (typeof activitiesTable.$inferInsert)[] = Array.from(
