@@ -30,9 +30,6 @@ export default function CodePage() {
           teamActivity.isCompleted ? (
             <ViewCardDrawer
               teamActivity={teamActivity}
-              isSpecialActivity={
-                team.specialActivity === teamActivity.activity.boardOrder
-              }
               key={index}
             />
           ) : (

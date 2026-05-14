@@ -16,8 +16,7 @@ import {
 } from "@/components/ui/drawer";
 import { Input } from "@/components/ui/input";
 import { Pill } from "@/components/ui/pill";
-import { Pokeball, pokeDifficulty } from "@/components/ui/pokeball/Pokeball";
-import { cn } from "@/lib/cn";
+import { JailImage } from "@/components/ui/jailImage/JailImage";
 import { TeamActivity } from "@/models/TeamActivity";
 import useCompleteActivityMutation from "@/queries/useCompleteActivityMutation";
 
@@ -55,7 +54,9 @@ const ActivityDrawer = ({
   };
 
   if (teamActivity.isCompleted) {
-    return <Pokeball variant="completed" />;
+    return (
+      <div className="aspect-square size-full rounded-lg border bg-neutral-200 select-none" />
+    );
   }
 
   return (
@@ -69,18 +70,9 @@ const ActivityDrawer = ({
     >
       <DrawerTrigger disabled={teamActivity.isCompleted}>
         <div className="relative">
-          <Pokeball
-            variant={
-              teamActivity.isCompleted
-                ? "completed"
-                : isSpecialActivity
-                  ? "master"
-                  : pokeDifficulty[teamActivity.activity.basePoints]
-            }
-            className={cn(
-              "cursor-pointer",
-              teamActivity.isCompleted && "cursor-default",
-            )}
+          <JailImage
+            cardImageName={teamActivity.activity.cardImageName}
+            className="cursor-pointer select-none border"
           />
           <p className="bg-pill absolute right-0 bottom-0 rounded px-2 py-1 text-xs font-bold">
             {index + 1}
@@ -115,14 +107,10 @@ const ActivityDrawer = ({
           </DrawerDescription>
         </DrawerHeader>
         <div className="flex w-full justify-center">
-          <Pokeball
-            variant={
-              isSpecialActivity
-                ? "master"
-                : pokeDifficulty[teamActivity.activity.basePoints]
-            }
+          <JailImage
+            cardImageName={teamActivity.activity.cardImageName}
             size="fixed"
-            className="shadow-2xl"
+            className="border shadow-2xl"
           />
         </div>
         <DrawerFooter>

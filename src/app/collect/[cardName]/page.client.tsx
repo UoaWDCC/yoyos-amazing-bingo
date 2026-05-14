@@ -30,18 +30,13 @@ export default function CollectClientPage({ cardName }: { cardName: string }) {
     if (html) {
       html.setAttribute("data-state-dim", "true");
       setTimeout(() => html.setAttribute("data-state-pokehide", "true"), 200);
-      setTimeout(() => html.setAttribute("data-state-blind", "true"), 2000);
       setTimeout(() => {
-        html.setAttribute("data-state-dim", "false");
-        html.setAttribute("data-state-blind-2", "true");
-      }, 3000);
-      setTimeout(() => {
-        html.removeAttribute("data-state-dim");
-        html.removeAttribute("data-state-pokehide");
-        html.removeAttribute("data-state-blind");
-        html.removeAttribute("data-state-blind-2");
         setCardState(true);
-      }, 4000);
+        setTimeout(() => {
+          html.removeAttribute("data-state-dim");
+          html.removeAttribute("data-state-pokehide");
+        }, 100);
+      }, 1500);
     }
   }, [isAnimating]);
 
