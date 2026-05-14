@@ -25,7 +25,8 @@ const StateCardDisplay = () => {
             className="slide-up"
             style={{ "--delay": 1.25 } as React.CSSProperties}
           >
-            {imageKey}
+            {/* Remove the last 5 characters ("_card") */}
+            {imageKey.substring(0, imageKey.length - 5)}
           </Pill>
           <CardDisplay />
           <Link
