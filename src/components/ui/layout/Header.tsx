@@ -14,7 +14,7 @@ export default function Header({ title }: { title: string }) {
     <div className="flex flex-col">
       <div className="flex justify-between">
         <Heading.h2>
-          Webster&apos;s <em className="ml-[-3px] font-semibold">Alternate Reality!</em>
+          Webster&apos;s <em className="ml-[-3px] font-semibold">Villain Arc!</em>
         </Heading.h2>
         <Heading.h1>{title || "Untitled"}</Heading.h1>
       </div>

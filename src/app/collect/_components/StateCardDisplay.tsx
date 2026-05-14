@@ -19,7 +19,7 @@ const StateCardDisplay = () => {
             className="slide-up"
             style={{ "--delay": 0.5 } as React.CSSProperties}
           >
-            You&apos;ve Collected
+            You&apos;ve Rescued
           </Heading.h2>
           <Pill
             className="slide-up"
