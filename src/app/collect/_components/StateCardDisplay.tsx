@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Heading } from "@/components/ui/heading";
 import { Pill } from "@/components/ui/pill";
 
+import { stripCardSuffix } from "@/lib/imageKey";
+
 import CardDisplay from "./CardDisplay";
 import { useCard } from "./Provider";
 
@@ -25,8 +27,7 @@ const StateCardDisplay = () => {
             className="slide-up"
             style={{ "--delay": 1.25 } as React.CSSProperties}
           >
-            {/* Remove the last 5 characters ("_card") */}
-            {imageKey.substring(0, imageKey.length - 5)}
+            {stripCardSuffix(imageKey)}
           </Pill>
           <CardDisplay />
           <Link

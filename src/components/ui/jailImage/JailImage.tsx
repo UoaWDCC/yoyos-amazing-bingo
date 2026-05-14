@@ -3,6 +3,7 @@ import { cva, VariantProps } from "class-variance-authority";
 
 import { jailImages } from "@/assets/images/jailImages";
 import { cn } from "@/lib/cn";
+import { cardToJailKey } from "@/lib/imageKey";
 
 const jailImage = cva("rounded-lg bg-cover bg-center bg-neutral-400", {
   variants: {
@@ -23,7 +24,7 @@ type JailImageProps = {
   HTMLAttributes<HTMLDivElement>;
 
 const JailImage = ({ cardImageName, size, style, className, ...props }: JailImageProps) => {
-  const jailKey = cardImageName.replace("_card", "_jail") as keyof typeof jailImages;
+  const jailKey = cardToJailKey(cardImageName) as keyof typeof jailImages;
   const src = jailImages[jailKey].src;
 
   return (
