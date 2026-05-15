@@ -14,11 +14,9 @@ export function getTeamTotalPoints(team: Team): number {
   // Sum up all completed squares' points (factors in +1 point for special activity)
   for (const teamActivity of board) {
     if (teamActivity.isCompleted) {
-      const isSpecialActivity =
-        teamActivity.activity.boardOrder === team.specialActivity;
       totalPoints += getPointsOfActivityForTeam(
         teamActivity.activity,
-        isSpecialActivity,
+        false,
       );
     }
   }
