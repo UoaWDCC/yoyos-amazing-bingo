@@ -7,5 +7,6 @@ export type Id = z.infer<typeof IdSchema>;
 
 export const CodeSchema = z
   .string()
-  .length(6, { message: "Code must be a 6 character string" });
+  .min(1, { message: "Code must be a non-empty string" })
+  .max(6, { message: "Code must be at most 6 characters" });
 export type Code = z.infer<typeof CodeSchema>;

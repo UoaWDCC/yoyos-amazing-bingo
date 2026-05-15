@@ -38,7 +38,7 @@ const ActivityDrawer = ({
 
   const handleInputChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const answer = e.target.value;
-    if (answer.length === 6) {
+    if (answer.length === teamActivity.activity.code.length) {
       try {
         await completeActivity({
           activityId: teamActivity.activity.id.padStart(2, "0"),
@@ -118,7 +118,7 @@ const ActivityDrawer = ({
             <Input
               type="text"
               placeholder="Enter code"
-              maxLength={6}
+              maxLength={teamActivity.activity.code.length}
               onChange={handleInputChange}
               error={error}
               disabled={isSubmitting}

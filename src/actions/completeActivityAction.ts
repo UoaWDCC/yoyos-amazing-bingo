@@ -25,7 +25,7 @@ export async function completeActivityAction(
     redirect("/");
   }
 
-  if (!activityCode || activityCode.length !== 6) {
+  if (!activityCode) {
     throw new Error("Incorrect activity code");
   }
 

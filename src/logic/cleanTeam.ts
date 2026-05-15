@@ -7,16 +7,14 @@ import { Team } from "@/models/Team";
 import { TeamActivity } from "@/models/TeamActivity";
 
 export function cleanTeam(team: Team): Team {
-  const REDACTED_CODE = "XXXXXX";
-
   return {
     ...team,
-    code: REDACTED_CODE,
+    code: "X".repeat(team.code.length),
     board: team.board.map((teamActivity: TeamActivity) => ({
       ...teamActivity,
       activity: {
         ...teamActivity.activity,
-        code: REDACTED_CODE,
+        code: "X".repeat(teamActivity.activity.code.length),
       },
     })),
   };
