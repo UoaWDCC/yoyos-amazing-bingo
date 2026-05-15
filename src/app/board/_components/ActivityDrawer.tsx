@@ -92,10 +92,8 @@ const ActivityDrawer = ({
                 pts
               </Pill>
               {isSpecialActivity && (
-                <div className="mt-1 text-center text-sm whitespace-pre text-pink-500">
-                  {" "}
-                  +1!
-                  <br />
+                <div>
+                  {/* +1 bonus hidden: special activity points not counted in getTeamTotalPoints */}
                 </div>
               )}
             </div>
