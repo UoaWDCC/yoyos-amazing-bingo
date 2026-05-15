@@ -65,8 +65,8 @@ function DrawerContent({
         )}
         {...props}
       >
-        <div className="responsive-body">
-          <div className="bg-muted mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
+        <div className="bg-muted mx-auto mt-4 hidden h-2 w-[100px] shrink-0 rounded-full group-data-[vaul-drawer-direction=bottom]/drawer-content:block" />
+        <div className="responsive-body min-h-0 flex-1 overflow-y-auto">
           {children}
         </div>
       </DrawerPrimitive.Content>
@@ -88,7 +88,7 @@ function DrawerFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="drawer-footer"
-      className={cn("mt-16 flex flex-col gap-4 p-8", className)}
+      className={cn("mt-4 flex flex-col gap-4 p-8", className)}
       {...props}
     />
   );
