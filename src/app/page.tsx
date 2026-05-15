@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import logo from "@/assets/logo.svg";
+import logo from "@/assets/WVA_logo.png";
 import { LoginForm } from "@/components/login-form";
 import { NormalLayout } from "@/components/ui/layout/NormalLayout";
 
