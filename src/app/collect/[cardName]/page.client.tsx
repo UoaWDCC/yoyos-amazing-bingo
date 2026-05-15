@@ -38,14 +38,14 @@ export default function CollectClientPage({ cardName }: { cardName: string }) {
     const html = window.document.querySelector("html");
     if (html) {
       html.setAttribute("data-state-dim", "true");
-      setTimeout(() => html.setAttribute("data-state-pokehide", "true"), 200);
+      html.setAttribute("data-state-pokehide", "true");
       setTimeout(() => {
         setCardState(true);
         setTimeout(() => {
           html.removeAttribute("data-state-dim");
           html.removeAttribute("data-state-pokehide");
         }, 100);
-      }, 1500);
+      }, 600);
     }
   }, [isAnimating]);
 
