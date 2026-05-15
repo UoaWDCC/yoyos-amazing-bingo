@@ -1,7 +1,7 @@
 "use client";
 
 import { Heading } from "../heading";
-import TeamNameEditor from "../heading/TeamNameEditor";
+import TeamNameDisplay from "../heading/TeamNameDisplay";
 
 /**
  * This is the header component for the app.
@@ -19,7 +19,7 @@ export default function Header({ title }: { title: string }) {
         <Heading.h1>{title || "Untitled"}</Heading.h1>
       </div>
       <div className="flex justify-between">
-        <TeamNameEditor />
+        <TeamNameDisplay />
       </div>
     </div>
   );

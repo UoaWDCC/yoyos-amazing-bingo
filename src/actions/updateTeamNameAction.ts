@@ -17,10 +17,7 @@ import { auth } from "./authActions";
  */
 export async function updateTeamAction(team: Team): Promise<void> {
   const { teamId: sessionTeamId } = await auth();
-  if (
-    !sessionTeamId ||
-    (sessionTeamId !== team.id && sessionTeamId !== process.env.ADMIN_ID)
-  ) {
+  if (sessionTeamId !== process.env.ADMIN_ID) {
     throw new Error("Unauthorized");
   }
 
