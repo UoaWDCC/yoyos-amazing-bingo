@@ -15,7 +15,7 @@ import StateCollectingDisplay from "../_components/StateCollectingDisplay";
 
 export default function CollectClientPage({ cardName }: { cardName: string }) {
   const { data: teamId } = useAuth();
-  const { data: team } = useGetTeam(teamId ?? null);
+  const { data: team, isValidating } = useGetTeam(teamId ?? null);
   const [cardState, setCardState] = useState(false);
   const [isAnimating, setAnimating] = useState(false);
 
@@ -40,7 +40,11 @@ export default function CollectClientPage({ cardName }: { cardName: string }) {
     }
   }, [isAnimating]);
 
-  if (!team) {
+  const teamActivity = team?.board.find(
+    (teamActivity) => teamActivity.activity.cardImageName === cardName,
+  );
+
+  if (!team || (!teamActivity?.isCompleted && isValidating)) {
     return (
       <>
         <div className="flex items-center justify-center">
@@ -49,10 +53,6 @@ export default function CollectClientPage({ cardName }: { cardName: string }) {
       </>
     );
   }
-
-  const teamActivity = team.board.find(
-    (teamActivity) => teamActivity.activity.cardImageName === cardName,
-  );
 
   if (!teamActivity || !teamActivity.isCompleted) {
     return (
