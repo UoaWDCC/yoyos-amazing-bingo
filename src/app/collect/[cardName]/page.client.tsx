@@ -15,13 +15,22 @@ import StateCollectingDisplay from "../_components/StateCollectingDisplay";
 
 export default function CollectClientPage({ cardName }: { cardName: string }) {
   const { data: teamId } = useAuth();
-  const { data: team, isValidating } = useGetTeam(teamId ?? null);
+  const { data: team, mutate } = useGetTeam(teamId ?? null);
   const [cardState, setCardState] = useState(false);
   const [isAnimating, setAnimating] = useState(false);
+  const [verified, setVerified] = useState(false);
 
   const handleAnimating = () => {
     setAnimating(true);
   };
+
+  const teamActivity = team?.board.find(
+    (teamActivity) => teamActivity.activity.cardImageName === cardName,
+  );
+
+  useEffect(() => {
+    mutate().then(() => setVerified(true));
+  }, [mutate]);
 
   useEffect(() => {
     if (!isAnimating) return;
@@ -40,11 +49,7 @@ export default function CollectClientPage({ cardName }: { cardName: string }) {
     }
   }, [isAnimating]);
 
-  const teamActivity = team?.board.find(
-    (teamActivity) => teamActivity.activity.cardImageName === cardName,
-  );
-
-  if (!team || (!teamActivity?.isCompleted && isValidating)) {
+  if (!team || !verified) {
     return (
       <>
         <div className="flex items-center justify-center">
